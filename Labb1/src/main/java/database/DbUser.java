@@ -8,8 +8,8 @@ public class DbUser extends User {
         super(authority, name, email, password);
     }
 
-    public static User getUser(String email) {
-        User foundUser = null;
+    public static User searchUserByEmail(String email) {
+        DbUser foundUser = null;
         String query = "SELECT T_User.* FROM T_User WHERE T_User.email LIKE ?";
 
         Connection con = DbManager.getConnection();
@@ -23,7 +23,7 @@ public class DbUser extends User {
                 //email = resultSet.getString("Email");
                 String password = resultSet.getString("Password");
 
-                foundUser = new User(authority, name, email, password);
+                foundUser = new DbUser(authority, name, email, password);
             }
         } catch (SQLException e) {
             e.printStackTrace();

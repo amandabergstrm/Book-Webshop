@@ -1,5 +1,6 @@
 package businessObjects;
 
+import database.DbUser;
 import java.util.regex.Pattern;
 
 public class User {
@@ -11,6 +12,11 @@ public class User {
 
     public static boolean isEmailValid(String isbn) {
         return EMAIL_PATTERN.matcher(isbn).matches();
+    }
+
+    /*Har kontakt mellan ob och db*/
+    static public User searchUserByEmail(String email) {
+        return DbUser.searchUserByEmail(email);
     }
 
     public User(Authority authority, String name, String email, String password) {
