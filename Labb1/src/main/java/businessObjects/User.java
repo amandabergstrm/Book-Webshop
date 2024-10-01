@@ -1,15 +1,24 @@
 package businessObjects;
 
+import java.util.regex.Pattern;
+
 public class User {
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
     private Authority authority;
     private String name;
     private String email;
     private String password;
 
+    public static boolean isEmailValid(String isbn) {
+        return EMAIL_PATTERN.matcher(isbn).matches();
+    }
+
     public User(Authority authority, String name, String email, String password) {
-        //kolla email
         this.authority = authority;
         this.name = name;
+        if (!isEmailValid(email)) {
+            throw new IllegalArgumentException("Not a valid email-address.");
+        }
         this.email = email;
         this.password = password;
     }
@@ -39,7 +48,9 @@ public class User {
     }
 
     public void setEmail(String email) {
-        // kolla email
+        if (!isEmailValid(email)) {
+            throw new IllegalArgumentException("Not a valid email-address.");
+        }
         this.email = email;
     }
 
