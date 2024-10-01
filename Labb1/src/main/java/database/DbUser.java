@@ -14,18 +14,16 @@ public class DbUser extends User {
 
         Connection con = DbManager.getConnection();
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-           // con.setAutoCommit(false);
+            // con.setAutoCommit(false);
             preparedStatement.setString(1, email + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    String authorityString = resultSet.getString("Authority");
-                    Authority authority = Authority.valueOf(authorityString);
-                    String name = resultSet.getString("Name");
-                    //email = resultSet.getString("Email");
-                    String password = resultSet.getString("Password");
+                String authorityString = resultSet.getString("Authority");
+                Authority authority = Authority.valueOf(authorityString);
+                String name = resultSet.getString("Name");
+                //email = resultSet.getString("Email");
+                String password = resultSet.getString("Password");
 
-                    foundUser = new User(authority, name, email, password);
-                }
+                foundUser = new User(authority, name, email, password);
             }
         } catch (SQLException e) {
             e.printStackTrace();
