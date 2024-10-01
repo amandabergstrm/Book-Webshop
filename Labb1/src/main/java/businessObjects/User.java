@@ -16,9 +16,8 @@ public class User {
     public User(Authority authority, String name, String email, String password) {
         this.authority = authority;
         this.name = name;
-        if (!isEmailValid(email)) {
+        if (!isEmailValid(email))
             throw new IllegalArgumentException("Not a valid email-address.");
-        }
         this.email = email;
         this.password = password;
     }
@@ -48,9 +47,8 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (!isEmailValid(email)) {
+        if (!isEmailValid(email))
             throw new IllegalArgumentException("Not a valid email-address.");
-        }
         this.email = email;
     }
 

@@ -10,8 +10,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bb6f7ca-a8a3-4ae5-9e18-7e0bd103c980" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/database/DbManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/database/DbUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/businessObjects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/businessObjects/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/P2.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -61,7 +64,7 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/MyCodes/Java/KTH/Övning8",
+    "last_opened_file_path": "C:/MyCodes/Databasteknik",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -166,7 +169,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727698276615</updated>
-      <workItem from="1727698280569" duration="4958000" />
+      <workItem from="1727698280569" duration="9976000" />
     </task>
     <servers />
   </component>
