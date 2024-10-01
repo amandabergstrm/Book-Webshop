@@ -1,4 +1,4 @@
-package com.example.labb1;
+package ui;
 
 import java.io.*;
 

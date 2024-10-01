@@ -1,5 +1,7 @@
 package businessObjects;
 
+import database.DbBook;
+
 import java.util.regex.Pattern;
 
 public class Book {
@@ -7,13 +9,15 @@ public class Book {
     private final String isbn;
     private final String title;
     private final Genre genre;
-    //private final String publisher;
-    //private final Date publicationDate;
     private final String author;
     private int nrOfCopies;
 
     public static boolean isIsbnValid(String isbn) {
         return ISBN_PATTERN.matcher(isbn).matches();
+    }
+
+    public static Book searchBookByISBN(String isbn) {
+        return DbBook.searchBookByISBN(isbn);
     }
 
     public Book(String isbn, String title, Genre genre, String author, int nrOfCopies) {

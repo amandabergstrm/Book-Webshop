@@ -14,12 +14,13 @@ public class DbManager {
     }
 
     private DbManager() {
+        String database = "DB_Webbshop";
+        String userName = "client";
+        String password = "client";
+        String server = "jdbc:mysql://localhost:3306/" + database + "?UseClientEnc=UTF8";
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String database = "DB_Webbshop";
-            String userName = "client";
-            String password = "client";
-            String server = "jdbc:mysql://localhost:3306/" + database + "?UseClientEnc=UTF8";
             con = DriverManager.getConnection(server, userName, password);
             //con = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=admin");
             System.out.println("Connection successfull");
