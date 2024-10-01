@@ -2,6 +2,7 @@ package businessObjects;
 
 import database.DbBook;
 
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class Book {
@@ -18,6 +19,10 @@ public class Book {
 
     public static Book searchBookByISBN(String isbn) {
         return DbBook.searchBookByISBN(isbn);
+    }
+
+    public static ArrayList<DbBook> importAllBooks() {
+        return DbBook.importAllBooks();
     }
 
     public Book(String isbn, String title, Genre genre, String author, int nrOfCopies) {

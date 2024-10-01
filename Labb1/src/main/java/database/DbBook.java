@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class DbBook extends Book {
     public DbBook(String isbn, String title, Genre genre, String author, int nrOfCopies) {
@@ -13,8 +14,8 @@ public class DbBook extends Book {
     }
 
     //hämta en bok baserat på isbn - klar
-    //hämta alla böcker
-    //hämta filtrerade böcker - sen
+    //hämta alla böcker - klar
+    //hämta filtrerade böcker - amanda
 
     public static DbBook searchBookByISBN(String isbn) {
         DbBook foundBook = null;
@@ -41,5 +42,30 @@ public class DbBook extends Book {
             e.printStackTrace();
         }
         return foundBook;
+    }
+
+    public static ArrayList<DbBook> importAllBooks() {
+        ArrayList<DbBook> books = new ArrayList<>();
+        String query = "SELECT T_Book.* FROM T_Book";
+        Connection con = DbManager.getConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    String isbn = resultSet.getString("isbn");
+                    String title = resultSet.getString("title");
+                    String stringGenre = resultSet.getString("genre");
+                    Genre genre = Genre.valueOf(stringGenre);
+                    String author = resultSet.getString("author");
+                    int nrOfCopies = resultSet.getInt("nrOfCopies");
+
+                    books.add(new DbBook(isbn, title, genre, author, nrOfCopies));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return books;
     }
 }

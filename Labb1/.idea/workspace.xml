@@ -10,19 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1bb6f7ca-a8a3-4ae5-9e18-7e0bd103c980" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/businessObjects/BookHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/database/DbBook.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ui/BookInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DB_Webbshop.sql" beforeDir="false" afterPath="$PROJECT_DIR$/DB_Webbshop.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/businessObjects/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/businessObjects/Book.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/businessObjects/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/businessObjects/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/labb1/HelloServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/HelloServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/DbManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DbManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/DbUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DbUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/DbBook.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DbBook.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +168,7 @@
       <option name="presentableId" value="Default" />
       <updated>1727698276615</updated>
       <workItem from="1727698280569" duration="18361000" />
-      <workItem from="1727794934289" duration="2430000" />
+      <workItem from="1727794934289" duration="3152000" />
     </task>
     <servers />
   </component>
