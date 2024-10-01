@@ -23,7 +23,7 @@ CREATE TABLE T_Book (
 
 CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 
-GRANT ALL PRIVILEGES ON Webbshop.* TO 'client'@'localhost';
+GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies)  
 VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Betty", 3);
