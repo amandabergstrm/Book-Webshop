@@ -17,11 +17,11 @@ public class DbUser extends User {
             // con.setAutoCommit(false);
             preparedStatement.setString(1, email + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                String authorityString = resultSet.getString("Authority");
+                String authorityString = resultSet.getString("authority");
                 Authority authority = Authority.valueOf(authorityString);
-                String name = resultSet.getString("Name");
-                //email = resultSet.getString("Email");
-                String password = resultSet.getString("Password");
+                String name = resultSet.getString("name");
+                //email = resultSet.getString("email");
+                String password = resultSet.getString("password");
 
                 foundUser = new DbUser(authority, name, email, password);
             }

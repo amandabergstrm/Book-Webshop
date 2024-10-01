@@ -11,7 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="1bb6f7ca-a8a3-4ae5-9e18-7e0bd103c980" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/businessObjects/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/businessObjects/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/DbUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DbUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +167,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1727698276615</updated>
-      <workItem from="1727698280569" duration="13231000" />
+      <workItem from="1727698280569" duration="13585000" />
     </task>
     <servers />
   </component>
