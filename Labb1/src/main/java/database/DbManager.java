@@ -16,7 +16,12 @@ public class DbManager {
     private DbManager() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=admin");
+            String database = "Webbshop";
+            String userName = "client";
+            String password = "client";
+            String server = "jdbc:mysql://localhost:3006/" + database + "?UseClientEnc=UTF8";
+            con = DriverManager.getConnection(server, userName, password);
+            //con = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=admin");
         } catch (Exception e) {
             e.printStackTrace();
         }

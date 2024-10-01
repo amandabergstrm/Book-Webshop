@@ -12,6 +12,6 @@
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
 <% UserInfo user = UserHandler.getUserByEmail("poriazov@kth.se");%>
-<% user.getName(); %>
+<%= user.getName() %>
 </body>
 </html>
