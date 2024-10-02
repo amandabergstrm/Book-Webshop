@@ -1,0 +1,75 @@
+body {
+    font-family: Cambria, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+/* Shop item Styles */
+.shop-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.shop-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: white;
+    text-align: left;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.shop-item img {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.item-info h3 {
+    font-size: 18px;
+    margin: 6px 0 2px 0;
+}
+
+.item-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+.item-info isbn {
+    display: block;
+    margin: 10px 0 45px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.item-info p:last-of-type {
+    position: absolute;
+    left: 16px;
+    bottom: 23px;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0;
+}
+
+.shop-item button {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.shop-item button:hover {
+    background-color: #039f60;
+}

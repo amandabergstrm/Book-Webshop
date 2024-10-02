@@ -1,110 +1,12 @@
-/* Navbar Styles */
+/* Title Styles */
 body {
-    font-family: Calibri, sans-serif;
+    font-family: Times New Roman, sans-serif;
     margin: 0;
     background-color: #f4f4f4;
 }
 
-.topnav {
-    background-color: #333;
-    overflow: hidden;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-    background-color: #04AA6D;
-    color: white;
-}
-
-/*Title Styles*/
 .shopTitle {
     font-family: "Times New Roman", sans-serif;
     font-size: 32px;
     text-align: center;
-}
-
-/* Shop item Styles */
-.shop-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; /* Optional: Adjusts spacing between items */
-    gap: 20px; /* Adds space between items */
-    padding: 20px; /* Adds padding around the container */
-}
-
-.shop-item {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: white;
-    text-align: left;
-    width: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: relative;
-}
-
-.shop-item img {
-    width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-}
-
-.item-info h3 {
-    font-size: 18px;
-    margin: 6px 0 2px 0;
-}
-
-.item-info p {
-    font-size: 16px;
-    color: #333;
-    margin: 0;
-}
-
-.item-info isbn {
-    display: block;
-    margin: 10px 0 45px 0;
-    font-size: 14px;
-    color: #666;
-}
-
-.item-info p:last-of-type {
-    position: absolute;
-    left: 16px;
-    bottom: 23px;
-    font-weight: bold;
-    font-size: 16px;
-    margin: 0;
-}
-
-.shop-item button {
-    position: absolute;
-    right: 16px; /* Align to the right */
-    bottom: 16px; /* Align to the bottom */
-    background-color: #04AA6D;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.shop-item button:hover {
-    background-color: #039f60;
 }
