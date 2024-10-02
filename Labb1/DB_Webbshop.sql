@@ -27,7 +27,25 @@ CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Betty", 3, 100);
+VALUES("9781782276203", "Tender is the Flesh", "SciFi", "Agustina Bazterrica", 5, 120);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9781906040093", "The Suicide Shop", "Fiction", "Jean Teulé", 5, 120);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9780571258093", "Never Let Me Go", "Fiction", "Kazuo Ishiguro", 5, 120);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9780062380623", "Coraline", "Fantasy", "Neil Gaiman", 5, 120);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9780008435769", "The Maid", "Mystery", "Nita Prose", 5, 120);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Ray Bradbury", 3, 95);
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 5, 120);
 
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
