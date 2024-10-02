@@ -23,7 +23,7 @@ public class DbBook extends Book {
         Connection con = DbManager.getConnection();
 
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
-            // con.setAutoCommit(false);
+            con.setAutoCommit(false);
             preparedStatement.setString(1, isbn + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
@@ -39,8 +39,24 @@ public class DbBook extends Book {
                 }
                 else System.out.println("User not found");
             }
+            con.commit();
         } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            }
             e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return foundBook;
     }
@@ -51,6 +67,7 @@ public class DbBook extends Book {
         Connection con = DbManager.getConnection();
 
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            con.setAutoCommit(false);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     String isbn = resultSet.getString("isbn");
@@ -64,10 +81,25 @@ public class DbBook extends Book {
                     books.add(new DbBook(isbn, title, genre, author, nrOfCopies, price));
                 }
             }
+            con.commit();
         } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            }
             e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
         return books;
     }
 }
