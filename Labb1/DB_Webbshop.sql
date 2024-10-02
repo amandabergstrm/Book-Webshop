@@ -12,11 +12,12 @@ CREATE TABLE T_User (
 );
 
 CREATE TABLE T_Book (
-	isbn			VARCHAR(13)		PRIMARY KEY,
-	title			VARCHAR(50)		NOT NULL,	
-    genre			VARCHAR(50)		NOT NULL,
-    author		VARCHAR(100)	NOT NULL,
-	CHECK (LENGTH(isbn) = 10 OR LENGTH(isbn) = 13),
+	itemId	INT				PRIMARY KEY AUTO_INCREMENT,
+    isbn	VARCHAR(13)		NOT NULL,
+	title	VARCHAR(50)		NOT NULL,	
+    genre	VARCHAR(50)		NOT NULL,
+    author	VARCHAR(100)	NOT NULL,
+	CHECK (LENGTH(isbn) = 13),
     -- CHECK (rating > 0 AND rating < 6)
     nrOfCopies INT NOT NULL,
     price INT NOT NULL

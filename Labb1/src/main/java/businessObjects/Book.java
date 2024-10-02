@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class Book {
     private static final Pattern ISBN_PATTERN = Pattern.compile("^\\d{12}[\\d|X]$");
+    private int itemId;
     private final String isbn;
     private final String title;
     private final Genre genre;
@@ -41,6 +42,14 @@ public class Book {
         this.price = price;
     }
 
+    public Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+       this(isbn, title, genre, author, nrOfCopies, price);
+       this.itemId = itemId;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
     public String getIsbn() {
         return isbn;
     }

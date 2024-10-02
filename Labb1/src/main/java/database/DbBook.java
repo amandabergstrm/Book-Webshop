@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DbBook extends Book {
-    public DbBook(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public DbBook(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         super(isbn, title, genre, author, nrOfCopies, price);
     }
 
@@ -27,6 +27,7 @@ public class DbBook extends Book {
             preparedStatement.setString(1, isbn + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
+                    int itemId = resultSet.getInt("itemId");
                     isbn = resultSet.getString("isbn");
                     String title = resultSet.getString("title");
                     String stringGenre = resultSet.getString("genre");
@@ -35,7 +36,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    foundBook = new DbBook(isbn, title, genre, author, nrOfCopies, price);
+                    foundBook = new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price);
                 }
                 else System.out.println("User not found");
             }
@@ -53,6 +54,7 @@ public class DbBook extends Book {
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
+                    int itemId = resultSet.getInt("itemId");
                     String isbn = resultSet.getString("isbn");
                     String title = resultSet.getString("title");
                     String stringGenre = resultSet.getString("genre");
@@ -61,7 +63,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    books.add(new DbBook(isbn, title, genre, author, nrOfCopies, price));
+                    books.add(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
                 }
             }
         } catch (SQLException e) {
