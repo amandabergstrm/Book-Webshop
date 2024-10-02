@@ -8,6 +8,8 @@ Kontakt mellan ui och bo.
 public class UserHandler {
     public static UserInfo getUserByEmail(String email) {
         User foundUser = User.getUserByEmail(email);
+        if (foundUser == null)
+            return null;
         return new UserInfo(foundUser.getAuthority(), foundUser.getName(), foundUser.getEmail(), foundUser.getPassword());
     }
 

@@ -20,7 +20,7 @@ public class User {
     }
 
     public void createUser(User user) {
-        DbUser.insertUser(user);
+        DbUser.executeUserInsert(user);
     }
 
     public User(Authority authority, String name, String email, String password) {
