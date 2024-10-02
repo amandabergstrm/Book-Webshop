@@ -2,6 +2,7 @@ package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DbManager {
     private static DbManager instance = null;
@@ -24,7 +25,8 @@ public class DbManager {
             con = DriverManager.getConnection(server, userName, password);
             //con = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=admin");
             System.out.println("Connection successfull");
-        } catch (Exception e) {
+            con.setAutoCommit(false);
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
