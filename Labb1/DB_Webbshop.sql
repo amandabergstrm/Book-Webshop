@@ -23,6 +23,17 @@ CREATE TABLE T_Book (
     price INT NOT NULL
 );
 
+CREATE TABLE T_Order (
+	user	VARCHAR(100)	NOT NULL, 
+	orderNr	INT	 			AUTO_INCREMENT,
+    itemId	INT				NOT NULL,
+    nrOfItems INT 			NOT NULL,
+    status	VARCHAR(30)		NOT NULL,
+    CONSTRAINT T_Order_pk PRIMARY KEY (orderNr, itemId),
+    CONSTRAINT T_Order_fk FOREIGN KEY (user) REFERENCES T_User(email),
+    CONSTRAINT T_Order_fk1 FOREIGN KEY (itemId) REFERENCES T_Book (itemId)
+);
+
 CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 
 GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
