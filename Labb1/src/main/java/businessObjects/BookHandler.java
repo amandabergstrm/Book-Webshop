@@ -9,7 +9,7 @@ import java.util.Iterator;
 public class BookHandler {
     public static BookInfo getBookByISBN(String isbn) {
         Book foundBook = Book.searchBookByISBN(isbn);
-        return new BookInfo(foundBook.getIsbn(), foundBook.getTitle(), foundBook.getGenre(), foundBook.getAuthor(), foundBook.getNrOfCopies());
+        return new BookInfo(foundBook.getIsbn(), foundBook.getTitle(), foundBook.getGenre(), foundBook.getAuthor(), foundBook.getNrOfCopies(), foundBook.getPrice());
     }
 
     public static Collection<BookInfo> getAllBooks() {
@@ -17,7 +17,7 @@ public class BookHandler {
         ArrayList<BookInfo> books = new ArrayList<BookInfo>();
         for (Iterator it = c.iterator(); it.hasNext();) {
             Book book = (Book) it.next();
-            books.add(new BookInfo(book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies()));
+            books.add(new BookInfo(book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice()));
         }
         return books;
     }

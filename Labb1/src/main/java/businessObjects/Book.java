@@ -12,6 +12,7 @@ public class Book {
     private final Genre genre;
     private final String author;
     private int nrOfCopies;
+    private int price;
 
     public static boolean isIsbnValid(String isbn) {
         return ISBN_PATTERN.matcher(isbn).matches();
@@ -25,7 +26,7 @@ public class Book {
         return DbBook.importAllBooks();
     }
 
-    public Book(String isbn, String title, Genre genre, String author, int nrOfCopies) {
+    public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid isbn");
         this.isbn = isbn;
@@ -35,6 +36,9 @@ public class Book {
         if (nrOfCopies < 0)
             throw new IllegalArgumentException("Not valid number of copies");
         this.nrOfCopies = nrOfCopies;
+        if (price < 0)
+            throw new IllegalArgumentException("Not valid price");
+        this.price = price;
     }
 
     public String getIsbn() {
@@ -57,10 +61,20 @@ public class Book {
         return nrOfCopies;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public void setNrOfCopies(int nrOfCopies) {
         if (nrOfCopies < 0)
             throw new IllegalArgumentException("Not valid number of copies");
         this.nrOfCopies = nrOfCopies;
+    }
+
+    public void setPrice(int price) {
+        if (price < 0)
+            throw new IllegalArgumentException("Not valid price");
+        this.price = price;
     }
 
     @Override
@@ -71,6 +85,7 @@ public class Book {
                 ", genre=" + genre +
                 ", author='" + author + '\'' +
                 ", nrOfCopies=" + nrOfCopies +
+                ", price=" + price +
                 '}';
     }
 }

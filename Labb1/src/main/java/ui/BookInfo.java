@@ -8,13 +8,15 @@ public class BookInfo {
     private final Genre genre;
     private final String author;
     private int nrOfCopies;
+    private int price;
 
-    public BookInfo(String isbn, String title, Genre genre, String author, int nrOfCopies) {
+    public BookInfo(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         this.isbn = isbn;
         this.title = title;
         this.genre = genre;
         this.author = author;
         this.nrOfCopies = nrOfCopies;
+        this.price = price;
     }
 
     public String getIsbn() {
@@ -37,7 +39,15 @@ public class BookInfo {
         return nrOfCopies;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public void setNrOfCopies(int nrOfCopies) {
         this.nrOfCopies = nrOfCopies;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

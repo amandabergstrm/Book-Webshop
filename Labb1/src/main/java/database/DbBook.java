@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DbBook extends Book {
-    public DbBook(String isbn, String title, Genre genre, String author, int nrOfCopies) {
-        super(isbn, title, genre, author, nrOfCopies);
+    public DbBook(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+        super(isbn, title, genre, author, nrOfCopies, price);
     }
 
     //hämta en bok baserat på isbn - klar
@@ -33,8 +33,9 @@ public class DbBook extends Book {
                     Genre genre = Genre.valueOf(stringGenre);
                     String author = resultSet.getString("author");
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
+                    int price = resultSet.getInt("price");
 
-                    foundBook = new DbBook(isbn, title, genre, author, nrOfCopies);
+                    foundBook = new DbBook(isbn, title, genre, author, nrOfCopies, price);
                 }
                 else System.out.println("User not found");
             }
@@ -58,8 +59,9 @@ public class DbBook extends Book {
                     Genre genre = Genre.valueOf(stringGenre);
                     String author = resultSet.getString("author");
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
+                    int price = resultSet.getInt("price");
 
-                    books.add(new DbBook(isbn, title, genre, author, nrOfCopies));
+                    books.add(new DbBook(isbn, title, genre, author, nrOfCopies, price));
                 }
             }
         } catch (SQLException e) {

@@ -27,6 +27,7 @@
     for (; it.hasNext();) {
         BookInfo b = it.next();%>
         <%= b.getTitle()%>
+        <%= b.getPrice()%>
     <%}%>
 </body>
 </html>

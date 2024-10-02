@@ -18,15 +18,16 @@ CREATE TABLE T_Book (
     author		VARCHAR(100)	NOT NULL,
 	CHECK (LENGTH(isbn) = 10 OR LENGTH(isbn) = 13),
     -- CHECK (rating > 0 AND rating < 6)
-    nrOfCopies INT NOT NULL
+    nrOfCopies INT NOT NULL,
+    price INT NOT NULL
 );
 
 CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 
 GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
 
-INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies)  
-VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Betty", 3);
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Betty", 3, 100);
 
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
