@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="shopItemsStyle.css">
     <link rel="stylesheet" href="navBarStyle.css">
     <link rel="stylesheet" href="sidebarCartStyle.css">
+    <link rel="stylesheet" href="logInStyle.css">
 </head>
 
 <body>
@@ -32,7 +33,64 @@
             <p>Book Title 1 - 199 kr</p>
             <p>Book Title 2 - 249 kr</p>
         </div>
-        <button>Proceed to Pay</button>
+        <button><label for="dialogToggle" class="login-button">Proceed to Pay</label></button>
+        <input type="checkbox" id="dialogToggle" hidden>
+
+        <!-- Login/Create User Dialog Box -->
+        <div class="login-dialog">
+            <div class="login-content">
+                <label for="dialogToggle" class="close-btn">&times;</label>
+                <h2>You have to be logged in to shop!</h2>
+                <div class="choice-buttons">
+                    <label for="loginToggle" class="option-button">Log In</label>
+                    <label for="createUserToggle" class="option-button">Create User</label>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="loginToggle" hidden>
+        <input type="checkbox" id="createUserToggle" hidden>
+
+        <!-- Log In Form -->
+        <div class="form-dialog" id="loginForm">
+            <div class="form-content">
+                <label for="loginToggle" class="close-btn">&times;</label>
+                <h2>Log In</h2>
+                <form action="user-servlet" method="POST">
+                    <input type="hidden" name="action" value="login">
+
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" name="email" required>
+
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="password" required>
+
+                    <button class="option-button" type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Create User Form -->
+        <div class="form-dialog" id="createUserForm">
+            <div class="form-content">
+                <label for="createUserToggle" class="close-btn">&times;</label>
+                <h2>Create User</h2>
+                <form action="user-servlet">
+                    <input type="hidden" name="action" value="createUser">
+
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit">Create Account</button>
+                </form>
+            </div>
+        </div>
     </div>
 
     <div class="shopTitle">
@@ -63,10 +121,5 @@
 <body>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
-<% UserInfo user = UserHandler.getUserByEmail("poriazov@kth.se");%>
-<%= user.getName() %>
-
-<% BookInfo book = BookHandler.getBookByISBN("9781451690316");%>
-<%= book.getTitle() %>
 </body>
 </html>

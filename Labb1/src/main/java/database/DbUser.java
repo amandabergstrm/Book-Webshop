@@ -8,7 +8,7 @@ public class DbUser extends User {
         super(authority, name, email, password);
     }
 
-    public void insertUser(DbUser user) {
+    public static void insertUser(User user) {
         String command = "INSERT INTO " + "T_User(authority, name, email, password) VALUES(?, ?, ?, ?)";
         Connection con = DbManager.getConnection();
 

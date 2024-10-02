@@ -10,3 +10,9 @@ body {
     font-size: 32px;
     text-align: center;
 }
+
+/*<% UserInfo user = UserHandler.getUserByEmail("poriazov@kth.se");%>
+<%= user.getName() %>
+
+<% BookInfo book = BookHandler.getBookByISBN("9781451690316");%>
+<%= book.getTitle() %>*/
