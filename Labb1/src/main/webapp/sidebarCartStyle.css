@@ -30,7 +30,7 @@ body {
 
 .cart-sidebar .closebtn {
     position: absolute;
-    top: 100px;
+    top: 0;
     right: 25px;
     font-size: 36px;
     cursor: pointer;

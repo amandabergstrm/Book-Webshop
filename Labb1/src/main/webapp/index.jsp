@@ -34,6 +34,7 @@
             <p>Book Title 2 - 249 kr</p>
         </div>
         <label class="proceedToPay">
+            <!--kolla om den är inlogagd redan, om den är det så gå vidare till kassa, annars logga in-->
             <a href="login.jsp">Proceed to Pay</a>
         </label>
 

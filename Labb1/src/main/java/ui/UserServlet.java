@@ -25,11 +25,11 @@ public class UserServlet extends HttpServlet {
                 System.out.println("logged in as" + existingUser.getName());
                 // kolla authority
                 if (existingUser.getAuthority() == Authority.Admin) {
-                    response.sendRedirect("index.jsp"); // skcika till admin sida
+                    response.sendRedirect("index.jsp"); // skicka till admin sida eller till home men dem ser allt
                 } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
-                    response.sendRedirect("index.jsp"); // skcika till lager sida
+                    response.sendRedirect("index.jsp"); // skicka till lager sida eller till home men dem ser det dem behöver
                 } else {
-                    response.sendRedirect("index.jsp"); // gör så man hamnar i checkout
+                    response.sendRedirect("index.jsp"); // gör så man hamnar i checkout endast om man tryck på proceed to pay annars hamna i home
                 }
             } else {
                 System.out.println("Fel lösenord (rätt email)");
@@ -45,13 +45,7 @@ public class UserServlet extends HttpServlet {
                 System.out.println("Skriv att kontot redan finns så får dem försöka igen");
                 response.sendRedirect("login.jsp");
             } else {
-                new Thread (() -> {
-                    try {
-                        UserHandler.createUser(new UserInfo(Authority.Customer, username, email, password));
-                    } catch (Exception e) {
-                        System.out.println("Database error");
-                    }
-                }).start();
+                UserHandler.createUser(new UserInfo(Authority.Customer, username, email, password));
                 System.out.println("Fortsätt till kassa");
                 response.sendRedirect("index.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
             }
