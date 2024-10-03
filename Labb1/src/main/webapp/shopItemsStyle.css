@@ -25,8 +25,9 @@ body {
 }
 
 .shop-item img {
-    width: 100%;
-    height: auto;
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
     border-bottom: 1px solid #ddd;
     padding-bottom: 5px;
 }
@@ -44,9 +45,17 @@ body {
 
 .item-info isbn {
     display: block;
-    margin: 10px 0 45px 0;
+    margin: 10px 0 25px 0;
     font-size: 14px;
     color: #666;
+}
+
+.item-info status {
+    display: block;
+    margin: 0 0 42px 0;
+    font-size: 14px;
+    color: #666;
+    text-align: right;
 }
 
 .item-info p:last-of-type {

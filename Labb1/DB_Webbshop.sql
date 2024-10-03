@@ -48,7 +48,7 @@ INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9780571258093", "Never Let Me Go", "Fiction", "Kazuo Ishiguro", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9780062380623", "Coraline", "Fantasy", "Neil Gaiman", 5, 120);
+VALUES("9780062380623", "Coraline", "Fantasy", "Neil Gaiman", 19, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
 VALUES("9780008435769", "The Maid", "Mystery", "Nita Prose", 5, 120);
@@ -57,7 +57,7 @@ INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Ray Bradbury", 3, 95);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 5, 120);
+VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120);
 
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
@@ -69,7 +69,15 @@ FROM T_Book;
 SELECT *
 FROM T_User;
 
+
 /*
+SELECT itemId
+FROM T_Book
+WHERE isbn = "9780062380623" AND title = "Coraline";
+
+DELETE FROM T_Book 
+WHERE itemId = 7;
+
 SELECT T_Book.*, T_Author.*User
 FROM T_AuthorAndBook
 JOIN T_Author ON T_Author.authorId = T_AuthorAndBook.author

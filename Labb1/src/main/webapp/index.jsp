@@ -50,6 +50,7 @@
             Iterator<BookInfo> it = books.iterator();
             for (; it.hasNext();) {
                 BookInfo b = it.next();
+                int nrOfCopies = b.getNrOfCopies();
         %>
             <div class="shop-item">
                 <div class="item-info">
@@ -57,6 +58,17 @@
                     <h3><%= b.getTitle()%></h3>
                     <p><%= b.getAuthor()%></p>
                     <isbn>ISBN: <%= b.getIsbn()%></isbn>
+
+                    <status>
+                        <% if (nrOfCopies == 0) { %>
+                        <span style="color: red; font-weight: bold;">●</span> Not available
+                        <% } else if (nrOfCopies < 10) { %>
+                        <span style="color: orange; font-weight: bold;">●</span> A few left
+                        <% } else { %>
+                        <span style="color: green; font-weight: bold;">●</span> Available
+                        <% } %>
+                    </status>
+
                     <p><%= b.getPrice()%> kr</p>
                     <button>Add to Cart</button>
                 </div>
