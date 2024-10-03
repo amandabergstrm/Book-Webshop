@@ -16,10 +16,7 @@ public class User {
 
     /*Har kontakt mellan ob och db*/
     public static User getUserByEmail(String email) {
-        User user = DbUser.searchUserByEmail(email);
-        if (user == null)
-            return null;
-        return user;
+        return DbUser.searchUserByEmail(email);
     }
 
     public void createUser(User user) {
