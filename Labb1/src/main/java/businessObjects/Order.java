@@ -1,4 +1,8 @@
 package businessObjects;
+import database.DbBook;
+import database.DbOrder;
+import ui.UserInfo;
+
 import java.util.ArrayList;
 public class Order {
 
@@ -6,12 +10,15 @@ public class Order {
 
     private final int orderNr;
 
-    private ArrayList<OrderItem> orderItems;
-
     private OrderStatus status;
+
+    private ArrayList<OrderItem> orderItems;
 
     //private int totalSum;
 
+    public static ArrayList<DbOrder> importAllOrders() {
+        return DbOrder.importAllOrders();
+    }
     public Order (User user, int orderNr, ArrayList<OrderItem> orderItems) {
         this.user = user;
         this.orderNr = orderNr;
@@ -28,4 +35,9 @@ public class Order {
         this.status = status;
         //this.totalSum = totalSum;
     }
+
+    public User getUser() { return user; }
+    public int getOrderNr() { return orderNr; }
+    public OrderStatus getOrderStatus() { return status; }
+    public ArrayList<OrderItem> getOrderItems () { return orderItems; }
 }

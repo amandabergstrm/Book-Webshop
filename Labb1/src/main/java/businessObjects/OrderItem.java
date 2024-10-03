@@ -6,7 +6,7 @@ public class OrderItem {
 
     private final int nrOfItems;
 
-    private OrderItem (String itemId, int nrOfItems){
+    public OrderItem(String itemId, int nrOfItems){
         this.itemId = itemId;
         this.nrOfItems = nrOfItems;
     }

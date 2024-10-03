@@ -26,9 +26,9 @@ CREATE TABLE T_Book (
 CREATE TABLE T_Order (
 	user	VARCHAR(100)	NOT NULL, 
 	orderNr	INT	 			AUTO_INCREMENT,
+    status	VARCHAR(30)		NOT NULL,
     itemId	INT				NOT NULL,
     nrOfItems INT 			NOT NULL,
-    status	VARCHAR(30)		NOT NULL,
     CONSTRAINT T_Order_pk PRIMARY KEY (orderNr, itemId),
     CONSTRAINT T_Order_fk FOREIGN KEY (user) REFERENCES T_User(email),
     CONSTRAINT T_Order_fk1 FOREIGN KEY (itemId) REFERENCES T_Book (itemId)
@@ -62,12 +62,21 @@ VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
 
+INSERT INTO T_Order (user, itemId, nrOfItems, status)
+VALUES ('poriazov@kth.se', 6, 2, 'Pending');
 
 SELECT *
 FROM T_Book;
 
 SELECT *
 FROM T_User;
+
+CREATE VIEW OrderDetails AS
+SELECT T_Order.orderNr, T_Order.user, T_Order.itemId, T_Book.title, T_Order.nrOfItems, T_Order.status
+FROM T_Order
+JOIN T_Book ON T_Order.itemId = T_Book.itemId;
+
+SELECT * FROM OrderDetails;
 
 
 /*
