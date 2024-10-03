@@ -30,7 +30,7 @@ body {
 
 .cart-sidebar .closebtn {
     position: absolute;
-    top: 0;
+    top: 100px;
     right: 25px;
     font-size: 36px;
     cursor: pointer;
@@ -62,7 +62,7 @@ body {
     transition: margin-right 0.5s;
 }
 
-.cart-sidebar button {
+.cart-sidebar .proceedToPay {
     position: absolute;
     bottom: 100px;
     left: 50%;
@@ -78,7 +78,7 @@ body {
     text-align: center;
 }
 
-.cart-sidebar button:hover {
+.cart-sidebar .proceedToPay:hover {
     background-color: #039f60;
 }
 

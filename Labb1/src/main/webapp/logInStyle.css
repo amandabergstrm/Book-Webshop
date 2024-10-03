@@ -2,116 +2,83 @@
 body {
     font-family: Cambria, sans-serif;
     background-color: #f4f4f4;
-}
-
-/* Dialog Box for Login and Create User */
-.login-dialog, .form-dialog {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
-#dialogToggle:checked ~ .login-dialog,
-#loginToggle:checked ~ .form-dialog#loginForm,
-#createUserToggle:checked ~ .form-dialog#createUserForm {
-    display: flex;
-}
-
-.login-content {
+.form-container {
     background-color: #fff;
-    padding: 30px;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 400px;
     text-align: center;
-    position: relative;
 }
 
-/* Form Dialog Content */
-.form-content {
-    background-color: #fff;
-    padding: 50px;
-    border-radius: 10px;
-    width: 400px;
-    text-align: left; /* Align labels and input fields to the left */
-    position: relative;
-    box-sizing: border-box;
+h2 {
+    margin-bottom: 20px;
 }
 
-/* Form Fields */
-.form-content label {
+label {
     display: block;
-    margin-bottom: 5px;
+    text-align: left;
+    margin-bottom: 8px;
     font-size: 14px;
     color: #333;
 }
 
-.form-content input {
+input[type="text"], input[type="email"], input[type="password"] {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px; /* Adds space between inputs */
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
 }
 
-/* Form Button */
-.form-content button {
-    width: 50%;
-    align-self: center; /* Center the button horizontally */
-    background-color: #5cb85c;
+button {
+    background-color: #04AA6D;
     color: white;
-    padding: 10px;
     border: none;
-    cursor: pointer;
-    margin-top: auto; /* Pushes the button to the bottom */
-    margin-bottom: -90px;
-    border-radius: 5px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.form-content button:hover {
-    background-color: #4cae4c;
-}
-
-.login-content h2, .form-content h2 {
-    margin-bottom: 20px;
-    padding-left: 0;
-    text-align: center;
-    color: #333;
-}
-
-.close-btn, .form-content close-btn{
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-}
-
-.choice-buttons {
-    display: flex;
-    justify-content:space-evenly;
-    margin-top: 80px;
-}
-
-.option-button {
-    background-color: #5cb85c;
-    color: white;
     padding: 10px 20px;
+    border-radius: 5px;
     cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
+    width: 100%;
+    font-size: 16px;
 }
 
-.option-button:hover {
-    background-color: #4cae4c;
+button:hover {
+    background-color: #028a56;
+}
+
+.toggle-link {
+    margin-top: 15px;
+    display: block;
+    cursor: pointer;
+    color: #04AA6D;
+    text-decoration: underline;
+}
+
+.toggle-link:hover {
+    color: #028a56;
+}
+
+/* Hide checkboxes */
+input[type="radio"] {
+    display: none;
+}
+
+#loginForm, #createUserForm {
+    display: none;
+}
+
+input#login:checked ~ .form-container #loginForm {
+    display: block;
+}
+
+input#createUser:checked ~ .form-container #createUserForm {
+    display: block;
 }

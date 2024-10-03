@@ -50,7 +50,7 @@ public class DbUser extends User {
             con.setAutoCommit(false);
             preparedStatement.setString(1, email + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     String authorityString = resultSet.getString("authority");
                     Authority authority = Authority.valueOf(authorityString);
                     String name = resultSet.getString("name");
@@ -59,7 +59,7 @@ public class DbUser extends User {
 
                     foundUser = new DbUser(authority, name, email, password);
                 }
-                else System.out.println("User not found");
+                if (foundUser == null) System.out.println("User not found");
             }
             con.commit();
         } catch (SQLException e) {
