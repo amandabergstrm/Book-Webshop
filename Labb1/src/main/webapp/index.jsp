@@ -17,11 +17,22 @@
 </head>
 
 <body>
+    <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
+
     <div class="topnav">
         <a class="active" href="index.jsp">Home</a>
-        <a href="#news">Idk</a>
-        <a href="login.jsp">Login</a>
+        <a href="#news">Worker</a>
+        <a href="#news">Admin</a>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
+        <% if(currentUser == null) { %>
+        <a href="login.jsp">Login</a>
+        <% } else { %>
+        <form action="user-servlet" method="POST">
+            <input type="hidden" name="action" value="logout">
+            <button class="log-out" type="submit">Logout</button>
+        </form>
+            <a class="view-user">Logged in: <%= currentUser.getName()%></a>
+        <% } %>
     </div>
 
     <input type="checkbox" id="cartToggle" hidden>

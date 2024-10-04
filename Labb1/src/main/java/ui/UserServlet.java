@@ -12,6 +12,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
+        HttpSession session = request.getSession();
 
         if ("login".equals(action)) {
             String email = request.getParameter("email");
@@ -23,7 +24,8 @@ public class UserServlet extends HttpServlet {
                 response.sendRedirect("login.jsp");
             } else if (existingUser.getPassword().equals(password)) {
                 System.out.println("logged in as" + existingUser.getName());
-                // kolla authority
+                session.setAttribute("currentUser", existingUser);
+
                 if (existingUser.getAuthority() == Authority.Admin) {
                     response.sendRedirect("index.jsp"); // skicka till admin sida eller till home men dem ser allt
                 } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
@@ -45,10 +47,16 @@ public class UserServlet extends HttpServlet {
                 System.out.println("Skriv att kontot redan finns så får dem försöka igen");
                 response.sendRedirect("login.jsp");
             } else {
-                UserHandler.createUser(new UserInfo(Authority.Customer, username, email, password));
+                UserInfo newUserInfo = new UserInfo(Authority.Customer, username, email, password);
+                UserHandler.createUser(newUserInfo);
                 System.out.println("Fortsätt till kassa");
+                session.setAttribute("currentUser", newUserInfo);
                 response.sendRedirect("index.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
             }
+        } else if ("logout".equals(action)) {
+            session = request.getSession();
+            session.invalidate();
+            response.sendRedirect("index.jsp");
         } else {
             response.getWriter().write("Invalid action.");
         }

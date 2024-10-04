@@ -35,3 +35,18 @@ body {
 .topnav .cart-link {
     float: right;
 }
+
+.topnav .log-out {
+    float: right;
+    font-family: Times New Roman, sans-serif;
+    font-size: 16px;
+    padding: 16px;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.topnav .view-user {
+    float: right;
+}
