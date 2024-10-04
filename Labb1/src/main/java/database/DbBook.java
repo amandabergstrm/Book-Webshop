@@ -7,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Vector;
 
 public class DbBook extends Book {
     public DbBook(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
-        super(isbn, title, genre, author, nrOfCopies, price);
+        super(itemId, isbn, title, genre, author, nrOfCopies, price);
     }
 
     public static void executeBookInsert(Book book) {
@@ -47,18 +50,18 @@ public class DbBook extends Book {
         }
     }
 
-    public static DbBook searchBookByISBN(String isbn) {
+    public static DbBook searchBookByItemID(int itemId) {
         DbBook foundBook = null;
-        String query = "SELECT T_Book.* FROM T_Book WHERE T_Book.isbn LIKE ?";
+        String query = "SELECT T_Book.* FROM T_Book WHERE T_Book.itemId LIKE ?";
         Connection con = DbManager.getConnection();
 
         try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
             con.setAutoCommit(false);
-            preparedStatement.setString(1, isbn + "%");
+            preparedStatement.setString(1, itemId + "%");
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next()) {
-                    int itemId = resultSet.getInt("itemId");
-                    isbn = resultSet.getString("isbn");
+                    itemId = resultSet.getInt("itemId");
+                    String isbn = resultSet.getString("isbn");
                     String title = resultSet.getString("title");
                     String stringGenre = resultSet.getString("genre");
                     Genre genre = Genre.valueOf(stringGenre);
@@ -91,8 +94,9 @@ public class DbBook extends Book {
         return foundBook;
     }
 
-    public static ArrayList<DbBook> importAllBooks() {
-        ArrayList<DbBook> books = new ArrayList<>();
+    public static Collection importAllBooks() {
+        Vector books = new Vector();
+
         String query = "SELECT T_Book.* FROM T_Book";
         Connection con = DbManager.getConnection();
 
@@ -109,7 +113,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    books.add(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
+                    books.addElement(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
                 }
             }
             con.commit();
@@ -170,14 +174,14 @@ public class DbBook extends Book {
         }
     }
 
-    public static void executeBookRemove(Book book) {
+    public static void executeBookRemove(int itemId) {
         String command = "DELETE FROM T_Book WHERE itemId = ?";
         Connection con = DbManager.getConnection();
 
         try {
             con.setAutoCommit(false);
             PreparedStatement preparedStatement = con.prepareStatement(command);
-            preparedStatement.setInt(1, book.getItemId());
+            preparedStatement.setInt(1, itemId);
             preparedStatement.execute();
             con.commit();
         } catch (SQLException e) {

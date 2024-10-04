@@ -6,6 +6,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="businessObjects.Genre" %>
+<%@ page import="businessObjects.Authority" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -22,8 +23,13 @@
 
     <div class="topnav">
         <a class="active" href="index.jsp">Home</a>
-        <a href="#news">Worker</a>
-        <a href="#news">Admin</a>
+        <% if(currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
+            <a href="#news">Worker</a>
+            <a href="products.jsp">Products</a>
+        <% } %>
+        <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
+            <a href="#news">Employees</a>
+        <% } %>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
@@ -70,6 +76,8 @@
                     <h3><%= b.getTitle()%></h3>
                     <p><%= b.getAuthor()%></p>
                     <isbn>ISBN: <%= b.getIsbn()%></isbn>
+                    <p><%= b.getItemId()%></p>
+
 
                     <status>
                         <% if (nrOfCopies == 0) { %>

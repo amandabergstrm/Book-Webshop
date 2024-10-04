@@ -2,7 +2,7 @@ package businessObjects;
 
 import database.DbBook;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class Book {
@@ -23,20 +23,20 @@ public class Book {
         DbBook.executeBookInsert(book);
     }
 
-    public static Book searchBookByISBN(String isbn) {
-        return DbBook.searchBookByISBN(isbn);
+    public static Book searchBookByItemId(int itemId) {
+        return DbBook.searchBookByItemID(itemId);
     }
 
-    public static ArrayList<DbBook> importAllBooks() {
-        return DbBook.importAllBooks();
+    public static Collection importAllBooks() {
+      return DbBook.importAllBooks();
     }
 
     public static void updateBook(Book book) {
         DbBook.executeBookUpdate(book);
     }
 
-    public static void deleteBook(Book book) {
-        DbBook.executeBookRemove(book);
+    public static void deleteBookById(int itemId) {
+        DbBook.executeBookRemove(itemId);
     }
 
     public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
