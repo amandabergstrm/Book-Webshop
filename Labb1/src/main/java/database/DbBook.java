@@ -13,9 +13,40 @@ public class DbBook extends Book {
         super(isbn, title, genre, author, nrOfCopies, price);
     }
 
-    //hämta en bok baserat på isbn - klar
-    //hämta alla böcker - klar
-    //hämta filtrerade böcker - amanda
+    public static void executeBookInsert(Book book) {
+        String command = "INSERT INTO " + "T_User(isbn, title, genre, author, nrOfCopies, price) VALUES(?, ?, ?, ?, ?, ?)";
+        Connection con = DbManager.getConnection();
+
+        try {
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(command);
+            preparedStatement.setString(1, book.getIsbn());
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3, book.getGenre().toString());
+            preparedStatement.setString(4, book.getAuthor());
+            preparedStatement.setInt(5, book.getNrOfCopies());
+            preparedStatement.setInt(6, book.getPrice());
+            preparedStatement.execute();
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public static DbBook searchBookByISBN(String isbn) {
         DbBook foundBook = null;

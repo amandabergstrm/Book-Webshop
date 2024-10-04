@@ -19,6 +19,10 @@ public class Book {
         return ISBN_PATTERN.matcher(isbn).matches();
     }
 
+    public void createBook(Book book) {
+        DbBook.executeBookInsert(book);
+    }
+
     public static Book searchBookByISBN(String isbn) {
         return DbBook.searchBookByISBN(isbn);
     }
