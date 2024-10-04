@@ -7,19 +7,20 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="businessObjects.Genre" %>
 <%@ page import="businessObjects.Authority" %>
+<%@ page import="java.util.Collections" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="mainPageStyle.css">
-    <link rel="stylesheet" href="shopItemsStyle.css">
-    <link rel="stylesheet" href="navBarStyle.css">
-    <link rel="stylesheet" href="sidebarCartStyle.css">
+    <link rel="stylesheet" href="css/mainPageStyle.css">
+    <link rel="stylesheet" href="css/shopItemsStyle.css">
+    <link rel="stylesheet" href="css/navBarStyle.css">
+    <link rel="stylesheet" href="css/sidebarCartStyle.css">
 </head>
 
 <body>
-    <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
+    <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
 
     <div class="topnav">
         <a class="active" href="index.jsp">Home</a>
@@ -48,14 +49,26 @@
         <label for="cartToggle" class="closebtn">&times;</label>
         <h2>Your Cart</h2>
         <div id="cartItems">
-            <p>Book Title 1 - 199 kr</p>
-            <p>Book Title 2 - 249 kr</p>
+            <%  session = request.getSession();
+                ArrayList<BookInfo> cart = (ArrayList<BookInfo>) session.getAttribute("cart");
+                if (cart == null || cart.isEmpty()) { %>
+                    <p>Your cart is empty!</p>
+            <% } else { %>
+            <p> <% for (BookInfo book : cart) { %>
+                <p> <%= book.getTitle() %>   -   <%= book.getPrice() %> kr </p>
+                <% } %>
+            </p>
+            <% } %>
         </div>
-        <label class="proceedToPay">
-            <!--kolla om den är inlogagd redan, om den är det så gå vidare till kassa, annars logga in-->
-            <a href="login.jsp">Proceed to Pay</a>
-        </label>
-
+        <% if (cart != null && !cart.isEmpty()) { %>
+            <label class="proceedToPay">
+                <% if (currentUser == null) {%>
+                    <a href="login.jsp">Proceed to Pay</a>
+                <% } else { %>
+                    <a href="products.jsp">Proceed to Pay</a>  <!-- byt med oder sida -->
+                <% } %>
+            </label>
+        <% } %>
     </div>
 
     <div class="shopTitle">
@@ -63,8 +76,9 @@
     </div>
 
     <div class="shop-container">
-        <%
-            Collection<BookInfo> books = BookHandler.getAllBooks(); //ska hämta från kontrollern istället
+           <!--ArrayList<BookInfo> books = (ArrayList<BookInfo>) request.getSession().getAttribute("books"); -->
+        <%  //Collection<BookInfo> books = (Collection<BookInfo>) request.getAttribute("bookList");
+            Collection<BookInfo> books = BookHandler.getAllBooks();
             Iterator<BookInfo> it = books.iterator();
             for (; it.hasNext();) {
                 BookInfo b = it.next();
@@ -76,8 +90,6 @@
                     <h3><%= b.getTitle()%></h3>
                     <p><%= b.getAuthor()%></p>
                     <isbn>ISBN: <%= b.getIsbn()%></isbn>
-                    <p><%= b.getItemId()%></p>
-
 
                     <status>
                         <% if (nrOfCopies == 0) { %>
@@ -90,7 +102,10 @@
                     </status>
 
                     <p><%= b.getPrice()%> kr</p>
-                    <button>Add to Cart</button>
+                    <form action="cart-servlet" method="POST">
+                        <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
+                        <button type="submit">Add to Cart</button>
+                    </form>
                 </div>
             </div>
         <%}%>

@@ -94,8 +94,8 @@ public class DbBook extends Book {
         return foundBook;
     }
 
-    public static Collection importAllBooks() {
-        Vector books = new Vector();
+    public static ArrayList<DbBook> importAllBooks() {
+        ArrayList<DbBook> books = new ArrayList<>();
 
         String query = "SELECT T_Book.* FROM T_Book";
         Connection con = DbManager.getConnection();
@@ -113,7 +113,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    books.addElement(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
+                    books.add(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
                 }
             }
             con.commit();

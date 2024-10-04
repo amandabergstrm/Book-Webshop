@@ -8,9 +8,9 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="navBarStyle.css">
-    <link rel="stylesheet" href="productStyle.css">
-    <link rel="stylesheet" href="handleBookForms.css">
+    <link rel="stylesheet" href="css/navBarStyle.css">
+    <link rel="stylesheet" href="css/productStyle.css">
+    <link rel="stylesheet" href="css/handleBookForms.css">
     <title>Title</title>
 </head>
 <body>
@@ -20,6 +20,9 @@
         <a class="active" href="index.jsp">Home</a>
         <a href="#news">Worker</a>
         <a href="products.jsp">Products</a>
+        <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
+            <a href="#news">Employees</a>
+        <% } %>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
         <% } else { %>
@@ -27,7 +30,7 @@
             <input type="hidden" name="action" value="logout">
             <button class="log-out" type="submit">Logout</button>
         </form>
-        <a class="view-user">Logged in: <%= currentUser.getName()%></a>
+            <a class="view-user">Logged in: <%= currentUser.getName()%></a>
         <% } %>
     </div>
 

@@ -2,26 +2,16 @@ package ui;
 
 import businessObjects.BookHandler;
 import businessObjects.Genre;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
-import java.util.Collection;
 
 @WebServlet(name = "bookServlet", value = "/book-servlet")
 public class BookServlet extends HttpServlet {
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Collection<BookInfo> books = BookHandler.getAllBooks();
-        request.setAttribute("books", books);
-        request.getRequestDispatcher("/books.jsp").forward(request, response); // Forward to JSP page
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+   @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
         if ("create".equals(action)) {
             createBook(request, response);

@@ -10,7 +10,7 @@ import jakarta.servlet.annotation.*;
 @WebServlet(name = "userServlet", value = "/user-servlet")
 public class UserServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
 
