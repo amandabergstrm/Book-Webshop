@@ -14,7 +14,7 @@ public class DbBook extends Book {
     }
 
     public static void executeBookInsert(Book book) {
-        String command = "INSERT INTO " + "T_User(isbn, title, genre, author, nrOfCopies, price) VALUES(?, ?, ?, ?, ?, ?)";
+        String command = "INSERT INTO " + "T_Book(isbn, title, genre, author, nrOfCopies, price) VALUES(?, ?, ?, ?, ?, ?)";
         Connection con = DbManager.getConnection();
 
         try {

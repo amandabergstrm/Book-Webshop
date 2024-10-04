@@ -78,6 +78,10 @@ JOIN T_Book ON T_Order.itemId = T_Book.itemId;
 
 SELECT * FROM OrderDetails;
 
+UPDATE T_Book 
+SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10
+
+
 
 /*
 SELECT itemId
@@ -85,7 +89,7 @@ FROM T_Book
 WHERE isbn = "9780062380623" AND title = "Coraline";
 
 DELETE FROM T_Book 
-WHERE itemId = 7;
+WHERE itemId = 11;
 
 SELECT T_Book.*, T_Author.*User
 FROM T_AuthorAndBook
