@@ -1,5 +1,6 @@
 package businessObjects;
 
+import database.DbBook;
 import ui.BookInfo;
 import ui.UserInfo;
 
@@ -10,7 +11,7 @@ import java.util.Iterator;
 public class BookHandler {
     public static void createBook(BookInfo book) {
         Book bookObj = new Book(book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice());
-        bookObj.createBook(bookObj);
+        Book.createBook(bookObj);
     }
 
     public static BookInfo getBookByISBN(String isbn) {
@@ -26,6 +27,11 @@ public class BookHandler {
             books.add(new BookInfo(book.getItemId(),book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice()));
         }
         return books;
+    }
+
+    public static void updateBook(BookInfo book, int newNrOfCopies, int newPrice) {
+        Book bookObj = new Book(book.getItemId(), book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), newNrOfCopies, newPrice);
+        Book.updateBook(bookObj);
     }
 
     public static void deleteBook(BookInfo book) {

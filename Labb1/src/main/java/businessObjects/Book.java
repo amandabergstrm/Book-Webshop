@@ -19,7 +19,7 @@ public class Book {
         return ISBN_PATTERN.matcher(isbn).matches();
     }
 
-    public void createBook(Book book) {
+    public static void createBook(Book book) {
         DbBook.executeBookInsert(book);
     }
 
@@ -31,7 +31,11 @@ public class Book {
         return DbBook.importAllBooks();
     }
 
-    public void deleteBook(Book book) {
+    public static void updateBook(Book book) {
+        DbBook.executeBookUpdate(book);
+    }
+
+    public static void deleteBook(Book book) {
         DbBook.executeBookRemove(book);
     }
 

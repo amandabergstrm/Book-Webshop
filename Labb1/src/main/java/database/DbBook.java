@@ -133,6 +133,43 @@ public class DbBook extends Book {
         return books;
     }
 
+    public static void executeBookUpdate(Book book) {
+        String command = "UPDATE T_Book SET nrOfCopies = ?, price = ? WHERE itemId = ?";
+        Connection con = DbManager.getConnection();
+
+        try {
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(command);
+            preparedStatement.setInt(1, book.getNrOfCopies());
+            preparedStatement.setInt(2, book.getPrice());
+            preparedStatement.setInt(3, book.getItemId());
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Book details updated successfully.");
+            } else {
+                System.out.println("No book found with the given itemId.");
+            }
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static void executeBookRemove(Book book) {
         String command = "DELETE FROM T_Book WHERE itemId = ?";
         Connection con = DbManager.getConnection();
