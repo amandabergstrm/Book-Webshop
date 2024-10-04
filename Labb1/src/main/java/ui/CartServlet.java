@@ -23,6 +23,6 @@ public class CartServlet extends HttpServlet {
             session.setAttribute("cart", cart);
         }
         cart.add(book);
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("shop.jsp");
     }
 }

@@ -17,7 +17,7 @@
     <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
 
     <div class="topnav">
-        <a class="active" href="index.jsp">Home</a>
+        <a class="active" href="shop.jsp">Home</a>
         <a href="#news">Worker</a>
         <a href="products.jsp">Products</a>
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
@@ -76,8 +76,7 @@
             </div>
         </div>
 
-        <%
-            Collection<BookInfo> books = BookHandler.getAllBooks(); //ska hämta från kontrollern istället
+        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getSession().getAttribute("booksInfo");
             Iterator<BookInfo> it = books.iterator();
             for (; it.hasNext();) {
                 BookInfo book = it.next();

@@ -27,11 +27,11 @@ public class UserServlet extends HttpServlet {
                 session.setAttribute("currentUser", existingUser);
 
                 if (existingUser.getAuthority() == Authority.Admin) {
-                    response.sendRedirect("index.jsp"); // skicka till admin sida eller till home men dem ser allt
+                    response.sendRedirect("shop.jsp"); // skicka till admin sida eller till home men dem ser allt
                 } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
-                    response.sendRedirect("index.jsp"); // skicka till lager sida eller till home men dem ser det dem behöver
+                    response.sendRedirect("shop.jsp"); // skicka till lager sida eller till home men dem ser det dem behöver
                 } else {
-                    response.sendRedirect("index.jsp"); // gör så man hamnar i checkout endast om man tryck på proceed to pay annars hamna i home
+                    response.sendRedirect("shop.jsp"); // gör så man hamnar i checkout endast om man tryck på proceed to pay annars hamna i home
                 }
             } else {
                 System.out.println("Fel lösenord (rätt email)");
@@ -51,12 +51,12 @@ public class UserServlet extends HttpServlet {
                 UserHandler.createUser(newUserInfo);
                 System.out.println("Fortsätt till kassa");
                 session.setAttribute("currentUser", newUserInfo);
-                response.sendRedirect("index.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
+                response.sendRedirect("shop.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
             }
         } else if ("logout".equals(action)) {
             session = request.getSession();
             session.invalidate();
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("shop.jsp");
         } else {
             response.getWriter().write("Invalid action.");
         }
@@ -91,9 +91,9 @@ public class UserServlet extends HttpServlet {
 
     HttpSession session = request.getSession();
     session.setAttribute("user", username); // Or other relevant info
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("shop.jsp");
 
-    In index.jsp, you can then check for session attributes like this:
+    In shop.jsp, you can then check for session attributes like this:
 
     <%
         String username = (String) session.getAttribute("user");

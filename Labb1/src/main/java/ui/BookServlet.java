@@ -6,7 +6,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
+import java.util.Collection;
 
 @WebServlet(name = "bookServlet", value = "/book-servlet")
 public class BookServlet extends HttpServlet {
@@ -31,7 +34,7 @@ public class BookServlet extends HttpServlet {
         int nrOfCopies = Integer.parseInt(request.getParameter("nrOfCopies"));
 
         BookHandler.createBook(new BookInfo(isbn, title, Genre.valueOf(genre), author, price, nrOfCopies));
-
+        updateSession(request, response);
         response.sendRedirect("products.jsp");
     }
 
@@ -53,13 +56,20 @@ public class BookServlet extends HttpServlet {
         }
 
         BookHandler.updateBook(book, newNrOfCopies, newPrice);
-
+        updateSession(request, response);
         response.sendRedirect("products.jsp");
     }
 
     private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String itemIdStr = request.getParameter("itemId");
         BookHandler.deleteBookById(Integer.parseInt(itemIdStr));
+        updateSession(request, response);
         response.sendRedirect("products.jsp");
+    }
+
+    private void updateSession(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        Collection<BookInfo> booksInfo = BookHandler.getAllBooks(); // Get updated list from handler
+        session.setAttribute("booksInfo", booksInfo); // Set updated list in session
     }
 }
