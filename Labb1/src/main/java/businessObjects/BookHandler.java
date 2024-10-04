@@ -27,4 +27,9 @@ public class BookHandler {
         }
         return books;
     }
+
+    public static void deleteBook(BookInfo book) {
+        Book bookObj = new Book(book.getItemId(), book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice());
+        bookObj.deleteBook(bookObj);
+    }
 }

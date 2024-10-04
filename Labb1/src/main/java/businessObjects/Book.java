@@ -31,6 +31,10 @@ public class Book {
         return DbBook.importAllBooks();
     }
 
+    public void deleteBook(Book book) {
+        DbBook.executeBookRemove(book);
+    }
+
     public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid isbn");

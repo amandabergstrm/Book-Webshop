@@ -35,8 +35,7 @@ public class DbBook extends Book {
                 } catch (SQLException ex) {
                     e.printStackTrace();
                 }
-            }
-            e.printStackTrace();
+            } e.printStackTrace();
         } finally {
             try {
                 if (con != null) {
@@ -79,8 +78,7 @@ public class DbBook extends Book {
                 } catch (SQLException ex) {
                     e.printStackTrace();
                 }
-            }
-            e.printStackTrace();
+            } e.printStackTrace();
         } finally {
             try {
                 if (con != null) {
@@ -122,8 +120,7 @@ public class DbBook extends Book {
                 } catch (SQLException ex) {
                     e.printStackTrace();
                 }
-            }
-            e.printStackTrace();
+            } e.printStackTrace();
         } finally {
             try {
                 if (con != null) {
@@ -134,5 +131,34 @@ public class DbBook extends Book {
             }
         }
         return books;
+    }
+
+    public static void executeBookRemove(Book book) {
+        String command = "DELETE FROM T_Book WHERE itemId = ?";
+        Connection con = DbManager.getConnection();
+
+        try {
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(command);
+            preparedStatement.setInt(1, book.getItemId());
+            preparedStatement.execute();
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
