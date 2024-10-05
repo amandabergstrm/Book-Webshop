@@ -36,7 +36,7 @@
     </div>
 
  <!-- Confirm order form -->
-    <form action="order-servlet" method="POST">
+    <form action="order-summary-servlet" method="POST">
      <input type="hidden" name="action" value="confirmOrder">
      <button type="submit" class="confirm-btn">Confirm Order</button>
     </form>

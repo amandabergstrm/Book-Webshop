@@ -23,11 +23,11 @@
 
 <body>
     <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
-
-    <% if (currentUser == null) {
+<!--
+    < % if (currentUser == null) {
         currentUser = new UserInfo(Authority.Admin, "Test User", "testuser@example.com", "password123");
         session.setAttribute("currentUser", currentUser);
-    } %>
+    } % >-->
 
 <!-- Navigation bar -->
 <div class="topnav">

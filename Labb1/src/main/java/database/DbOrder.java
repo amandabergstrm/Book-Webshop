@@ -72,8 +72,8 @@ public class DbOrder extends Order {
     }
 
     public static void executeOrderInsert(Order order) {
-        String queryInsertOrder = "INSERT INTO T_Order (userEmail, status) VALUES (?, ?)";
-        String queryInsertOrderItem = "INSERT INTO T_OrderItem (orderNr, itemId, nrOfItems) VALUES (?, ?, ?)";
+        String queryInsertOrder = "INSERT INTO T_Order(userEmail, status) VALUES(?, ?)";
+        String queryInsertOrderItem = "INSERT INTO T_OrderItem(orderNr, itemId, nrOfItems) VALUES(?, ?, ?)";
 
         Connection con = DbManager.getConnection();
         try {
