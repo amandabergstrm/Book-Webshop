@@ -1,6 +1,5 @@
 <%@ page import="ui.UserInfo" %>
 <%@ page import="ui.BookInfo" %>
-<%@ page import="businessObjects.BookHandler" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="businessObjects.Authority" %>
@@ -11,7 +10,7 @@
     <link rel="stylesheet" href="css/navBarStyle.css">
     <link rel="stylesheet" href="css/productStyle.css">
     <link rel="stylesheet" href="css/handleBookForms.css">
-    <title>Title</title>
+    <title>Manage products</title>
 </head>
 <body>
     <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
@@ -21,12 +20,12 @@
         <a href="#news">Worker</a>
         <a href="products.jsp">Products</a>
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-            <a href="#news">Employees</a>
+            <a href="users.jsp">Users</a>
         <% } %>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
         <% } else { %>
-        <form action="user-servlet" method="POST">
+        <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="logout">
             <button class="log-out" type="submit">Logout</button>
         </form>
@@ -35,7 +34,6 @@
     </div>
 
     <div class="product-list">
-
         <div class="list-item">
             <div class="item-info">
                 <a> </a>

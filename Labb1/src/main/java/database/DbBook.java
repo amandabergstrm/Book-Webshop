@@ -7,9 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Vector;
 
 public class DbBook extends Book {
     public DbBook(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {

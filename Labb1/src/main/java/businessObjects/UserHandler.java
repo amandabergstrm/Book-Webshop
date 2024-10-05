@@ -1,20 +1,41 @@
 package businessObjects;
 
 import ui.UserInfo;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /*
 Kontakt mellan ui och bo.
  */
 public class UserHandler {
-    public static void createUser(UserInfo user) {
-        User userObj = new User(user.getAuthority(), user.getName(), user.getEmail(), user.getPassword());
+    public static void createUser(UserInfo userInfo) {
+        User userObj = new User(userInfo.getAuthority(), userInfo.getName(), userInfo.getEmail(), userInfo.getPassword());
         userObj.createUser(userObj);
     }
 
     public static UserInfo getUserByEmail(String email) {
-        User foundUser = User.getUserByEmail(email);
-        if (foundUser == null)
+        User userObj = User.getUserByEmail(email);
+        if (userObj == null)
             return null;
-        return new UserInfo(foundUser.getAuthority(), foundUser.getName(), foundUser.getEmail(), foundUser.getPassword());
+        return new UserInfo(userObj.getAuthority(), userObj.getName(), userObj.getEmail(), userObj.getPassword());
+    }
+
+    public static Collection<UserInfo> getAllUsers() {
+        Collection c = User.importAllUsers();
+        ArrayList<UserInfo> usersInfo = new ArrayList<>();
+        for (Object u : c) {
+            User userObj = (User) u;
+            usersInfo.add(new UserInfo(userObj.getAuthority(), userObj.getName(), userObj.getEmail(), userObj.getPassword()));
+        }
+        return usersInfo;
+    }
+
+    public static void updateUser(UserInfo userInfo) {
+        User userObj = new User(userInfo.getAuthority(), userInfo.getName(), userInfo.getEmail(), userInfo.getPassword());
+        User.updateUser(userObj);
+    }
+
+    public static void deleteUserByEmail(String email) {
+        User.deleteUserByEmail(email);
     }
 }

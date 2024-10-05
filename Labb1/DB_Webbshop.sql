@@ -79,9 +79,10 @@ JOIN T_Book ON T_Order.itemId = T_Book.itemId;
 SELECT * FROM OrderDetails;
 
 UPDATE T_Book 
-SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10
+SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
-
+UPDATE T_User 
+SET T_User.authority = "Admin" WHERE email = "test6@hello.com";
 
 /*
 SELECT itemId

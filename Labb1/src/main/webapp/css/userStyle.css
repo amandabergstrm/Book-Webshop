@@ -1,0 +1,76 @@
+body {
+    font-family: Cambria, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.users-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 20px;
+}
+
+.list-user {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: 250px 300px 200px 200px 60px 20px 80px;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.user-info a {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.user-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+button img {
+    vertical-align: middle;
+}
+
+button:hover img {
+    opacity: 0.7;
+}
+
+.shop-item {
+    height: 75px;
+}
+
+input[type="text"], input[type="email"], input[type="password"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+select {
+    background-color: #fff;
+    cursor: pointer;
+}

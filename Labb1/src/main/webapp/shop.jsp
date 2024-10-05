@@ -27,13 +27,13 @@
             <a href="products.jsp">Products</a>
         <% } %>
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-            <a href="#news">Employees</a>
+            <a href="users.jsp">Users</a>
         <% } %>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
         <% } else { %>
-        <form action="user-servlet" method="POST">
+        <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="logout">
             <button class="log-out" type="submit">Logout</button>
         </form>
@@ -111,7 +111,13 @@
 <body>
 <br/>
 <a href="hello-servlet">Hello Servlet</a>
-<% UserInfo user = UserHandler.getUserByEmail("poriazov@kth.se");%>
-<%= user.getName() %>
+<% UserInfo user = UserHandler.getUserByEmail("test7@gmail.com");%>
+<%= user.getAuthority().toString() %>
+
+<% user.setAuthority(Authority.Admin);
+    UserHandler.updateUser(user);%>
+<% user = UserHandler.getUserByEmail("test7@gmail.com");%>
+<%=user.getAuthority().toString() %>
+
 </body>
 </html>

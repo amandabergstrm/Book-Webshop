@@ -1,8 +1,10 @@
 package ui;
 
 import java.io.*;
-
+import java.util.Collection;
 import businessObjects.Authority;
+import businessObjects.BookHandler;
+import businessObjects.Genre;
 import businessObjects.UserHandler;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -12,97 +14,47 @@ public class UserServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
+        if ("create".equals(action)) {
+            createUser(request, response);
+        } else if ("edit".equals(action)) {
+            editUser(request, response);
+        } else if ("delete".equals(action)) {
+            deleteUser(request, response);
+        }
+    }
+
+    private void createUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String name = request.getParameter("username");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String authority = request.getParameter("authority");
+
+        UserHandler.createUser(new UserInfo(Authority.valueOf(authority), name, email, password));
+        updateSession(request, response);
+        response.sendRedirect("users.jsp");
+    }
+
+    private void editUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        String authorityStr = request.getParameter("authority");
+        UserInfo userInfo = UserHandler.getUserByEmail(email);
+        assert userInfo != null;
+        userInfo.setAuthority(Authority.valueOf(authorityStr));
+        UserHandler.updateUser(userInfo);
+        updateSession(request, response);
+        response.sendRedirect("users.jsp");
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        UserHandler.deleteUserByEmail(email);
+        updateSession(request, response);
+        response.sendRedirect("users.jsp");
+    }
+
+    private void updateSession(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-
-        if ("login".equals(action)) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            UserInfo existingUser = UserHandler.getUserByEmail(email);
-            if (existingUser == null) {
-                System.out.println("User hittades inte, prova igen eller create");
-                response.sendRedirect("login.jsp");
-            } else if (existingUser.getPassword().equals(password)) {
-                System.out.println("logged in as" + existingUser.getName());
-                session.setAttribute("currentUser", existingUser);
-
-                if (existingUser.getAuthority() == Authority.Admin) {
-                    response.sendRedirect("shop.jsp"); // skicka till admin sida eller till home men dem ser allt
-                } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
-                    response.sendRedirect("shop.jsp"); // skicka till lager sida eller till home men dem ser det dem behöver
-                } else {
-                    response.sendRedirect("shop.jsp"); // gör så man hamnar i checkout endast om man tryck på proceed to pay annars hamna i home
-                }
-            } else {
-                System.out.println("Fel lösenord (rätt email)");
-                response.sendRedirect("login.jsp"); // prova igen
-            }
-        } else if ("createUser".equals(action)) {
-            String username = request.getParameter("username");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            UserInfo existingUser = UserHandler.getUserByEmail(email);
-            if (existingUser != null) {
-                System.out.println("Skriv att kontot redan finns så får dem försöka igen");
-                response.sendRedirect("login.jsp");
-            } else {
-                UserInfo newUserInfo = new UserInfo(Authority.Customer, username, email, password);
-                UserHandler.createUser(newUserInfo);
-                System.out.println("Fortsätt till kassa");
-                session.setAttribute("currentUser", newUserInfo);
-                response.sendRedirect("shop.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
-            }
-        } else if ("logout".equals(action)) {
-            session = request.getSession();
-            session.invalidate();
-            response.sendRedirect("shop.jsp");
-        } else {
-            response.getWriter().write("Invalid action.");
-        }
+        Collection<UserInfo> usersInfo = UserHandler.getAllUsers();
+        session.setAttribute("usersInfo", usersInfo);
     }
-    /*
-    @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String action = request.getParameter("action");
-
-        if ("login".equals(action)) {
-            UserInfo existingUser = UserHandler.getUserByEmail(request.getParameter("loginEmail"));
-            if (existingUser == null) {
-                System.out.println("Skriv att user ej finns och öppna create user dialog");
-            } else {
-                System.out.println("Fortsätt till kassa");
-            }
-        } else if ("createUser".equals(action)) {
-            UserInfo existingUser = UserHandler.getUserByEmail(request.getParameter("email"));
-            if (existingUser != null) {
-                System.out.println("Skriv att kontot redan finns så får dem försöka igen");
-            }
-            UserHandler.createUser(new UserInfo(Authority.Customer, request.getParameter("username"), request.getParameter("email"), request.getParameter("password")));
-            System.out.println("Fortsätt till kassa");
-        } else {
-            response.getWriter().write("Invalid action.");
-        }
-    }
-
-    session :
-
-    If you need to pass any session information (e.g., logged-in user data), you can use the HttpSession object in the servlet:
-
-    HttpSession session = request.getSession();
-    session.setAttribute("user", username); // Or other relevant info
-    response.sendRedirect("shop.jsp");
-
-    In shop.jsp, you can then check for session attributes like this:
-
-    <%
-        String username = (String) session.getAttribute("user");
-        if (username != null) {
-    %>
-        <p>Welcome, <%= username %>!</p>
-    <%
-        }
-    %>
-
-    */
 }

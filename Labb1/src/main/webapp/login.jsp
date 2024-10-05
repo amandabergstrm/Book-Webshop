@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login or Create User</title>
     <link rel="stylesheet" href="css/logInStyle.css">
+    <title>Login or Create User</title>
 </head>
 <body>
 <!-- Radio buttons for toggling between forms -->
@@ -16,7 +16,7 @@
     <!-- Log In Form -->
     <div id="loginForm">
         <h2>Log In</h2>
-        <form action="user-servlet" method="POST">
+        <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="login">
             <label for="loginEmail">Email:</label>
             <input type="email" id="loginEmail" name="email" required>
@@ -32,7 +32,7 @@
     <!-- Create User Form -->
     <div id="createUserForm">
         <h2>Create User</h2>
-        <form action="user-servlet" method="POST">
+        <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="createUser">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>

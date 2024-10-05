@@ -67,9 +67,9 @@ public class BookServlet extends HttpServlet {
         response.sendRedirect("products.jsp");
     }
 
-    private void updateSession(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void updateSession(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
-        Collection<BookInfo> booksInfo = BookHandler.getAllBooks(); // Get updated list from handler
-        session.setAttribute("booksInfo", booksInfo); // Set updated list in session
+        Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
+        session.setAttribute("booksInfo", booksInfo);
     }
 }

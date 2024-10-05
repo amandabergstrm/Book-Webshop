@@ -1,6 +1,9 @@
 package businessObjects;
 
 import database.DbUser;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class User {
@@ -15,12 +18,24 @@ public class User {
     }
 
     /*Har kontakt mellan ob och db*/
-    public void createUser(User user) {
-        DbUser.executeUserInsert(user);
+    public void createUser(User userObj) {
+        DbUser.executeUserInsert(userObj);
     }
 
     public static User getUserByEmail(String email) {
         return DbUser.searchUserByEmail(email);
+    }
+
+    public static Collection importAllUsers() {
+        return DbUser.importAllUsers();
+    }
+
+    public static void updateUser(User userObj) {
+        DbUser.executeUserUpdate(userObj);
+    }
+
+    public static void deleteUserByEmail(String email) {
+        DbUser.executeUserRemove(email);
     }
 
     public User(Authority authority, String name, String email, String password) {
