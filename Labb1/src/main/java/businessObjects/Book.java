@@ -2,7 +2,7 @@ package businessObjects;
 
 import database.DbBook;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class Book {
@@ -19,28 +19,27 @@ public class Book {
         return ISBN_PATTERN.matcher(isbn).matches();
     }
 
-    public static void createBook(Book book) {
-        DbBook.executeBookInsert(book);
+    public static void createBook(Book bookObj) {
+        DbBook.executeBookInsert(bookObj);
     }
 
-    public static Book searchBookByISBN(String isbn) {
-        return DbBook.searchBookByISBN(isbn);
+    public static Book searchBookByItemId(int itemId) {
+        return DbBook.searchBookByItemID(itemId);
     }
 
-    public static ArrayList<DbBook> importAllBooks() {
-        return DbBook.importAllBooks();
-        //Deep copy och gör om till bokobjekt?
+    public static Collection importAllBooks() {
+      return DbBook.importAllBooks();
     }
 
-    public static void updateBook(Book book) {
-        DbBook.executeBookUpdate(book);
+    public static void updateBook(Book bookObj) {
+        DbBook.executeBookUpdate(bookObj);
     }
 
-    public static void deleteBook(Book book) {
-        DbBook.executeBookRemove(book);
+    public static void deleteBookById(int itemId) {
+        DbBook.executeBookRemove(itemId);
     }
 
-    protected Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid isbn");
         this.isbn = isbn;
@@ -55,7 +54,7 @@ public class Book {
         this.price = price;
     }
 
-    protected Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
        this(isbn, title, genre, author, nrOfCopies, price);
        this.itemId = itemId;
     }

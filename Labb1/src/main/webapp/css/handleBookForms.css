@@ -1,0 +1,108 @@
+body {
+    font-family: Cambria, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+}
+
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"]:checked ~ .form-container {
+    display: block;
+}
+
+.form-container button {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #028a56;
+}
+
+.toggle-link {
+    position: relative;
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0;
+}
+
+.toggle-link:hover {
+    color: #028a56;
+}
+
+.delete-btn {
+    position: relative;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 20px;
+    margin-bottom: -16px;
+}
+
+.delete-btn:hover {
+    color: #c0392b;
+}
+
+#createBookToggle:checked ~ .form-container {
+    display: block;
+}
+
+#editBookToggle:checked ~ .form-container {
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 36px;
+    cursor: pointer;
+    text-align: center;
+}
