@@ -96,7 +96,7 @@
         %>
             <div class="shop-item">
                 <div class="item-info">
-                    <img src="resources/<%= b.getTitle()%>.jpg" alt="<%= b.getTitle()%>"> <!--img samma med bild om dem lagras-->
+                    <img src="resources/<%= b.getIsbn()%>.jpg" alt="<%= b.getIsbn()%>">
                     <h3><%= b.getTitle()%></h3>
                     <p><%= b.getAuthor()%></p>
                     <isbn>Genre: <%= b.getGenre()%></isbn>

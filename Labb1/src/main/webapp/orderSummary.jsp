@@ -20,7 +20,7 @@
     %>
     <div class="cart-item">
         <div class="item-info">
-            <img src="resources/<%= item.getItem().getTitle() %>.jpg" alt="<%= item.getItem().getTitle() %>" class="item-image">
+            <img src="resources/<%= item.getItem().getIsbn() %>.jpg" alt="<%= item.getItem().getIsbn() %>" class="item-image">
             <div class="item-details">
                 <p><span class="item-title"><%= item.getItem().getTitle() %></span> by <%= item.getItem().getAuthor() %></p>
                 <p><%= item.getNrOfItems() %> x <%= item.getItem().getPrice() %> kr</p>
