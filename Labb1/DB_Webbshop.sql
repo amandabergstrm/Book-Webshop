@@ -87,7 +87,6 @@ VALUES ('3', '10','2');
 UPDATE T_Book 
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
-
 SELECT *
 FROM T_Book;
 
