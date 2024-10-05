@@ -46,7 +46,7 @@
                 <a>Stock</a>
                 <a>Price</a>
 
-                <!-- Add Button -->
+                <!-- Add Book Button -->
                 <input type="checkbox" id="createBookToggle" hidden>
                 <div class="form-container" id="createBookForm">
                     <label for="createBookToggle" class="close-btn">&times;</label>
@@ -74,10 +74,25 @@
                         <button type="submit">Add Book</button>
                     </form>
                 </div>
-                <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-                    <label for="createBookToggle" class="toggle-link">Add</label>
-                <% } %>
 
+                <!-- Add Category Button -->
+                <input type="checkbox" id="addCategoryToggle" hidden>
+                <div class="form-container" id="addCategoryForm">
+                    <label for="addCategoryToggle" class="close-btn">&times;</label>
+                    <h2>Add New Category</h2>
+                    <form action="book-servlet" method="POST">
+                        <input type="hidden" name="action" value="category">
+                        <label for="newGenre">Category (genre):</label>
+                        <input type="text" id="newGenre" name="newGenre" required>
+                        <button type="submit">Add Category</button>
+                    </form>
+                </div>
+
+                <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
+                <label for="createBookToggle" class="toggle-link">Add</label>
+                <a> </a>
+                <label for="addCategoryToggle" class="toggle-link">Add Category</label>
+                <% } %>
             </div>
         </div>
 

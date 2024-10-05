@@ -86,6 +86,9 @@ FROM T_Book;
 SELECT *
 FROM T_User;
 
+SELECT *
+FROM T_Category;
+
 CREATE VIEW OrderDetails AS
 SELECT T_Order.orderNr, T_Order.user, T_Order.itemId, T_Book.title, T_Order.nrOfItems, T_Order.status
 FROM T_Order

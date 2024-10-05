@@ -67,7 +67,7 @@ body {
     margin: 0;
 }
 
-.shop-item button {
+.add-to-cart-button {
     position: absolute;
     right: 16px;
     bottom: 16px;
@@ -77,6 +77,12 @@ body {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.add-to-cart-button:disabled {
+    background-color: #cccccc; /* Lighter color for disabled button */
+    opacity: 0.5; /* Make the button more transparent */
+    cursor: not-allowed; /* Change the cursor to indicate it’s disabled */
 }
 
 .shop-item button:hover {

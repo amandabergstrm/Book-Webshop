@@ -102,7 +102,7 @@
                     <p><%= b.getPrice()%> kr</p>
                     <form action="cart-servlet" method="POST">
                         <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
-                        <button type="submit">Add to Cart</button>
+                        <button type="submit" class="add-to-cart-button" <%= (nrOfCopies == 0) ? "disabled" : "" %> >Add to Cart</button>
                     </form>
                 </div>
             </div>

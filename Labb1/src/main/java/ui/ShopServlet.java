@@ -11,8 +11,6 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 @WebServlet(name = "shopServlet", value = "/shop-servlet")
 public class ShopServlet extends HttpServlet {
@@ -22,7 +20,7 @@ public class ShopServlet extends HttpServlet {
         Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
         session.setAttribute("booksInfo", booksInfo);
 
-        ArrayList<String> genres = BookHandler.getAllGenres();
+        ArrayList<String> genres = BookHandler.getAllCategories();
         session.setAttribute("genres", genres);
 
         Collection<UserInfo> usersInfo = UserHandler.getAllUsers();

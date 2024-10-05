@@ -35,8 +35,12 @@ public class BookHandler {
         Book.deleteBookById(itemId);
     }
 
-    public static ArrayList<String> getAllGenres() {
-        ArrayList<String> genres = Book.importAllGenres();
-        return new ArrayList<>(genres);
+    public static void addCategory(String category) {
+        Book.addCategory(category);
+    }
+
+    public static ArrayList<String> getAllCategories() {
+        ArrayList<String> categories = Book.importAllCategories();
+        return new ArrayList<>(categories);
     }
 }

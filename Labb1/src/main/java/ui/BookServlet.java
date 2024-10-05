@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @WebServlet(name = "bookServlet", value = "/book-servlet")
@@ -14,13 +15,35 @@ public class BookServlet extends HttpServlet {
    @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
-        if ("create".equals(action)) {
+        if ("category".equals(action)) {
+            addCategory(request, response);
+        } else if ("create".equals(action)) {
             createBook(request, response);
         } else if ("edit".equals(action)) {
             editBook(request, response);
         } else if ("delete".equals(action)) {
             deleteBook(request, response);
         }
+    }
+
+    private void addCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String genre = request.getParameter("newGenre");
+
+        HttpSession session = request.getSession();
+        ArrayList<String> genres = (ArrayList<String>) session.getAttribute("genres");
+        if (genres != null && genres.contains(genre)) {
+            request.setAttribute("errorMessage", "Genre already exists.");
+        } else {
+            if (genres == null) {
+                genres = new ArrayList<>();
+            }
+            genres.add(genre);
+            BookHandler.addCategory(genre);
+           // session.setAttribute("genres", genres);
+        }
+
+        updateSession(request, response);
+        response.sendRedirect("products.jsp");
     }
 
     private void createBook(HttpServletRequest request, HttpServletResponse response) throws IOException {

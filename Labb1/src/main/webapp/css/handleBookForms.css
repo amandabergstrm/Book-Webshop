@@ -44,10 +44,6 @@ select {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked ~ .form-container {
-    display: block;
-}
-
 .form-container button {
     background-color: #04AA6D;
     color: white;
@@ -95,11 +91,15 @@ button:hover {
     color: #c0392b;
 }
 
-#createBookToggle:checked ~ .form-container {
+input[id^="editBookToggle"]:checked ~ div[id^="editBookForm"] {
     display: block;
 }
 
-#editBookToggle:checked ~ .form-container {
+#createBookToggle:checked ~ #createBookForm {
+    display: block;
+}
+
+#addCategoryToggle:checked ~ #addCategoryForm {
     display: block;
 }
 

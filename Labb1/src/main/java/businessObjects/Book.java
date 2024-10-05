@@ -36,11 +36,16 @@ public class Book {
         DbBook.executeBookUpdate(bookObj);
     }
 
-    public static ArrayList<String> importAllGenres() { return DbBook.importAllGenres(); }
-
     public static void deleteBookById(int itemId) {
         DbBook.executeBookRemove(itemId);
     }
+
+    public static void addCategory(String category) {
+        DbBook.executeCategoryInsert(category);
+    }
+
+    public static ArrayList<String> importAllCategories() { return DbBook.importAllCategories(); }
+
 
     public Book(String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
