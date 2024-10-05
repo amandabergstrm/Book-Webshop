@@ -16,7 +16,7 @@
 
     <div class="topnav">
         <a class="active" href="shop.jsp">Home</a>
-        <a href="#news">Worker</a>
+        <a href="orders.jsp">Orders</a>
         <a href="products.jsp">Products</a>
         <a href="users.jsp">Users</a>
         <% if(currentUser == null) { %>
@@ -57,7 +57,6 @@
                             <option value="<%= authority %>"><%= authority %></option>
                             <% } %>
                         </select>
-
                         <button type="submit">Create Account</button>
                     </form>
                 </div>

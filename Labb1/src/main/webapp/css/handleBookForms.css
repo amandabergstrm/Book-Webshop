@@ -103,6 +103,14 @@ input[id^="editBookToggle"]:checked ~ div[id^="editBookForm"] {
     display: block;
 }
 
+input[id^="editUserToggle"]:checked ~ div[id^="editUserForm"] {
+    display: block;
+}
+
+#createUserToggle:checked ~ #createUserForm {
+    display: block;
+}
+
 .close-btn {
     position: absolute;
     top: 5px;

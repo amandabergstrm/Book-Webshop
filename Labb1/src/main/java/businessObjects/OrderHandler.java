@@ -27,7 +27,7 @@ public class OrderHandler {
         Order orderObj = new Order(orderInfo.getUserEmail(), orderItems);
         Order.createOrder(orderObj);
     }
-    public static ArrayList<OrderInfo> getAllOrders(){
+    /*public static ArrayList<OrderInfo> getAllOrders(){
         ArrayList<DbOrder> orders = Order.importAllOrders();
         if(orders == null) {
             System.out.println("INGA ORDRAR FINNS");
@@ -47,5 +47,32 @@ public class OrderHandler {
             orderInfo.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));
         }
         return orderInfo;
+    }*/
+
+    public static ArrayList<OrderInfo> getAllOrders() {
+        ArrayList<DbOrder> orders = Order.importAllOrders();
+        if (orders == null) {
+            System.out.println("INGA ORDRAR FINNS");
+        }
+
+        ArrayList<OrderInfo> orderInfoList = new ArrayList<>();
+
+        for (Order o : orders) {
+            // Create a new list of OrderItemInfo for each order
+            ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<>();
+
+            // Process each order's items
+            ArrayList<OrderItem> orderItems = o.getOrderItems();
+            for (OrderItem item : orderItems) {
+                OrderItemInfo orderItemInfo = new OrderItemInfo(item.getItemId(), item.getNrOfItems());
+                orderItemInfos.add(orderItemInfo);
+            }
+
+            // Create a new OrderInfo object and add it to the orderInfoList
+            orderInfoList.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));
+        }
+
+        return orderInfoList;
     }
+
 }
