@@ -21,7 +21,7 @@ public class BookHandler {
         ArrayList<BookInfo> booksInfo = new ArrayList<BookInfo>();
         for (Object b : c) {
             Book bookObj = (Book) b;
-            booksInfo.add(new BookInfo(bookObj.getItemId(),bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice()));
+            booksInfo.add(new BookInfo(bookObj.getItemId(), bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice()));
         }
         return booksInfo;
     }

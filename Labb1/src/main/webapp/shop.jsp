@@ -85,7 +85,9 @@
                     <img src="resources/<%= b.getTitle()%>.jpg" alt="<%= b.getTitle()%>"> <!--img samma med bild om dem lagras-->
                     <h3><%= b.getTitle()%></h3>
                     <p><%= b.getAuthor()%></p>
+                    <isbn>Genre: <%= b.getGenre()%></isbn>
                     <isbn>ISBN: <%= b.getIsbn()%></isbn>
+
 
                     <status>
                         <% if (nrOfCopies == 0) { %>

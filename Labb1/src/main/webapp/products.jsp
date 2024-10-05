@@ -3,6 +3,7 @@
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="businessObjects.Authority" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -59,7 +60,12 @@
                         <label for="author">Author:</label>
                         <input type="text" id="author" name="author" required>
                         <label for="genre">Genre:</label>
-                        <input type="text" id="genre" name="genre" required>
+                        <select id="genre" name="genre" required>
+                            <% ArrayList<String> genres = (ArrayList<String>) session.getAttribute("genres");
+                                for (String genre : genres) { %>
+                            <option value="<%= genre %>"><%= genre %></option>
+                            <% } %>
+                        </select>
                         <label for="price">Price:</label>
                         <input type="number" id="price" name="price" required>
                         <label for="nrOfCopies">Number of Copies:</label>

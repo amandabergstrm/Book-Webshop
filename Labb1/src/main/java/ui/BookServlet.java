@@ -1,7 +1,6 @@
 package ui;
 
 import businessObjects.BookHandler;
-import businessObjects.Genre;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -33,7 +32,7 @@ public class BookServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("price"));
         int nrOfCopies = Integer.parseInt(request.getParameter("nrOfCopies"));
 
-        BookHandler.createBook(new BookInfo(isbn, title, Genre.valueOf(genre), author, price, nrOfCopies));
+        BookHandler.createBook(new BookInfo(isbn, title, genre, author, price, nrOfCopies));
         updateSession(request, response);
         response.sendRedirect("products.jsp");
     }
