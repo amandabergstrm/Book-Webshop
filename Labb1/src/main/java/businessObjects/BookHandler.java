@@ -6,28 +6,28 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class BookHandler {
-    public static void createBook(BookInfo book) {
-        Book bookObj = new Book(book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice());
+    public static void createBook(BookInfo bookInfo) {
+        Book bookObj = new Book(bookInfo.getIsbn(), bookInfo.getTitle(), bookInfo.getGenre(), bookInfo.getAuthor(), bookInfo.getNrOfCopies(), bookInfo.getPrice());
         Book.createBook(bookObj);
     }
 
     public static BookInfo getBookByItemId(int itemId) {
-        Book foundBook = Book.searchBookByItemId(itemId);
-        return new BookInfo(foundBook.getItemId(), foundBook.getIsbn(), foundBook.getTitle(), foundBook.getGenre(), foundBook.getAuthor(), foundBook.getNrOfCopies(), foundBook.getPrice());
+        Book bookObj = Book.searchBookByItemId(itemId);
+        return new BookInfo(bookObj.getItemId(), bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice());
     }
 
     public static Collection<BookInfo> getAllBooks() {
         Collection c = Book.importAllBooks();
-        ArrayList<BookInfo> books = new ArrayList<BookInfo>();
+        ArrayList<BookInfo> booksInfo = new ArrayList<BookInfo>();
         for (Object b : c) {
-            Book book = (Book) b;
-            books.add(new BookInfo(book.getItemId(),book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice()));
+            Book bookObj = (Book) b;
+            booksInfo.add(new BookInfo(bookObj.getItemId(),bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice()));
         }
-        return books;
+        return booksInfo;
     }
 
-    public static void updateBook(BookInfo book, int newNrOfCopies, int newPrice) {
-        Book bookObj = new Book(book.getItemId(), book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), newNrOfCopies, newPrice);
+    public static void updateBook(BookInfo bookInfo, int newNrOfCopies, int newPrice) {
+        Book bookObj = new Book(bookInfo.getItemId(), bookInfo.getIsbn(), bookInfo.getTitle(), bookInfo.getGenre(), bookInfo.getAuthor(), newNrOfCopies, newPrice);
         Book.updateBook(bookObj);
     }
 

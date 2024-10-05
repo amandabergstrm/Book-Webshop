@@ -19,8 +19,8 @@ public class Book {
         return ISBN_PATTERN.matcher(isbn).matches();
     }
 
-    public static void createBook(Book book) {
-        DbBook.executeBookInsert(book);
+    public static void createBook(Book bookObj) {
+        DbBook.executeBookInsert(bookObj);
     }
 
     public static Book searchBookByItemId(int itemId) {
@@ -31,8 +31,8 @@ public class Book {
       return DbBook.importAllBooks();
     }
 
-    public static void updateBook(Book book) {
-        DbBook.executeBookUpdate(book);
+    public static void updateBook(Book bookObj) {
+        DbBook.executeBookUpdate(bookObj);
     }
 
     public static void deleteBookById(int itemId) {

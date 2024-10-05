@@ -13,19 +13,19 @@ public class DbBook extends Book {
         super(itemId, isbn, title, genre, author, nrOfCopies, price);
     }
 
-    public static void executeBookInsert(Book book) {
+    public static void executeBookInsert(Book bookObj) {
         String command = "INSERT INTO " + "T_Book(isbn, title, genre, author, nrOfCopies, price) VALUES(?, ?, ?, ?, ?, ?)";
         Connection con = DbManager.getConnection();
 
         try {
             con.setAutoCommit(false);
             PreparedStatement preparedStatement = con.prepareStatement(command);
-            preparedStatement.setString(1, book.getIsbn());
-            preparedStatement.setString(2, book.getTitle());
-            preparedStatement.setString(3, book.getGenre().toString());
-            preparedStatement.setString(4, book.getAuthor());
-            preparedStatement.setInt(5, book.getNrOfCopies());
-            preparedStatement.setInt(6, book.getPrice());
+            preparedStatement.setString(1, bookObj.getIsbn());
+            preparedStatement.setString(2, bookObj.getTitle());
+            preparedStatement.setString(3, bookObj.getGenre().toString());
+            preparedStatement.setString(4, bookObj.getAuthor());
+            preparedStatement.setInt(5, bookObj.getNrOfCopies());
+            preparedStatement.setInt(6, bookObj.getPrice());
             preparedStatement.execute();
             con.commit();
         } catch (SQLException e) {
@@ -48,7 +48,7 @@ public class DbBook extends Book {
     }
 
     public static DbBook searchBookByItemID(int itemId) {
-        DbBook foundBook = null;
+        DbBook dbBook = null;
         String query = "SELECT T_Book.* FROM T_Book WHERE T_Book.itemId LIKE ?";
         Connection con = DbManager.getConnection();
 
@@ -66,7 +66,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    foundBook = new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price);
+                    dbBook = new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price);
                 }
                 else System.out.println("User not found");
             }
@@ -88,11 +88,11 @@ public class DbBook extends Book {
                 e.printStackTrace();
             }
         }
-        return foundBook;
+        return dbBook;
     }
 
     public static ArrayList<DbBook> importAllBooks() {
-        ArrayList<DbBook> books = new ArrayList<>();
+        ArrayList<DbBook> dbBooks = new ArrayList<>();
 
         String query = "SELECT T_Book.* FROM T_Book";
         Connection con = DbManager.getConnection();
@@ -110,7 +110,7 @@ public class DbBook extends Book {
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
 
-                    books.add(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
+                    dbBooks.add(new DbBook(itemId, isbn, title, genre, author, nrOfCopies, price));
                 }
             }
             con.commit();
@@ -131,19 +131,19 @@ public class DbBook extends Book {
                 e.printStackTrace();
             }
         }
-        return books;
+        return dbBooks;
     }
 
-    public static void executeBookUpdate(Book book) {
+    public static void executeBookUpdate(Book bookObj) {
         String command = "UPDATE T_Book SET nrOfCopies = ?, price = ? WHERE itemId = ?";
         Connection con = DbManager.getConnection();
 
         try {
             con.setAutoCommit(false);
             PreparedStatement preparedStatement = con.prepareStatement(command);
-            preparedStatement.setInt(1, book.getNrOfCopies());
-            preparedStatement.setInt(2, book.getPrice());
-            preparedStatement.setInt(3, book.getItemId());
+            preparedStatement.setInt(1, bookObj.getNrOfCopies());
+            preparedStatement.setInt(2, bookObj.getPrice());
+            preparedStatement.setInt(3, bookObj.getItemId());
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
