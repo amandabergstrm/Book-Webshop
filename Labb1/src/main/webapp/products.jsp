@@ -65,6 +65,7 @@
                                 for (String genre : genres) { %>
                             <option value="<%= genre %>"><%= genre %></option>
                             <% } %>
+                            <option value="other"> </option>
                         </select>
                         <label for="price">Price:</label>
                         <input type="number" id="price" name="price" required>

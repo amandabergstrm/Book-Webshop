@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 import java.util.Collection;
 
@@ -25,16 +24,16 @@ public class BookServlet extends HttpServlet {
     }
 
     private void createBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String isbn = request.getParameter("isbn");
-        String title = request.getParameter("title");
-        String author = request.getParameter("author");
-        String genre = request.getParameter("genre");
-        int price = Integer.parseInt(request.getParameter("price"));
-        int nrOfCopies = Integer.parseInt(request.getParameter("nrOfCopies"));
+       String isbn = request.getParameter("isbn");
+       String title = request.getParameter("title");
+       String author = request.getParameter("author");
+       String genre = request.getParameter("genre");
+       int price = Integer.parseInt(request.getParameter("price"));
+       int nrOfCopies = Integer.parseInt(request.getParameter("nrOfCopies"));
 
-        BookHandler.createBook(new BookInfo(isbn, title, genre, author, price, nrOfCopies));
-        updateSession(request, response);
-        response.sendRedirect("products.jsp");
+       BookHandler.createBook(new BookInfo(isbn, title, genre, author, price, nrOfCopies));
+       updateSession(request, response);
+       response.sendRedirect("products.jsp");
     }
 
     private void editBook(HttpServletRequest request, HttpServletResponse response) throws IOException {

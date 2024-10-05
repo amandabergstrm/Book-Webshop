@@ -2,6 +2,7 @@ package businessObjects;
 
 import database.DbBook;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -34,6 +35,8 @@ public class Book {
     public static void updateBook(Book bookObj) {
         DbBook.executeBookUpdate(bookObj);
     }
+
+    public static ArrayList<String> importAllGenres() { return DbBook.importAllGenres(); }
 
     public static void deleteBookById(int itemId) {
         DbBook.executeBookRemove(itemId);

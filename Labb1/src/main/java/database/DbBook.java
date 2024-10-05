@@ -197,4 +197,40 @@ public class DbBook extends Book {
             }
         }
     }
+
+    //insert
+
+    public static ArrayList<String> importAllGenres() {
+        ArrayList<String> genres = new ArrayList<>();
+
+        String query = "SELECT T_Category.* FROM T_Category";
+        Connection con = DbManager.getConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            con.setAutoCommit(false);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    genres.add(resultSet.getString("genre"));
+                }
+            }
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return genres;
+    }
 }

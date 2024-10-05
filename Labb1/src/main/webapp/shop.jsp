@@ -111,15 +111,5 @@
 </body>
 
 <body>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<% UserInfo user = UserHandler.getUserByEmail("test7@gmail.com");%>
-<%= user.getAuthority().toString() %>
-
-<% user.setAuthority(Authority.Admin);
-    UserHandler.updateUser(user);%>
-<% user = UserHandler.getUserByEmail("test7@gmail.com");%>
-<%=user.getAuthority().toString() %>
-
 </body>
 </html>

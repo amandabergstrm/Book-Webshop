@@ -34,4 +34,9 @@ public class BookHandler {
     public static void deleteBookById(int itemId) {
         Book.deleteBookById(itemId);
     }
+
+    public static ArrayList<String> getAllGenres() {
+        ArrayList<String> genres = Book.importAllGenres();
+        return new ArrayList<>(genres);
+    }
 }

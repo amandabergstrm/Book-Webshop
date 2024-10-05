@@ -11,6 +11,10 @@ CREATE TABLE T_User (
     password	VARCHAR(30)		NOT NULL
 );
 
+CREATE TABLE T_Category (
+	genre	VARCHAR(50)	PRIMARY KEY NOT NULL 
+);
+
 CREATE TABLE T_Book (
 	itemId	INT				PRIMARY KEY AUTO_INCREMENT,
     isbn	VARCHAR(13)		NOT NULL,
@@ -20,7 +24,8 @@ CREATE TABLE T_Book (
 	CHECK (LENGTH(isbn) = 13),
     -- CHECK (rating > 0 AND rating < 6)
     nrOfCopies INT NOT NULL,
-    price INT NOT NULL
+    price INT NOT NULL,
+    CONSTRAINT T_Book_fk FOREIGN KEY (genre) REFERENCES T_Category(genre)
 );
 
 CREATE TABLE T_Order (
@@ -38,8 +43,18 @@ CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 
 GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
 
+INSERT INTO T_Category (genre)
+VALUES ('Fantasy'),
+       ('Science Fiction'),
+       ('Romance'),
+       ('Mystery'),
+       ('Fiction'),
+       ('Historical'),
+       ('Thriller');
+       
+
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781782276203", "Tender is the Flesh", "SciFi", "Agustina Bazterrica", 5, 120);
+VALUES("9781782276203", "Tender is the Flesh", "Science Fiction", "Agustina Bazterrica", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
 VALUES("9781906040093", "The Suicide Shop", "Fiction", "Jean Teulé", 5, 120);
@@ -54,7 +69,7 @@ INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9780008435769", "The Maid", "Mystery", "Nita Prose", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Ray Bradbury", 3, 95);
+VALUES("9781451690316", "Fahrenheit 451", "Science Fiction", "Ray Bradbury", 3, 95);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
 VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120);

@@ -22,16 +22,22 @@ public class ShopServlet extends HttpServlet {
         Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
         session.setAttribute("booksInfo", booksInfo);
 
-        Set<String> uniqueGenres = new HashSet<>();
-        uniqueGenres.add(" ");
-        for (BookInfo bookInfo : booksInfo) {
-            uniqueGenres.add(bookInfo.getGenre());
-        }
-        session.setAttribute("genres", new ArrayList<>(uniqueGenres));
+        ArrayList<String> genres = BookHandler.getAllGenres();
+        session.setAttribute("genres", genres);
 
         Collection<UserInfo> usersInfo = UserHandler.getAllUsers();
         session.setAttribute("usersInfo", usersInfo);
 
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
+
+    /*<a href="hello-servlet">Hello Servlet</a>
+<% UserInfo user = UserHandler.getUserByEmail("test7@gmail.com");%>
+<%= user.getAuthority().toString() %>
+
+<% user.setAuthority(Authority.Admin);
+    UserHandler.updateUser(user);%>
+<% user = UserHandler.getUserByEmail("test7@gmail.com");%>
+<%=user.getAuthority().toString() %>
+*/
 }
