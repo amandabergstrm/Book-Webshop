@@ -19,8 +19,9 @@
         <a href="orders.jsp">Orders</a>
         <a href="products.jsp">Products</a>
         <a href="users.jsp">Users</a>
+        <a href="profile.jsp">Profile</a>
         <% if(currentUser == null) { %>
-            <a href="login.jsp">Login</a>
+        <a href="login.jsp">Login</a>
         <% } else { %>
         <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="logout">

@@ -39,6 +39,9 @@
     <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
     <a href="users.jsp">Users</a>
     <% } %>
+    <% if (currentUser != null) { %>
+    <a href="profile.jsp">Profile</a>
+    <% } %>
     <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
     <% if (currentUser == null) { %>
     <a href="login.jsp">Login</a>

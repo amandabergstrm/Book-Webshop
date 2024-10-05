@@ -1,0 +1,67 @@
+body {
+    font-family: Cambria, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.user-info {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.user-info h2 {
+    margin-top: 0;
+}
+
+.orders-section {
+    margin-top: 40px;
+}
+
+.order-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.order-box h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.order-box p {
+    margin: 5px 0;
+}
+
+.order-items {
+    display: none;
+    margin-top: 20px;
+    background-color: #fafafa;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.order-items p {
+    font-size: 14px;
+}
+
+.toggle-link {
+    color: #04AA6D;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.toggle-link:hover {
+    text-decoration: underline;
+}

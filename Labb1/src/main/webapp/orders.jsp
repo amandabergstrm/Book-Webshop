@@ -25,6 +25,7 @@
     <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
     <a href="users.jsp">Users</a>
     <% } %>
+    <a href="profile.jsp">Profile</a>
     <% if(currentUser == null) { %>
     <a href="login.jsp">Login</a>
     <% } else { %>

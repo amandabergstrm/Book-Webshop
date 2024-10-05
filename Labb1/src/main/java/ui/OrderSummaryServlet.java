@@ -2,7 +2,6 @@ package ui;
 
 import businessObjects.BookHandler;
 import businessObjects.OrderHandler;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,7 +34,7 @@ public class OrderSummaryServlet extends HttpServlet {
                 updateBookStock(orderItems, session);
 
                 session.removeAttribute("cart");
-                response.sendRedirect("shop.jsp"); // gör en sida där man kan se sina egan order
+                response.sendRedirect("profile.jsp");
             } else {
                 response.sendRedirect("shop.jsp");
             }
