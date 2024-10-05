@@ -1,0 +1,77 @@
+/* General styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styling for the order list */
+ul.order-list, ul.order-items-list {
+    list-style-type: none; /* Remove bullet points */
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.order-list li {
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: white;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.order-list li:hover {
+    background-color: #e6f7ff; /* Light blue background on hover */
+}
+
+/* Styling for the "View Order Items" link */
+.view-order-items {
+    color: #0073e6;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.view-order-items:hover {
+    text-decoration: underline;
+}
+
+/* Styling for the nested order items list */
+.order-items-list {
+    display: none; /* Hide the order items by default */
+    margin-left: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-left: 2px solid #ccc;
+}
+
+/* Toggle the display of order items when the checkbox is checked */
+input[type="checkbox"]:checked ~ .order-items-list {
+    display: block; /* Show the order items when the checkbox is checked */
+}
+
+/* Styling for individual order items */
+.order-items-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+.order-items-list li:hover {
+    background-color: #f1f1f1; /* Change background on hover for order items */
+}
+
+/* Styling for text within the list items */
+.order-list li, .order-items-list li {
+    font-size: 16px;
+    color: #333;
+}
+
+.order-list li strong {
+    font-weight: bold;
+    color: #0073e6; /* Blue color for labels */
+}
