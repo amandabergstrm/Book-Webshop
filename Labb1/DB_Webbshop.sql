@@ -11,6 +11,10 @@ CREATE TABLE T_User (
     password	VARCHAR(30)		NOT NULL
 );
 
+CREATE TABLE T_Category (
+	genre	VARCHAR(50)	PRIMARY KEY NOT NULL
+);
+
 CREATE TABLE T_Book (
 	itemId	INT				PRIMARY KEY AUTO_INCREMENT,
     isbn	VARCHAR(13)		NOT NULL,
@@ -20,12 +24,13 @@ CREATE TABLE T_Book (
 	CHECK (LENGTH(isbn) = 13),
     -- CHECK (rating > 0 AND rating < 6)
     nrOfCopies INT NOT NULL,
-    price INT NOT NULL
+    price INT NOT NULL,
+    CONSTRAINT T_Book_fk FOREIGN KEY (genre) REFERENCES T_Category(genre)
 );
 
 CREATE TABLE T_Order (
 	orderNr	INT	 				PRIMARY KEY AUTO_INCREMENT,
-    userEmail	VARCHAR(100)	NOT NULL, 
+    userEmail	VARCHAR(100)	NOT NULL,
     status	VARCHAR(30)			NOT NULL,
     CONSTRAINT T_Order_fk FOREIGN KEY (userEmail) REFERENCES T_User(email)
 );
@@ -43,8 +48,17 @@ CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
 
 GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
 
-INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781782276203", "Tender is the Flesh", "SciFi", "Agustina Bazterrica", 5, 120);
+INSERT INTO T_Category (genre)
+VALUES ('Fantasy'),
+       ('Science Fiction'),
+       ('Romance'),
+       ('Mystery'),
+       ('Fiction'),
+       ('Historical'),
+       ('Thriller');
+
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
+VALUES("9781782276203", "Tender is the Flesh", "Science Fiction", "Agustina Bazterrica", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
 VALUES("9781906040093", "The Suicide Shop", "Fiction", "Jean Teulé", 5, 120);
@@ -59,7 +73,7 @@ INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9780008435769", "The Maid", "Mystery", "Nita Prose", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
-VALUES("9781451690316", "Fahrenheit 451", "SciFi", "Ray Bradbury", 3, 95);
+VALUES("9781451690316", "Fahrenheit 451", "Science Fiction", "Ray Bradbury", 3, 95);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
 VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120);
@@ -67,7 +81,7 @@ VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
 
-INSERT INTO T_User (authority, name, email, password) 
+INSERT INTO T_User (authority, name, email, password)
 VALUES('Admin', 'Test User', 'testuser@example.com', 'password123');
 
 -- INSERT INTO T_Order (userEmail, status)
@@ -85,7 +99,7 @@ VALUES('Admin', 'Test User', 'testuser@example.com', 'password123');
 -- INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
 -- VALUES ('3', '10','2');
 
-UPDATE T_Book 
+UPDATE T_Book
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
 SELECT *
@@ -100,12 +114,31 @@ FROM T_OrderItem;
 SELECT *
 FROM T_User;
 
+SELECT *
+FROM T_Category;
+
+CREATE VIEW OrderDetails AS
+SELECT T_Order.orderNr, T_Order.user, T_Order.itemId, T_Book.title, T_Order.nrOfItems, T_Order.status
+FROM T_Order
+JOIN T_Book ON T_Order.itemId = T_Book.itemId;
+
+SELECT * FROM OrderDetails;
+SELECT T_OrderItem.orderNr, T_OrderItem.itemId, T_OrderItem.nrOfItems, T_Order.userEmail, T_Book.title
+FROM T_OrderItem
+JOIN T_Order ON T_OrderItem.orderNr = T_Order.orderNr
+JOIN T_Book ON T_OrderItem.itemId = T_Book.itemId
+WHERE T_OrderItem.orderNr = 1;
 -- SELECT T_OrderItem.orderNr, T_OrderItem.itemId, T_OrderItem.nrOfItems, T_Order.userEmail, T_Book.title
 -- FROM T_OrderItem
 -- JOIN T_Order ON T_OrderItem.orderNr = T_Order.orderNr
 -- JOIN T_Book ON T_OrderItem.itemId = T_Book.itemId
 -- WHERE T_OrderItem.orderNr = 1;
 
+UPDATE T_Book
+SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
+
+UPDATE T_User
+SET T_User.authority = "Admin" WHERE email = "test6@hello.com";
 
 /*
 SELECT itemId

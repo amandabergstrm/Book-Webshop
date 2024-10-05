@@ -30,7 +30,7 @@ label {
     color: #333;
 }
 
-input[type="text"], input[type="number"] {
+input[type="text"], input[type="number"], select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -39,8 +39,9 @@ input[type="text"], input[type="number"] {
     box-sizing: border-box;
 }
 
-input[type="checkbox"]:checked ~ .form-container {
-    display: block;
+select {
+    background-color: #fff;
+    cursor: pointer;
 }
 
 .form-container button {
@@ -90,11 +91,15 @@ button:hover {
     color: #c0392b;
 }
 
-#createBookToggle:checked ~ .form-container {
+input[id^="editBookToggle"]:checked ~ div[id^="editBookForm"] {
     display: block;
 }
 
-#editBookToggle:checked ~ .form-container {
+#createBookToggle:checked ~ #createBookForm {
+    display: block;
+}
+
+#addCategoryToggle:checked ~ #addCategoryForm {
     display: block;
 }
 

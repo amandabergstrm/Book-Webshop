@@ -3,8 +3,6 @@ package ui;
 import java.io.*;
 import java.util.Collection;
 import businessObjects.Authority;
-import businessObjects.BookHandler;
-import businessObjects.Genre;
 import businessObjects.UserHandler;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;

@@ -2,6 +2,7 @@ package businessObjects;
 
 import database.DbBook;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
@@ -10,7 +11,7 @@ public class Book {
     private int itemId;
     private final String isbn;
     private final String title;
-    private final Genre genre;
+    private final String genre;
     private final String author;
     private int nrOfCopies;
     private int price;
@@ -39,7 +40,14 @@ public class Book {
         DbBook.executeBookRemove(itemId);
     }
 
-    public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public static void addCategory(String category) {
+        DbBook.executeCategoryInsert(category);
+    }
+
+    public static ArrayList<String> importAllCategories() { return DbBook.importAllCategories(); }
+
+
+    public Book(String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid isbn");
         this.isbn = isbn;
@@ -54,7 +62,7 @@ public class Book {
         this.price = price;
     }
 
-    public Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public Book(int itemId, String isbn, String title, String genre, String author, int nrOfCopies, int price) {
        this(isbn, title, genre, author, nrOfCopies, price);
        this.itemId = itemId;
     }
@@ -70,7 +78,7 @@ public class Book {
         return title;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 

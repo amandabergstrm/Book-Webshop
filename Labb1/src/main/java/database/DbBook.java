@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class DbBook extends Book {
-    public DbBook(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public DbBook(int itemId, String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         super(itemId, isbn, title, genre, author, nrOfCopies, price);
     }
 
@@ -22,7 +22,7 @@ public class DbBook extends Book {
             PreparedStatement preparedStatement = con.prepareStatement(command);
             preparedStatement.setString(1, bookObj.getIsbn());
             preparedStatement.setString(2, bookObj.getTitle());
-            preparedStatement.setString(3, bookObj.getGenre().toString());
+            preparedStatement.setString(3, bookObj.getGenre());
             preparedStatement.setString(4, bookObj.getAuthor());
             preparedStatement.setInt(5, bookObj.getNrOfCopies());
             preparedStatement.setInt(6, bookObj.getPrice());
@@ -60,8 +60,7 @@ public class DbBook extends Book {
                     itemId = resultSet.getInt("itemId");
                     String isbn = resultSet.getString("isbn");
                     String title = resultSet.getString("title");
-                    String stringGenre = resultSet.getString("genre");
-                    Genre genre = Genre.valueOf(stringGenre);
+                    String genre = resultSet.getString("genre");
                     String author = resultSet.getString("author");
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
@@ -104,8 +103,7 @@ public class DbBook extends Book {
                     int itemId = resultSet.getInt("itemId");
                     String isbn = resultSet.getString("isbn");
                     String title = resultSet.getString("title");
-                    String stringGenre = resultSet.getString("genre");
-                    Genre genre = Genre.valueOf(stringGenre);
+                    String genre = resultSet.getString("genre");
                     String author = resultSet.getString("author");
                     int nrOfCopies = resultSet.getInt("nrOfCopies");
                     int price = resultSet.getInt("price");
@@ -198,5 +196,68 @@ public class DbBook extends Book {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void executeCategoryInsert(String genre) {
+        String command = "INSERT INTO " + "T_Category(genre) VALUES(?)";
+        Connection con = DbManager.getConnection();
+
+        try {
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(command);
+            preparedStatement.setString(1, genre);
+            preparedStatement.execute();
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static ArrayList<String> importAllCategories() {
+        ArrayList<String> categories = new ArrayList<>();
+
+        String query = "SELECT T_Category.* FROM T_Category";
+        Connection con = DbManager.getConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            con.setAutoCommit(false);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    categories.add(resultSet.getString("genre"));
+                }
+            }
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return categories;
     }
 }

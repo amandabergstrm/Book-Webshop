@@ -21,7 +21,7 @@ public class BookHandler {
         ArrayList<BookInfo> booksInfo = new ArrayList<BookInfo>();
         for (Object b : c) {
             Book bookObj = (Book) b;
-            booksInfo.add(new BookInfo(bookObj.getItemId(),bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice()));
+            booksInfo.add(new BookInfo(bookObj.getItemId(), bookObj.getIsbn(), bookObj.getTitle(), bookObj.getGenre(), bookObj.getAuthor(), bookObj.getNrOfCopies(), bookObj.getPrice()));
         }
         return booksInfo;
     }
@@ -33,5 +33,14 @@ public class BookHandler {
 
     public static void deleteBookById(int itemId) {
         Book.deleteBookById(itemId);
+    }
+
+    public static void addCategory(String category) {
+        Book.addCategory(category);
+    }
+
+    public static ArrayList<String> getAllCategories() {
+        ArrayList<String> categories = Book.importAllCategories();
+        return new ArrayList<>(categories);
     }
 }

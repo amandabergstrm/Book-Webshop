@@ -82,37 +82,42 @@
     <h1><%= "The Bookshop" %></h1>
 </div>
 
-<div class="shop-container">
-    <% Collection<BookInfo> books = (Collection<BookInfo>) request.getSession().getAttribute("booksInfo");
-        Iterator<BookInfo> it = books.iterator();
-        while (it.hasNext()) {
-            BookInfo b = it.next();
-            int nrOfCopies = b.getNrOfCopies();
-    %>
-    <div class="shop-item">
-        <div class="item-info">
-            <img src="resources/<%= b.getTitle() %>.jpg" alt="<%= b.getTitle() %>">
-            <h3><%= b.getTitle() %></h3>
-            <p><%= b.getAuthor() %></p>
-            <isbn>ISBN: <%= b.getIsbn() %></isbn>
-            <status>
-                <% if (nrOfCopies == 0) { %>
-                <span style="color: red; font-weight: bold;">●</span> Not available
-                <% } else if (nrOfCopies < 10) { %>
-                <span style="color: orange; font-weight: bold;">●</span> A few left
-                <% } else { %>
-                <span style="color: green; font-weight: bold;">●</span> Available
-                <% } %>
-            </status>
-            <p><%= b.getPrice() %> kr</p>
-            <form action="cart-servlet" method="POST">
-                <input type="hidden" name="itemId" value="<%= b.getItemId() %>">
-                <button type="submit">Add to Cart</button>
-            </form>
-        </div>
+    <div class="shop-container">
+        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getSession().getAttribute("booksInfo");
+            Iterator<BookInfo> it = books.iterator();
+            for (; it.hasNext();) {
+                BookInfo b = it.next();
+                int nrOfCopies = b.getNrOfCopies();
+        %>
+            <div class="shop-item">
+                <div class="item-info">
+                    <img src="resources/<%= b.getTitle()%>.jpg" alt="<%= b.getTitle()%>"> <!--img samma med bild om dem lagras-->
+                    <h3><%= b.getTitle()%></h3>
+                    <p><%= b.getAuthor()%></p>
+                    <isbn>Genre: <%= b.getGenre()%></isbn>
+                    <isbn>ISBN: <%= b.getIsbn()%></isbn>
+
+
+                    <status>
+                        <% if (nrOfCopies == 0) { %>
+                        <span style="color: red; font-weight: bold;">●</span> Not available
+                        <% } else if (nrOfCopies < 10) { %>
+                        <span style="color: orange; font-weight: bold;">●</span> A few left
+                        <% } else { %>
+                        <span style="color: green; font-weight: bold;">●</span> Available
+                        <% } %>
+                    </status>
+
+                    <p><%= b.getPrice()%> kr</p>
+                    <form action="cart-servlet" method="POST">
+                        <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
+                        <button type="submit" class="add-to-cart-button" <%= (nrOfCopies == 0) ? "disabled" : "" %> >Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        <%}%>
     </div>
-    <% } %>
-</div>
+</body>
 
 <!-- Display all current orders -->
 <div>
@@ -240,5 +245,6 @@
         %>
     </div>
 </div>
+<body>
 </body>
 </html>

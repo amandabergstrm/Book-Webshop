@@ -1,18 +1,16 @@
 package ui;
 
-import businessObjects.Genre;
-
 public class BookInfo {
 
     private int itemId;
     private final String isbn;
     private final String title;
-    private final Genre genre;
+    private final String genre;
     private final String author;
     private int nrOfCopies;
     private int price;
 
-    public BookInfo(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public BookInfo(String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         this.isbn = isbn;
         this.title = title;
         this.genre = genre;
@@ -21,7 +19,7 @@ public class BookInfo {
         this.price = price;
     }
 
-    public BookInfo(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    public BookInfo(int itemId, String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         this(isbn, title, genre, author, nrOfCopies, price);
         this.itemId = itemId;
     }
@@ -37,7 +35,7 @@ public class BookInfo {
         return title;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
