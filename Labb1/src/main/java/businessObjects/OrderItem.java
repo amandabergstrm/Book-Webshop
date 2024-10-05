@@ -4,7 +4,7 @@ public class OrderItem {
 
     private final int itemId;
 
-    private final int nrOfItems;
+    private int nrOfItems;
 
     public OrderItem(int itemId, int nrOfItems){
         this.itemId = itemId;
@@ -17,5 +17,9 @@ public class OrderItem {
 
     public int getNrOfItems() {
         return nrOfItems;
+    }
+
+    public void setNrOfItems(int nrOfItems) {
+        this.nrOfItems = nrOfItems;
     }
 }

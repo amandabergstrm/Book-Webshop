@@ -15,14 +15,28 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String itemIdStr = request.getParameter("itemId");
-        BookInfo book = BookHandler.getBookByItemId(Integer.parseInt(itemIdStr));
+        ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
 
-        ArrayList<BookInfo> cart = (ArrayList<BookInfo>) session.getAttribute("cart");
+        BookInfo bookInfo = BookHandler.getBookByItemId(Integer.parseInt(itemIdStr));
+        OrderItemInfo orderItemInfo = new OrderItemInfo(bookInfo, bookInfo.getItemId(), 1);
+
         if (cart == null) {
             cart = new ArrayList<>();
             session.setAttribute("cart", cart);
         }
-        cart.add(book);
+
+        boolean existingItem = false;
+
+        for (OrderItemInfo item : cart) {
+            if (item.getItemId() == orderItemInfo.getItemId()) {
+                item.setNrOfItems(item.getNrOfItems() + 1);
+                existingItem = true;
+                break;
+            }
+        }
+        if (!existingItem) {
+            cart.add(orderItemInfo);
+        }
         response.sendRedirect("shop.jsp");
     }
 }

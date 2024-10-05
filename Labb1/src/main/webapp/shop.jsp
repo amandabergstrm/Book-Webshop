@@ -6,6 +6,7 @@
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="businessObjects.Authority" %>
+<%@ page import="ui.OrderItemInfo" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -48,12 +49,13 @@
         <h2>Your Cart</h2>
         <div id="cartItems">
             <%  session = request.getSession();
-                ArrayList<BookInfo> cart = (ArrayList<BookInfo>) session.getAttribute("cart");
+                ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
                 if (cart == null || cart.isEmpty()) { %>
                     <p>Your cart is empty!</p>
-            <% } else { %>
-            <p> <% for (BookInfo book : cart) { %>
-                <p> <%= book.getTitle() %>   -   <%= book.getPrice() %> kr </p>
+                <% } else { %>
+            <p>
+                <% for (OrderItemInfo itemInfo : cart) { %>
+                    <p> <%= itemInfo.getItem().getTitle() %>   -   <%= itemInfo.getItem().getPrice() %> kr  -  <%= itemInfo.getNrOfItems()%> </p>
                 <% } %>
             </p>
             <% } %>
@@ -63,7 +65,7 @@
                 <% if (currentUser == null) {%>
                     <a href="login.jsp">Proceed to Pay</a>
                 <% } else { %>
-                    <a href="products.jsp">Proceed to Pay</a>  <!-- byt med oder sida -->
+                    <a href="newOrder.jsp">Proceed to Pay</a>
                 <% } %>
             </label>
         <% } %>
@@ -87,7 +89,6 @@
                     <p><%= b.getAuthor()%></p>
                     <isbn>Genre: <%= b.getGenre()%></isbn>
                     <isbn>ISBN: <%= b.getIsbn()%></isbn>
-
 
                     <status>
                         <% if (nrOfCopies == 0) { %>

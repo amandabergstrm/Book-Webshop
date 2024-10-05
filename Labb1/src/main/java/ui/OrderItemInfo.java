@@ -1,15 +1,21 @@
 package ui;
 
-
 public class OrderItemInfo {
 
     private final int itemId;
 
-    private final int nrOfItems;
+    private int nrOfItems;
+
+    private BookInfo item;
 
     public OrderItemInfo(int itemId, int nrOfItems){
         this.itemId = itemId;
         this.nrOfItems = nrOfItems;
+    }
+
+    public OrderItemInfo(BookInfo item, int itemId, int nrOfItems) {
+        this(itemId, nrOfItems);
+        this.item = item;
     }
 
     public int getItemId() {
@@ -18,6 +24,14 @@ public class OrderItemInfo {
 
     public int getNrOfItems() {
         return nrOfItems;
+    }
+
+    public BookInfo getItem() {
+        return item;
+    }
+
+    public void setNrOfItems(int nrOfItems) {
+        this.nrOfItems = nrOfItems;
     }
 
     @Override
