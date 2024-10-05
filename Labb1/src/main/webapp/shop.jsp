@@ -74,7 +74,7 @@
                 <% if (currentUser == null) {%>
                     <a href="login.jsp">Proceed to Pay</a>
                 <% } else { %>
-                    <a href="newOrder.jsp">Proceed to Pay</a>
+                    <a href="orderSummary.jsp">Proceed to Pay</a>
                 <% } %>
             </label>
         <% } %>
