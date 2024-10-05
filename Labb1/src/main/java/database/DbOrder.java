@@ -132,4 +132,45 @@ public class DbOrder extends Order {
         }
     }
 
+    public static ArrayList<DbOrder> searchUserOrders(String email) {
+        ArrayList<DbOrder> orders = new ArrayList<>();
+        String query = "SELECT T_Order.* FROM T_Order WHERE T_Order.userEmail LIKE ?";
+        Connection con = DbManager.getConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            con.setAutoCommit(false);
+            preparedStatement.setString(1, email + "%");
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int orderNr = resultSet.getInt("orderNr");
+                    String userEmail = resultSet.getString("userEmail");
+                    String stringStatus = resultSet.getString("status");
+                    OrderStatus status = OrderStatus.valueOf(stringStatus);
+
+                    ArrayList<OrderItem> orderItems = matchAllOrderItems(orderNr);
+                    orders.add(new DbOrder(userEmail, orderNr, orderItems, status));
+                }
+            }
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return orders;
+    }
+
 }

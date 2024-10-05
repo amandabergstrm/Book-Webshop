@@ -177,10 +177,10 @@
     %>
 </div>
 
-<!-- Create a new order -->
+<!-- Create a new order
 <div>
     <h2>Create and Display a New Order</h2>
-    <%
+    < %
         // Retrieve a book to create a new order
         ArrayList<BookInfo> booksTest = (ArrayList<BookInfo>) BookHandler.getAllBooks();
 
@@ -193,13 +193,13 @@
 
         OrderInfo newOrder = new OrderInfo(currentUser.getEmail(), orderItemInfos);
         OrderHandler.createOrder(newOrder); // Create the new order
-    %>
-
+    % >
+-->
     <!-- Fetch and display updated orders -->
     <div>
-        <h2>Updated Orders List After Creating a New Order</h2>
+        <h2>Updated Orders List After Creating a New Order (Only current user orders)</h2>
         <%
-            ArrayList<OrderInfo> updatedOrders = OrderHandler.getAllOrders(); // Fetch updated orders
+            ArrayList<OrderInfo> updatedOrders = OrderHandler.getUserOrders(currentUser.getEmail()); // Fetch updated orders
             Iterator<OrderInfo> updatedOrderIterator = updatedOrders.iterator(); // Create iterator
             if (!updatedOrders.isEmpty()) {
         %>

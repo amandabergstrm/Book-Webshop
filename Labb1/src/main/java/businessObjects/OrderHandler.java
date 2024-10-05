@@ -54,25 +54,27 @@ public class OrderHandler {
         if (orders == null) {
             System.out.println("INGA ORDRAR FINNS");
         }
+        return convertObjectToInfo(orders);
+    }
 
+    public static ArrayList<OrderInfo> getUserOrders(String email) {
+        ArrayList<DbOrder> orders = Order.searchUserOrders(email);
+        return convertObjectToInfo(orders);
+    }
+
+    private static ArrayList<OrderInfo> convertObjectToInfo(ArrayList<DbOrder> orders) {
         ArrayList<OrderInfo> orderInfoList = new ArrayList<>();
 
         for (Order o : orders) {
-            // Create a new list of OrderItemInfo for each order
             ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<>();
 
-            // Process each order's items
             ArrayList<OrderItem> orderItems = o.getOrderItems();
             for (OrderItem item : orderItems) {
                 OrderItemInfo orderItemInfo = new OrderItemInfo(item.getItemId(), item.getNrOfItems());
                 orderItemInfos.add(orderItemInfo);
             }
-
-            // Create a new OrderInfo object and add it to the orderInfoList
             orderInfoList.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));
         }
-
         return orderInfoList;
     }
-
 }

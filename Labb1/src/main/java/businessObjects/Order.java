@@ -21,6 +21,10 @@ public class Order {
         return DbOrder.importAllOrders();
     }
 
+    public static ArrayList<DbOrder> searchUserOrders(String email) {
+        return DbOrder.searchUserOrders(email);
+    }
+
     //när man SKAPAR en ny order
     protected Order (String userEmail, ArrayList<OrderItem> orderItems) {
         this.userEmail = userEmail;

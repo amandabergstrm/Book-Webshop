@@ -123,6 +123,8 @@ SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 UPDATE T_User
 SET T_User.authority = "Admin" WHERE email = "test6@hello.com";
 
+SELECT * FROM T_Order WHERE userEmail = "poriazov@kth.se";
+
 /*
 SELECT itemId
 FROM T_Book
