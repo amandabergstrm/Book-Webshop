@@ -12,7 +12,7 @@ CREATE TABLE T_User (
 );
 
 CREATE TABLE T_Category (
-	genre	VARCHAR(50)	PRIMARY KEY NOT NULL 
+	genre	VARCHAR(50)	PRIMARY KEY NOT NULL
 );
 
 CREATE TABLE T_Book (
@@ -29,14 +29,18 @@ CREATE TABLE T_Book (
 );
 
 CREATE TABLE T_Order (
-	user	VARCHAR(100)	NOT NULL, 
-	orderNr	INT	 			AUTO_INCREMENT,
-    status	VARCHAR(30)		NOT NULL,
-    itemId	INT				NOT NULL,
-    nrOfItems INT 			NOT NULL,
-    CONSTRAINT T_Order_pk PRIMARY KEY (orderNr, itemId),
-    CONSTRAINT T_Order_fk FOREIGN KEY (user) REFERENCES T_User(email),
-    CONSTRAINT T_Order_fk1 FOREIGN KEY (itemId) REFERENCES T_Book (itemId)
+	orderNr	INT	 				PRIMARY KEY AUTO_INCREMENT,
+    userEmail	VARCHAR(100)	NOT NULL,
+    status	VARCHAR(30)			NOT NULL,
+    CONSTRAINT T_Order_fk FOREIGN KEY (userEmail) REFERENCES T_User(email)
+);
+
+CREATE TABLE T_OrderItem (
+	itemId	INT				PRIMARY KEY,
+	nrOfItems INT 			NOT NULL,
+    orderNr	INT	 			NOT NULL,
+	CONSTRAINT T_OrderItem_fk FOREIGN KEY (orderNr) REFERENCES T_Order(orderNr),
+    CONSTRAINT T_OrderItem_fk1 FOREIGN KEY (itemId) REFERENCES T_Book(itemId)
 );
 
 CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
@@ -51,9 +55,8 @@ VALUES ('Fantasy'),
        ('Fiction'),
        ('Historical'),
        ('Thriller');
-       
 
-INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
+INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9781782276203", "Tender is the Flesh", "Science Fiction", "Agustina Bazterrica", 5, 120);
 
 INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)  
@@ -77,11 +80,35 @@ VALUES("9781785036354", "The Toymakers", "Historical", "Robert Dinsdale", 0, 120
 INSERT INTO T_User (authority, name, email, password) 
 VALUES("Admin", "Betty", "poriazov@kth.se", "123");
 
-INSERT INTO T_Order (user, itemId, nrOfItems, status)
-VALUES ('poriazov@kth.se', 6, 2, 'Pending');
+INSERT INTO T_User (authority, name, email, password)
+VALUES('User', 'Test User', 'testuser@example.com', 'password123');
+
+INSERT INTO T_Order (userEmail, status)
+VALUES ('testuser@example.com', 'Pending');
+
+INSERT INTO T_Order (userEmail, status)
+VALUES ('testuser@example.com', 'Pending');
+
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('1', '6','1');
+
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('2','2','1');
+
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('3', '10','2');
+
+UPDATE T_Book
+SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
 SELECT *
 FROM T_Book;
+
+SELECT *
+FROM T_Order;
+
+SELECT *
+FROM T_OrderItem;
 
 SELECT *
 FROM T_User;
@@ -95,6 +122,11 @@ FROM T_Order
 JOIN T_Book ON T_Order.itemId = T_Book.itemId;
 
 SELECT * FROM OrderDetails;
+SELECT T_OrderItem.orderNr, T_OrderItem.itemId, T_OrderItem.nrOfItems, T_Order.userEmail, T_Book.title
+FROM T_OrderItem
+JOIN T_Order ON T_OrderItem.orderNr = T_Order.orderNr
+JOIN T_Book ON T_OrderItem.itemId = T_Book.itemId
+WHERE T_OrderItem.orderNr = 1;
 
 UPDATE T_Book 
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;

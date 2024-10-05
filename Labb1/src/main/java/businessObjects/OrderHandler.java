@@ -1,14 +1,51 @@
 package businessObjects;
 
+import database.DbOrder;
+import ui.BookInfo;
+import ui.OrderInfo;
+import ui.OrderItemInfo;
+
+import java.sql.Array;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class OrderHandler {
 
-    public static ArrayList<Order> getAllOrders(){
-        ArrayList orders = Order.importAllOrders();
-        /*for (Order o : orders){
-            orders.add(new OrderInfo(o.getUser, o.getOrderNr(), o.getOrderItems(), o.getOrderStatus()))
-        }*/
-        return orders;
+
+    public static void createOrder(OrderInfo orderInfo) {
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+        ArrayList<OrderItemInfo> orderItemInfos = orderInfo.getOrderItemInfo();
+
+        for(OrderItemInfo o: orderItemInfos){
+            System.out.println("Item id:" + o.getItemId() + " Nr of items: " + o.getNrOfItems());
+            System.out.println("\n");
+        }
+
+        for(OrderItemInfo o: orderItemInfos){
+            orderItems.add(new OrderItem(o.getItemId(), o.getNrOfItems()));
+        }
+        Order orderObj = new Order(orderInfo.getUserEmail(), orderItems);
+        Order.createOrder(orderObj);
+    }
+    public static ArrayList<OrderInfo> getAllOrders(){
+        ArrayList<DbOrder> orders = Order.importAllOrders();
+        if(orders == null) {
+            System.out.println("INGA ORDRAR FINNS");
+        }
+
+        ArrayList<OrderInfo> orderInfo = new ArrayList<OrderInfo>();
+        ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<OrderItemInfo>();
+        for(Order o: orders){
+            ArrayList<OrderItem> orderItems = o.getOrderItems();
+            for(OrderItem b: orderItems) {
+                OrderItemInfo orderItemInfo = new OrderItemInfo(b.getItemId(), b.getNrOfItems());
+                orderItemInfos.add(orderItemInfo);
+            }
+        }
+
+        for (Order o : orders){
+            orderInfo.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));
+        }
+        return orderInfo;
     }
 }
