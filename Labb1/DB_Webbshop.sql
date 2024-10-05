@@ -117,23 +117,6 @@ FROM T_User;
 SELECT *
 FROM T_Category;
 
-CREATE VIEW OrderDetails AS
-SELECT T_Order.orderNr, T_Order.user, T_Order.itemId, T_Book.title, T_Order.nrOfItems, T_Order.status
-FROM T_Order
-JOIN T_Book ON T_Order.itemId = T_Book.itemId;
-
-SELECT * FROM OrderDetails;
-SELECT T_OrderItem.orderNr, T_OrderItem.itemId, T_OrderItem.nrOfItems, T_Order.userEmail, T_Book.title
-FROM T_OrderItem
-JOIN T_Order ON T_OrderItem.orderNr = T_Order.orderNr
-JOIN T_Book ON T_OrderItem.itemId = T_Book.itemId
-WHERE T_OrderItem.orderNr = 1;
--- SELECT T_OrderItem.orderNr, T_OrderItem.itemId, T_OrderItem.nrOfItems, T_Order.userEmail, T_Book.title
--- FROM T_OrderItem
--- JOIN T_Order ON T_OrderItem.orderNr = T_Order.orderNr
--- JOIN T_Book ON T_OrderItem.itemId = T_Book.itemId
--- WHERE T_OrderItem.orderNr = 1;
-
 UPDATE T_Book
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
