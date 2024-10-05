@@ -23,7 +23,7 @@ public class User {
         return DbUser.searchUserByEmail(email);
     }
 
-    public User(Authority authority, String name, String email, String password) {
+    protected User(Authority authority, String name, String email, String password) {
         this.authority = authority;
         this.name = name;
         //if (!isEmailValid(email)) throw new IllegalArgumentException("Not a valid email-address.");

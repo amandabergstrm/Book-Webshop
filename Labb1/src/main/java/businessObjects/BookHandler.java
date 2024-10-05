@@ -20,13 +20,12 @@ public class BookHandler {
     }
 
     public static Collection<BookInfo> getAllBooks() {
-        Collection c = Book.importAllBooks();
-        ArrayList<BookInfo> books = new ArrayList<BookInfo>();
-        for (Iterator it = c.iterator(); it.hasNext();) {
-            Book book = (Book) it.next();
-            books.add(new BookInfo(book.getItemId(),book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor(), book.getNrOfCopies(), book.getPrice()));
+        ArrayList<DbBook> books = Book.importAllBooks();
+        ArrayList<BookInfo> bookInfos = new ArrayList<BookInfo>();
+        for(Book book: books){
+            bookInfos.add(new BookInfo(book.getItemId(),book.getIsbn(), book.getTitle(), book.getGenre(), book.getAuthor( ), book.getNrOfCopies(), book.getPrice()));
         }
-        return books;
+        return bookInfos;
     }
 
     public static void updateBook(BookInfo book, int newNrOfCopies, int newPrice) {

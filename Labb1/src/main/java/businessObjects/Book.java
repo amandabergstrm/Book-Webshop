@@ -29,6 +29,7 @@ public class Book {
 
     public static ArrayList<DbBook> importAllBooks() {
         return DbBook.importAllBooks();
+        //Deep copy och gör om till bokobjekt?
     }
 
     public static void updateBook(Book book) {
@@ -39,7 +40,7 @@ public class Book {
         DbBook.executeBookRemove(book);
     }
 
-    public Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    protected Book(String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid isbn");
         this.isbn = isbn;
@@ -54,7 +55,7 @@ public class Book {
         this.price = price;
     }
 
-    public Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
+    protected Book(int itemId, String isbn, String title, Genre genre, String author, int nrOfCopies, int price) {
        this(isbn, title, genre, author, nrOfCopies, price);
        this.itemId = itemId;
     }

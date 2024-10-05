@@ -2,12 +2,20 @@ package businessObjects;
 
 public class OrderItem {
 
-    private final String itemId;
+    private final int itemId;
 
     private final int nrOfItems;
 
-    public OrderItem(String itemId, int nrOfItems){
+    public OrderItem(int itemId, int nrOfItems){
         this.itemId = itemId;
         this.nrOfItems = nrOfItems;
+    }
+
+    public int getItemId() {
+        return itemId;
+    }
+
+    public int getNrOfItems() {
+        return nrOfItems;
     }
 }

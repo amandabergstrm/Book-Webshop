@@ -8,13 +8,29 @@ import java.util.ArrayList;
 public class DbOrder extends Order {
 
     int nrOfItems;
-    public DbOrder(User user, int orderNr, OrderStatus status, int itemId, int nrOfItems) {
-        super(user, orderNr, new ArrayList<OrderItem>(), status);
-        this.nrOfItems = nrOfItems;
+    public DbOrder(String userEmail, int orderNr, ArrayList<OrderItem> orderItems, OrderStatus status) {
+        super(userEmail, orderNr, orderItems, status);
     }
-    //hämta en bok baserat på isbn - klar
-    //hämta alla böcker - klar
-    //hämta filtrerade böcker - amanda
+
+    public static ArrayList<OrderItem> matchAllOrderItems(int orderNr){
+        ArrayList<OrderItem> orderItems = new ArrayList<>();
+        String query = "SELECT itemId, nrOfItems FROM T_OrderItem WHERE orderNr = ?";
+        Connection con = DbManager.getConnection();
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setInt(1, orderNr);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    int itemId = resultSet.getInt("itemId");
+                    int nrOfItems = resultSet.getInt("nrOfItems");
+                    orderItems.add(new OrderItem(itemId, nrOfItems));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orderItems;
+    }
     public static ArrayList<DbOrder> importAllOrders() {
         ArrayList<DbOrder> orders = new ArrayList<>();
         String query = "SELECT T_Order.* FROM T_Order";
@@ -24,16 +40,13 @@ public class DbOrder extends Order {
             con.setAutoCommit(false);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    String userEmail = resultSet.getString("user");
                     int orderNr = resultSet.getInt("orderNr");
+                    String userEmail = resultSet.getString("userEmail");
                     String stringStatus = resultSet.getString("status");
                     OrderStatus status = OrderStatus.valueOf(stringStatus);
-                    int itemId = resultSet.getInt("itemId");
-                    int nrOfItems = resultSet.getInt("nrOfItems");
 
-                    //gör en lista med orderItems istället, gör en check för de som har samma ordernr -> lägg till i samma order
-                    //alla med samma ordernummer ska bli samma order
-                    //orders.add(new DbOrder(userEmail, orderNr, status, itemId, nrOfItems));
+                    ArrayList<OrderItem> orderItems = matchAllOrderItems(orderNr);
+                    orders.add(new DbOrder(userEmail, orderNr, orderItems, status));
                 }
             }
             con.commit();
@@ -57,4 +70,66 @@ public class DbOrder extends Order {
         }
         return orders;
     }
+
+    public static void executeOrderInsert(Order order) {
+        String queryInsertOrder = "INSERT INTO T_Order (userEmail, status) VALUES (?, ?)";
+        String queryInsertOrderItem = "INSERT INTO T_OrderItem (orderNr, itemId, nrOfItems) VALUES (?, ?, ?)";
+
+        Connection con = DbManager.getConnection();
+        try {
+            con.setAutoCommit(false);
+
+            //Lägg in ny order i T_Order
+            PreparedStatement preparedStatementOrder = con.prepareStatement(queryInsertOrder, PreparedStatement.RETURN_GENERATED_KEYS);
+            preparedStatementOrder.setString(1, order.getUserEmail());  // Use the getUserEmail() method
+            preparedStatementOrder.setString(2, order.getOrderStatus().toString());
+
+            preparedStatementOrder.execute();
+            // Execute the order insert
+            /*int affectedRows = preparedStatement.executeUpdate();
+
+            // Retrieve the generated orderNr (primary key)
+            if (affectedRows == 0) {
+                throw new SQLException("Creating order failed, no rows affected.");
+            }*/
+
+            try (ResultSet generatedOrderNr = preparedStatementOrder.getGeneratedKeys()) {
+                if (generatedOrderNr.next()) {
+                    int orderNr = generatedOrderNr.getInt(1);
+
+                    // Lägg in i T_OrderItem tabellen
+                    PreparedStatement prepareStatementOrderItem = con.prepareStatement(queryInsertOrderItem);
+                    for (OrderItem item : order.getOrderItems()) {
+                        prepareStatementOrderItem.setInt(1, orderNr);
+                        prepareStatementOrderItem.setInt(2, item.getItemId());
+                        prepareStatementOrderItem.setInt(3, item.getNrOfItems());
+                        prepareStatementOrderItem.addBatch(); // Mer effektivt att lägga till i en batch och sen lägga in allt
+                    }
+                    prepareStatementOrderItem.executeBatch(); // Gör en insert för allt samtidigt
+                } else {
+                    throw new SQLException("Creating order failed, no ID obtained.");
+                }
+            }
+            con.commit();
+
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 }

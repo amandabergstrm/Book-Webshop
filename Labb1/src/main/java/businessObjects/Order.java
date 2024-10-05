@@ -6,37 +6,41 @@ import ui.UserInfo;
 import java.util.ArrayList;
 public class Order {
 
-    private final User user;
+    private final String userEmail;
 
-    private final int orderNr;
+    private int orderNr;
 
     private OrderStatus status;
 
     private ArrayList<OrderItem> orderItems;
 
-    //private int totalSum;
-
+    public static void createOrder(Order order) {
+        DbOrder.executeOrderInsert(order);
+    }
     public static ArrayList<DbOrder> importAllOrders() {
         return DbOrder.importAllOrders();
     }
-    public Order (User user, int orderNr, ArrayList<OrderItem> orderItems) {
-        this.user = user;
-        this.orderNr = orderNr;
+
+    //när man SKAPAR en ny order
+    protected Order (String userEmail, ArrayList<OrderItem> orderItems) {
+        this.userEmail = userEmail;
         this.orderItems = orderItems;
         this.status = OrderStatus.Pending;
         /*for (OrderItem b: orderItems){
             this.totalSum += b.getPrice();
         }*/
     }
-    public Order (User user, int orderNr, ArrayList<OrderItem> orderItems, OrderStatus status) {
-        this.user = user;
+
+    //när man HÄMTAR en ny order
+    protected Order (String userEmail, int orderNr, ArrayList<OrderItem> orderItems, OrderStatus status) {
+        this.userEmail = userEmail;
         this.orderNr = orderNr;
         this.orderItems = orderItems;
         this.status = status;
         //this.totalSum = totalSum;
     }
 
-    public User getUser() { return user; }
+    public String getUserEmail() { return userEmail; }
     public int getOrderNr() { return orderNr; }
     public OrderStatus getOrderStatus() { return status; }
     public ArrayList<OrderItem> getOrderItems () { return orderItems; }
