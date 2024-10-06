@@ -26,7 +26,7 @@ public class User {
         return DbUser.searchUserByEmail(email);
     }
 
-    public static Collection importAllUsers() {
+    public static ArrayList<DbUser> importAllUsers() {
         return DbUser.importAllUsers();
     }
 

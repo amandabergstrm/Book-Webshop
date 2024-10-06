@@ -34,7 +34,7 @@ public class OrderServlet extends HttpServlet {
         OrderHandler.updateOrderStatus(orderNr, orderStatus);
     }
     private void updateAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        ArrayList<OrderInfo> ordersInfo = OrderHandler.getAllOrders();
+        Collection ordersInfo = OrderHandler.getAllOrders();
         request.setAttribute("ordersInfo", ordersInfo);
         request.getRequestDispatcher("orders.jsp").forward(request, response);
     }

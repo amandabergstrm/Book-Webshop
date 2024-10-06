@@ -1,10 +1,10 @@
 package businessObjects;
 
-import database.DbOrder;
 import ui.OrderInfo;
 import ui.OrderItemInfo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class OrderHandler {
 
@@ -20,8 +20,8 @@ public class OrderHandler {
         Order.createOrder(orderObj);
     }
 
-    public static ArrayList<OrderInfo> getAllOrders() {
-        ArrayList<DbOrder> orders = Order.importAllOrders();
+    public static Collection<OrderInfo> getAllOrders() {
+        Collection orders = Order.importAllOrders();
         if (orders == null) {
             System.out.println("INGA ORDRAR FINNS");
         }
@@ -29,7 +29,7 @@ public class OrderHandler {
     }
 
     public static ArrayList<OrderInfo> getUserOrders(String email) {
-        ArrayList<DbOrder> orders = Order.searchUserOrders(email);
+        Collection orders = Order.searchUserOrders(email);
         return convertOrderToOrderInfo(orders);
     }
 
@@ -47,13 +47,13 @@ public class OrderHandler {
     }
 
     //Snygga till senare, anropa converOrderItemInfoToOrderItem istället
-    private static ArrayList<OrderInfo> convertOrderToOrderInfo(ArrayList<DbOrder> orders) {
+    private static ArrayList<OrderInfo> convertOrderToOrderInfo(Collection<Order> orders) {
         ArrayList<OrderInfo> orderInfoList = new ArrayList<>();
 
         for (Order o : orders) {
+            ArrayList<OrderItem> orderItems = o.getOrderItems();
             ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<>();
 
-            ArrayList<OrderItem> orderItems = o.getOrderItems();
             for (OrderItem item : orderItems) {
                 OrderItemInfo orderItemInfo = new OrderItemInfo(item.getItemId(), item.getNrOfItems());
                 orderItemInfos.add(orderItemInfo);

@@ -1,6 +1,7 @@
 package businessObjects;
 
 import ui.BookInfo;
+import ui.OrderItemInfo;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -43,4 +44,12 @@ public class BookHandler {
         ArrayList<String> categories = Book.importAllCategories();
         return new ArrayList<>(categories);
     }
+
+    /*public static ArrayList<Book> convertBookToBookInfo(ArrayList<BookInfo> bookInfos){
+        ArrayList<Book> books = new ArrayList<Book>();
+        for(BookInfo b: bookInfos){
+            books.add(new Book(b.getItemId(), o.getNrOfItems()));
+        }
+        return orderItems;
+    }*/
 }
