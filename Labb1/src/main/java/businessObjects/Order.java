@@ -21,6 +21,9 @@ public class Order {
         return DbOrder.importAllOrders();
     }
 
+    public static void updateOrderStatus(Order orderObj) {
+        DbOrder.executeOrderUpdate(orderObj);
+    }
     public static ArrayList<DbOrder> searchUserOrders(String email) {
         return DbOrder.searchUserOrders(email);
     }

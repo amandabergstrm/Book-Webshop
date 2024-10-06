@@ -17,11 +17,6 @@ public class OrderHandler {
         ArrayList<OrderItemInfo> orderItemInfos = orderInfo.getOrderItemInfo();
 
         for(OrderItemInfo o: orderItemInfos){
-            System.out.println("Item id:" + o.getItemId() + " Nr of items: " + o.getNrOfItems());
-            System.out.println("\n");
-        }
-
-        for(OrderItemInfo o: orderItemInfos){
             orderItems.add(new OrderItem(o.getItemId(), o.getNrOfItems()));
         }
         Order orderObj = new Order(orderInfo.getUserEmail(), orderItems);
@@ -54,15 +49,29 @@ public class OrderHandler {
         if (orders == null) {
             System.out.println("INGA ORDRAR FINNS");
         }
-        return convertObjectToInfo(orders);
+        return convertOrderToOrderInfo(orders);
     }
 
     public static ArrayList<OrderInfo> getUserOrders(String email) {
         ArrayList<DbOrder> orders = Order.searchUserOrders(email);
-        return convertObjectToInfo(orders);
+        return convertOrderToOrderInfo(orders);
     }
 
-    private static ArrayList<OrderInfo> convertObjectToInfo(ArrayList<DbOrder> orders) {
+    public static void updateOrderStatus(OrderInfo orderInfo, OrderStatus newStatus) {
+        Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), converOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
+        Order.updateOrderStatus(orderObj);
+    }
+
+    public static ArrayList<OrderItem> converOrderItemInfoToOrderItem(ArrayList<OrderItemInfo> orderItemInfos){
+        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+        for(OrderItemInfo o: orderItemInfos){
+            orderItems.add(new OrderItem(o.getItemId(), o.getNrOfItems()));
+        }
+        return orderItems;
+    }
+
+    //Snygga till senare, anropa converOrderItemInfoToOrderItem istället
+    private static ArrayList<OrderInfo> convertOrderToOrderInfo(ArrayList<DbOrder> orders) {
         ArrayList<OrderInfo> orderInfoList = new ArrayList<>();
 
         for (Order o : orders) {
