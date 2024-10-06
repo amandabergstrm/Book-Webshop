@@ -18,12 +18,14 @@ public class OrderServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
-        ArrayList<OrderInfo> ordersInfo = OrderHandler.getAllOrders();
+        /*ArrayList<OrderInfo> ordersInfo = OrderHandler.getAllOrders();
         session.setAttribute("ordersInfo", ordersInfo);
         System.out.println(ordersInfo.toString());
 
         request.getRequestDispatcher("orders.jsp").forward(request, response);
+    */
     }
+
 
     private void updateSession(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();

@@ -5,6 +5,7 @@
 <%@ page import="businessObjects.Authority" %>
 <%@ page import="ui.OrderItemInfo" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Collection" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -49,7 +50,7 @@
         </div>
     </div>
 
-    <!-- Display all current orders -->
+    <!-- Hårdkodat alla current orders, ta bort sen, bara kontroll att den kommer till orders.jsp överhuvudtaget-->
     <div>
         <h2>Display all current orders</h2>
         <%
@@ -122,6 +123,20 @@
 
     <!-- Ändra order status knapp -->
 
+        <%  Collection<OrderInfo> orderInfos = (Collection<OrderInfo>) request.getSession().getAttribute("ordersInfo");
+            Iterator<OrderInfo> it = orderInfos.iterator();
+            for (; it.hasNext();) {
+                OrderInfo orderInfo = it.next();
+                int orderNr = orderInfo.getOrderNr();
+        %>
+    <div class="list-order">
+        <div class="order-info">
+            <p><%= orderNr %></p>
+            <p><%= orderInfo.getUserEmail() %></p>
+            <p><%= orderInfo.getOrderStatus() %></p>
+
+            <% } %>
 </div>
+    </div>
 </body>
 </html>
