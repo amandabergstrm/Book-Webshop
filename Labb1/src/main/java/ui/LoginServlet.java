@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
             session = request.getSession();
             session.setAttribute("currentUser", null);
             session.invalidate();
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("shop-servlet");
         } else {
             response.getWriter().write("Invalid action.");
         }
