@@ -80,7 +80,7 @@
             <input type="checkbox" id="editOrderStatusToggle<%=orderNr%>" hidden>
             <div class="form-container" id="editOrderStatusForm<%=orderNr%>">
                 <label for="editOrderStatusToggle<%=orderNr%>" class="close-btn">&times;</label>
-                <h2>Edit user: <%=orderNr%></h2>
+                <h2>Edit order status: <%=orderNr%></h2>
                 <form action="orders-servlet" method="POST">
                     <input type="hidden" name="action" value="edit">
                     <input type="hidden" name="orderNr" value="<%=orderNr%>">
