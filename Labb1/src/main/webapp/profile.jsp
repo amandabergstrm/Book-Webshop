@@ -47,7 +47,7 @@
             <%  session = request.getSession();
                 ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
                 if (cart == null || cart.isEmpty()) { %>
-            <p>Your cart is empty!</p>
+            <p class="empty-cart">Your cart is empty!</p>
             <% } else { %>
             <p>
                     <% for (OrderItemInfo itemInfo : cart) { %>
