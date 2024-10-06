@@ -133,3 +133,20 @@ body {
 .cart-sidebar .proceedToPay:hover {
     background-color: #039f60;
 }
+
+.remove-item-form {
+    margin-left: auto;
+}
+
+.remove-item-btn {
+    background-color: transparent;
+    border: none;
+    color: #876969;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.remove-item-btn:hover {
+    color: #755454;
+}

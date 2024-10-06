@@ -16,30 +16,36 @@ public class CartServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         String itemIdStr = request.getParameter("itemId");
+        String action = request.getParameter("action");
         ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
 
-        BookInfo bookInfo = BookHandler.getBookByItemId(Integer.parseInt(itemIdStr));
-        OrderItemInfo orderItemInfo = new OrderItemInfo(bookInfo, bookInfo.getItemId(), 1);
         if (cart == null) {
             cart = new ArrayList<>();
             session.setAttribute("cart", cart);
         }
 
-        boolean existingItem = false;
+        if ("add".equals(action)) {
+            BookInfo bookInfo = BookHandler.getBookByItemId(Integer.parseInt(itemIdStr));
+            OrderItemInfo orderItemInfo = new OrderItemInfo(bookInfo, bookInfo.getItemId(), 1);
+            boolean existingItem = false;
 
-        for (OrderItemInfo item : cart) {
-            if (item.getItemId() == orderItemInfo.getItemId()) {
-                if (item.getItem().getNrOfCopies() != 1) {
-                    item.setNrOfItems(item.getNrOfItems() + 1);
-                    item.getItem().setNrOfCopies(item.getItem().getNrOfCopies() - 1);
+            for (OrderItemInfo item : cart) {
+                if (item.getItemId() == orderItemInfo.getItemId()) {
+                    if (item.getItem().getNrOfCopies() != 1) {
+                        item.setNrOfItems(item.getNrOfItems() + 1);
+                        item.getItem().setNrOfCopies(item.getItem().getNrOfCopies() - 1);
+                    }
+                    existingItem = true;
+                    break;
                 }
-                existingItem = true;
-                break;
             }
-        }
-        if (!existingItem) {
-            if (orderItemInfo.getItem().getNrOfCopies() != 1)
-                cart.add(orderItemInfo);
+            if (!existingItem) {
+                if (orderItemInfo.getItem().getNrOfCopies() != 1)
+                    cart.add(orderItemInfo);
+            }
+        } else if ("remove".equals(action)) {
+            int itemId = Integer.parseInt(itemIdStr);
+            cart.removeIf(item -> item.getItemId() == itemId);
         }
 
         String cartToggle = request.getParameter("cartToggle");

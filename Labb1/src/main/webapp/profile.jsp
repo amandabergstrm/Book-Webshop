@@ -49,17 +49,25 @@
                 if (cart == null || cart.isEmpty()) { %>
             <p class="empty-cart">Your cart is empty!</p>
             <% } else { %>
-            <p>
-                    <% for (OrderItemInfo itemInfo : cart) { %>
-            <p> <%= itemInfo.getItem().getTitle() %>   -   <%= itemInfo.getItem().getPrice() %> kr  -  <%= itemInfo.getNrOfItems()%> </p>
-            <% } %>
-            </p>
+            <div class="cart-items-wrapper">
+                <% for (OrderItemInfo itemInfo : cart) { %>
+                <div class="cart-item-info">
+                    <img src="resources/<%= itemInfo.getItem().getIsbn() %>.jpg" alt="<%= itemInfo.getItem().getIsbn() %>">
+                    <div class="item-details">
+                        <p class="item-title"><%= itemInfo.getItem().getTitle() %></p>
+                        <p class="item-author">by <%= itemInfo.getItem().getAuthor() %></p>
+                        <p class="item-price"><%= itemInfo.getItem().getPrice() %> kr</p>
+                        <p class="item-quantity">Quantity: <%= itemInfo.getNrOfItems() %></p>
+                    </div>
+                </div>
+                <% } %>
+            </div>
             <% } %>
         </div>
         <% if (cart != null && !cart.isEmpty()) { %>
         <label class="proceedToPay">
             <% if (currentUser == null) {%>
-            <a href="login.jsp">Proceed to Pay</a>
+            <a href="login.jsp?redirect=orderSummary.jsp">Proceed to Pay</a>
             <% } else { %>
             <a href="orderSummary.jsp">Proceed to Pay</a>
             <% } %>

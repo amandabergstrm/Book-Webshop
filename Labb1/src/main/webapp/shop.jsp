@@ -68,6 +68,11 @@
                         <p class="item-price"><%= itemInfo.getItem().getPrice() %> kr</p>
                         <p class="item-quantity">Quantity: <%= itemInfo.getNrOfItems() %></p>
                     </div>
+                    <form action="cart-servlet" method="POST" class="remove-item-form">
+                        <input type="hidden" name="action" value="remove">
+                        <input type="hidden" name="itemId" value="<%= itemInfo.getItem().getItemId() %>">
+                        <button type="submit" class="remove-item-btn">X</button>
+                    </form>
                 </div>
                 <% } %>
             </div>
@@ -117,6 +122,7 @@
                     <form action="cart-servlet" method="POST">
                         <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
                         <input type="hidden" name="cartToggle" value="open">
+                        <input type="hidden" name="action" value="add">
                         <button type="submit" class="add-to-cart-button" <%= (nrOfCopies == 0) ? "disabled" : "" %> >Add to Cart</button>
                     </form>
                 </div>
