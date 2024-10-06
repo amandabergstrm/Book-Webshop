@@ -1,6 +1,7 @@
 package businessObjects;
 import database.DbBook;
 import database.DbOrder;
+import database.DbUser;
 import ui.UserInfo;
 
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class Order {
         return DbOrder.importAllOrders();
     }
 
-    public static void updateOrderStatus(Order orderObj) {
-        DbOrder.executeOrderUpdate(orderObj);
+    public static void updateOrderStatus(int orderNr, String status) {
+        DbOrder.executeOrderUpdate(orderNr, status);
     }
     public static ArrayList<DbOrder> searchUserOrders(String email) {
         return DbOrder.searchUserOrders(email);

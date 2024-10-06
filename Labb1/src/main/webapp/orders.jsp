@@ -6,6 +6,7 @@
 <%@ page import="ui.OrderItemInfo" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Collection" %>
+<%@ page import="businessObjects.OrderStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -14,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/navBarStyle.css">
     <link rel="stylesheet" href="css/orderStyle.css">
+    <link rel="stylesheet" href="css/handleBookForms.css">
     <title>Manage Orders</title>
 </head>
 <body>
@@ -42,39 +44,21 @@
 <div class="order-list">
     <div class="list-order">
         <div class="order-info">
-        <a> </a>
-        <a>Order number</a>
-        <a>User email</a>
-        <a>Order Status</a>
+            <a> </a>
+            <a>Order number</a>
+            <a>User email</a>
+            <a>Order Status</a>
             <a>Handle order</a>
         </div>
     </div>
 
-    <!-- Hämta alla ordrar -->
-
-    <!-- < % ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getSession().getAttribute("ordersInfo");
+        <%ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getAttribute("ordersInfo");
         for(OrderInfo o: ordersInfo){
-            OrderInfo orderInfo = o;
-            int orderNr = orderInfo.getOrderNr();
-            %>
-
-            <div class="list-order">
-                <div class="order-info">
-                <p>< %= orderNr %></p>
-                <p>< %= orderInfo.getUserEmail() %></p>
-                    <p>< %= orderInfo.getOrderStatus() %></p>
-                    < % } %>
-</div>
-            </div> -->
-
-    <!-- Ändra order status knapp -->
-
-        <%  Collection<OrderInfo> orderInfos = (Collection<OrderInfo>) request.getAttribute("ordersInfo");
-            Iterator<OrderInfo> it = orderInfos.iterator();
-            for (; it.hasNext();) {
-                OrderInfo orderInfo = it.next();
-                int orderNr = orderInfo.getOrderNr();
+        OrderInfo orderInfo = o;
+        int orderNr = orderInfo.getOrderNr();
+        ArrayList<OrderItemInfo> orderItems = orderInfo.getOrderItemInfo(); %>
         %>
+
     <div class="list-order">
         <div class="order-info">
             <p></p>
@@ -83,8 +67,39 @@
             <p><%= orderInfo.getOrderStatus() %></p>
 
 
-</div>
+            <!-- Checkbox to toggle the visibility of order items -->
+            <input type="checkbox" id="toggleOrder<%= orderNr %>" hidden>
+            <label for="toggleOrder<%= orderNr %>" class="view-order-items">View Order Items</label>
 
+            <!-- Nested list for order items, hidden by default -->
+            <ul class="order-items-list" id="orderItems<%= orderNr %>">
+                <% for (OrderItemInfo item : orderItems) { %>
+                <li>
+                    <strong>Item ID:</strong> <%= item.getItemId() %> <br>
+                    <strong>Quantity:</strong> <%= item.getNrOfItems() %>
+                </li>
+                <% } %>
+            </ul>
+
+            <!-- Edit Button -->
+            <input type="checkbox" id="editOrderStatusToggle<%=orderNr%>" hidden>
+            <div class="form-container" id="editOrderStatusForm<%=orderNr%>">
+                <label for="editOrderStatusToggle<%=orderNr%>" class="close-btn">&times;</label>
+                <h2>Edit user: <%=orderNr%></h2>
+                <form action="orders-servlet" method="POST">
+                    <input type="hidden" name="action" value="edit">
+                    <input type="hidden" name="orderNr" value="<%=orderNr%>">
+                    <label for="newOrderStatus<%=orderNr%>">New order status (leave empty to keep unchanged):</label>
+                    <select id="newOrderStatus<%=orderNr%>" name="status" required>
+                        <% for (OrderStatus status : OrderStatus.values()) { %>
+                        <option value="<%= status %>"><%= status %></option>
+                        <% } %>
+                    </select>
+                    <button type="submit">Save Changes</button>
+                </form>
+            </div>
+            <label for="editOrderStatusToggle<%=orderNr%>" class="toggle-link">Edit</label>
+        </div>
     </div>
         <% } %>
 </body>

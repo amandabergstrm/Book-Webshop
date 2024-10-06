@@ -111,6 +111,14 @@ input[id^="editUserToggle"]:checked ~ div[id^="editUserForm"] {
     display: block;
 }
 
+input[id^="editOrderStatusToggle"]:checked ~ div[id^="editOrderStatusForm"] {
+    display: block;
+}
+
+#editOrderStatusToggle:checked ~ #editOrderStatusForm {
+    display: block;
+}
+
 .close-btn {
     position: absolute;
     top: 5px;
