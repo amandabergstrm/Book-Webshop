@@ -1,5 +1,6 @@
 package businessObjects;
 
+import ui.view.BookInfo;
 import ui.view.OrderInfo;
 import ui.view.OrderItemInfo;
 import java.util.ArrayList;
@@ -75,7 +76,9 @@ public class OrderHandler {
             ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<>();
 
             for (OrderItem item : orderItems) {
-                OrderItemInfo orderItemInfo = new OrderItemInfo(item.getItemId(), item.getNrOfItems());
+                BookInfo bookInfo = BookHandler.getBookByItemId(item.getItemId());
+                OrderItemInfo orderItemInfo = new OrderItemInfo(bookInfo, bookInfo.getItemId(), 1);
+                //OrderItemInfo orderItemInfo = new OrderItemInfo(item.getItemId(), item.getNrOfItems());
                 orderItemInfos.add(orderItemInfo);
             }
             orderInfoList.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));

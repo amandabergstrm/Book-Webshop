@@ -71,6 +71,8 @@
                 <% for (OrderItemInfo item : orderItems) { %>
                 <li>
                     <strong>Item ID:</strong> <%= item.getItemId() %> <br>
+                    <strong>Title:</strong> <%= item.getItem().getTitle() %> <br>
+                    <strong>Genre:</strong> <%= item.getItem().getGenre() %> <br>
                     <strong>Quantity:</strong> <%= item.getNrOfItems() %>
                 </li>
                 <% } %>
