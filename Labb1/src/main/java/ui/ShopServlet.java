@@ -21,6 +21,9 @@ public class ShopServlet extends HttpServlet {
         ArrayList<String> genres = BookHandler.getAllCategories();
         request.setAttribute("genres", genres);
 
+        String cartToggle = request.getParameter("cartToggle");
+        request.setAttribute("cartToggle", cartToggle);
+
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
 }

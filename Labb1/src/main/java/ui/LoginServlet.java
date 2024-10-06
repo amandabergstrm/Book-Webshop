@@ -17,6 +17,7 @@ public class LoginServlet extends HttpServlet {
         if ("login".equals(action)) {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String redirect = request.getParameter("redirect");
 
             UserInfo existingUser = UserHandler.getUserByEmail(email);
             if (existingUser == null) {
@@ -26,15 +27,20 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("logged in as" + existingUser.getName());
                 session.setAttribute("currentUser", existingUser);
 
-                response.sendRedirect("shop-servlet");
+                if (redirect != null && !redirect.isEmpty()) {
+                    response.sendRedirect(redirect);
+                } else {
+                    response.sendRedirect("shop-servlet");
+                }
             } else {
                 System.out.println("Fel lösenord (rätt email)");
-                response.sendRedirect("login.jsp"); // prova igen
+                response.sendRedirect("login.jsp");
             }
         } else if ("createUser".equals(action)) {
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            String redirect = request.getParameter("redirect");
 
             UserInfo existingUser = UserHandler.getUserByEmail(email);
             if (existingUser != null) {
@@ -45,13 +51,17 @@ public class LoginServlet extends HttpServlet {
                 UserHandler.createUser(newUserInfo);
                 System.out.println("Fortsätt till kassa");
                 session.setAttribute("currentUser", newUserInfo);
-                response.sendRedirect("shop-servlet");
+                if (redirect != null && !redirect.isEmpty()) {
+                    response.sendRedirect(redirect);
+                } else {
+                    response.sendRedirect("shop-servlet");
+                }
             }
         } else if ("logout".equals(action)) {
             session = request.getSession();
             session.setAttribute("currentUser", null);
             session.invalidate();
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("shop-servlet");
         } else {
             response.getWriter().write("Invalid action.");
         }

@@ -22,32 +22,32 @@
 <body>
     <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
 
-<!-- Navigation bar -->
-<div class="topnav">
-    <a class="active" href="shop-servlet">Home</a>
-    <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
-    <a href="orders-servlet">Orders</a>
-    <a href="product-servlet">Products</a>
-    <% } %>
-    <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-    <a href="user-servlet">Users</a>
-    <% } %>
-    <% if (currentUser != null) { %>
-    <a href="profile.jsp">Profile</a>
-    <% } %>
-    <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
-    <% if (currentUser == null) { %>
-    <a href="login.jsp">Login</a>
-    <% } else { %>
-    <form action="login-servlet" method="POST">
-        <input type="hidden" name="action" value="logout">
-        <button class="log-out" type="submit">Logout</button>
-    </form>
-    <a class="view-user">Logged in: <%= currentUser.getName() %></a>
-    <% } %>
-</div>
+    <!-- Navigation bar -->
+    <div class="topnav">
+        <a class="active" href="shop-servlet">Home</a>
+        <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
+        <a href="orders-servlet">Orders</a>
+        <a href="product-servlet">Products</a>
+        <% } %>
+        <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
+        <a href="user-servlet">Users</a>
+        <% } %>
+        <% if (currentUser != null) { %>
+        <a href="profile.jsp">Profile</a>
+        <% } %>
+        <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
+        <% if (currentUser == null) { %>
+        <a href="login.jsp">Login</a>
+        <% } else { %>
+        <form action="login-servlet" method="POST">
+            <input type="hidden" name="action" value="logout">
+            <button class="log-out" type="submit">Logout</button>
+        </form>
+        <a class="view-user">Logged in: <%= currentUser.getName() %></a>
+        <% } %>
+    </div>
 
-    <input type="checkbox" id="cartToggle" hidden>
+    <input type="checkbox" id="cartToggle" hidden <%= "open".equals(request.getAttribute("cartToggle")) ? "checked" : "" %> >
 
     <div id="cartSidebar" class="cart-sidebar">
         <label for="cartToggle" class="closebtn">&times;</label>
@@ -68,7 +68,7 @@
         <% if (cart != null && !cart.isEmpty()) { %>
             <label class="proceedToPay">
                 <% if (currentUser == null) {%>
-                    <a href="login.jsp">Proceed to Pay</a>
+                    <a href="login.jsp?redirect=orderSummary.jsp">Proceed to Pay</a>
                 <% } else { %>
                     <a href="orderSummary.jsp">Proceed to Pay</a>
                 <% } %>
@@ -108,140 +108,12 @@
                     <p><%= b.getPrice()%> kr</p>
                     <form action="cart-servlet" method="POST">
                         <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
+                        <input type="hidden" name="cartToggle" value="open">
                         <button type="submit" class="add-to-cart-button" <%= (nrOfCopies == 0) ? "disabled" : "" %> >Add to Cart</button>
                     </form>
                 </div>
             </div>
         <%}%>
     </div>
-</body>
-
-<!-- Display all current orders -->
-<div>
-    <h2>Display all current orders</h2>
-    <%
-        ArrayList<OrderInfo> orders = OrderHandler.getAllOrders(); // Fetch all orders
-        Iterator<OrderInfo> orderIterator = orders.iterator(); // Create an iterator
-        if (!orders.isEmpty()) {
-    %>
-    <table>
-        <thead>
-        <tr>
-            <th>Order Number</th>
-            <th>User Email</th>
-            <th>Order Status</th>
-            <th>Number of Items</th>
-            <th>Order Items</th>
-        </tr>
-        </thead>
-        <tbody>
-        <%
-            while (orderIterator.hasNext()) {
-                OrderInfo order = orderIterator.next();
-                int orderNr = order.getOrderNr();
-                String userEmail = order.getUserEmail();
-                String status = order.getOrderStatus().toString();
-                ArrayList<OrderItemInfo> orderItems = order.getOrderItemInfo();
-        %>
-        <tr>
-            <td><%= orderNr %></td>
-            <td><%= userEmail %></td>
-            <td><%= status %></td>
-            <td><%= orderItems.size() %></td>
-            <td>
-                <ul>
-                    <% for (OrderItemInfo item : orderItems) { %>
-                    <li>Item ID: <%= item.getItemId() %>, Quantity: <%= item.getNrOfItems() %></li>
-                    <% } %>
-                </ul>
-            </td>
-        </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
-    <%
-    } else {
-    %>
-    <p>No orders found.</p>
-    <%
-        }
-    %>
-</div>
-
-<!-- Create a new order
-<div>
-    <h2>Create and Display a New Order</h2>
-    < %
-        // Retrieve a book to create a new order
-        ArrayList<BookInfo> booksTest = (ArrayList<BookInfo>) BookHandler.getAllBooks();
-
-        int itemIdTest = booksTest.get(0).getItemId(); // Get the first book's itemId
-        OrderItemInfo orderItemInfo = new OrderItemInfo(itemIdTest, 13); // 13 is the quantity
-
-        // Create OrderItemInfo list and OrderInfo
-        ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<>();
-        orderItemInfos.add(orderItemInfo);
-
-        OrderInfo newOrder = new OrderInfo(currentUser.getEmail(), orderItemInfos);
-        OrderHandler.createOrder(newOrder); // Create the new order
-    % >
--->
-    <!-- Fetch and display updated orders -->
-    <div>
-        <h2>Updated Orders List After Creating a New Order (Only current user orders)</h2>
-        <%
-            ArrayList<OrderInfo> updatedOrders = OrderHandler.getUserOrders(currentUser.getEmail()); // Fetch updated orders
-            Iterator<OrderInfo> updatedOrderIterator = updatedOrders.iterator(); // Create iterator
-            if (!updatedOrders.isEmpty()) {
-        %>
-        <table>
-            <thead>
-            <tr>
-                <th>Order Number</th>
-                <th>User Email</th>
-                <th>Order Status</th>
-                <th>Number of Items</th>
-                <th>Order Items</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%
-                while (updatedOrderIterator.hasNext()) {
-                    OrderInfo updatedOrder = updatedOrderIterator.next();
-                    int updatedOrderNr = updatedOrder.getOrderNr();
-                    String updatedUserEmail = updatedOrder.getUserEmail();
-                    String updatedStatus = updatedOrder.getOrderStatus().toString();
-                    ArrayList<OrderItemInfo> updatedOrderItemsList = updatedOrder.getOrderItemInfo();
-            %>
-            <tr>
-                <td><%= updatedOrderNr %></td>
-                <td><%= updatedUserEmail %></td>
-                <td><%= updatedStatus %></td>
-                <td><%= updatedOrderItemsList.size() %></td>
-                <td>
-                    <ul>
-                        <% for (OrderItemInfo item : updatedOrderItemsList) { %>
-                        <li>Item ID: <%= item.getItemId() %>, Quantity: <%= item.getNrOfItems() %></li>
-                        <% } %>
-                    </ul>
-                </td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
-        </table>
-        <%
-        } else {
-        %>
-        <p>No updated orders found.</p>
-        <%
-            }
-        %>
-    </div>
-</div>
-<body>
 </body>
 </html>

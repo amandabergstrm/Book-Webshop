@@ -8,7 +8,7 @@
     <title>Login or Create User</title>
 </head>
 <body>
-<!-- Radio buttons for toggling between forms -->
+
 <input type="radio" id="login" name="toggleForm" checked>
 <input type="radio" id="createUser" name="toggleForm">
 
@@ -18,6 +18,8 @@
         <h2>Log In</h2>
         <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="login">
+            <input type="hidden" name="redirect" value="<%= request.getParameter("redirect") != null ? request.getParameter("redirect") : "" %>">
+
             <label for="loginEmail">Email:</label>
             <input type="email" id="loginEmail" name="email" required>
 
@@ -34,6 +36,8 @@
         <h2>Create User</h2>
         <form action="login-servlet" method="POST">
             <input type="hidden" name="action" value="createUser">
+            <input type="hidden" name="redirect" value="<%= request.getParameter("redirect") != null ? request.getParameter("redirect") : "" %>">
+
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
 
