@@ -15,13 +15,13 @@
     <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
 
     <div class="topnav">
-        <a class="active" href="shop.jsp">Home</a>
+        <a class="active" href="shop-servlet">Home</a>
         <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
         <a href="orders.jsp">Orders</a>
-        <a href="products.jsp">Products</a>
+        <a href="product-servlet">Products</a>
         <% } %>
         <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-        <a href="users.jsp">Users</a>
+        <a href="user-servlet">Users</a>
         <% } %>
         <a href="profile.jsp">Profile</a>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>

@@ -26,13 +26,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("logged in as" + existingUser.getName());
                 session.setAttribute("currentUser", existingUser);
 
-                if (existingUser.getAuthority() == Authority.Admin) {
-                    response.sendRedirect("shop.jsp");
-                } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
-                    response.sendRedirect("shop.jsp");
-                } else {
-                    response.sendRedirect("shop.jsp");
-                }
+                response.sendRedirect("shop-servlet");
             } else {
                 System.out.println("Fel lösenord (rätt email)");
                 response.sendRedirect("login.jsp"); // prova igen
@@ -51,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 UserHandler.createUser(newUserInfo);
                 System.out.println("Fortsätt till kassa");
                 session.setAttribute("currentUser", newUserInfo);
-                response.sendRedirect("shop.jsp");
+                response.sendRedirect("shop-servlet");
             }
         } else if ("logout".equals(action)) {
             session = request.getSession();

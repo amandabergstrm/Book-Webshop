@@ -1,36 +1,40 @@
 package ui;
 
 import businessObjects.BookHandler;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@WebServlet(name = "bookServlet", value = "/book-servlet")
-public class BookServlet extends HttpServlet {
-   @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String action = request.getParameter("action");
-        if ("category".equals(action)) {
-            addCategory(request, response);
-        } else if ("create".equals(action)) {
-            createBook(request, response);
-        } else if ("edit".equals(action)) {
-            editBook(request, response);
-        } else if ("delete".equals(action)) {
-            deleteBook(request, response);
-        }
+@WebServlet(name = "productServlet", value = "/product-servlet")
+public class ProductServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        updateAndRedirect(request, response);
     }
 
-    private void addCategory(HttpServletRequest request, HttpServletResponse response) throws IOException {
+   @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String action = request.getParameter("action");
+        if ("category".equals(action)) {
+            addCategory(request);
+        } else if ("create".equals(action)) {
+            createBook(request);
+        } else if ("edit".equals(action)) {
+            editBook(request);
+        } else if ("delete".equals(action)) {
+            deleteBook(request);
+        }
+       updateAndRedirect(request, response);
+   }
+
+    private void addCategory(HttpServletRequest request) {
         String genre = request.getParameter("newGenre");
 
-        HttpSession session = request.getSession();
-        ArrayList<String> genres = (ArrayList<String>) session.getAttribute("genres");
+        ArrayList<String> genres = (ArrayList<String>) request.getAttribute("genres");
         if (genres != null && genres.contains(genre)) {
             request.setAttribute("errorMessage", "Genre already exists.");
         } else {
@@ -39,27 +43,20 @@ public class BookServlet extends HttpServlet {
             }
             genres.add(genre);
             BookHandler.addCategory(genre);
-           // session.setAttribute("genres", genres);
         }
-
-        updateSession(request, response);
-        response.sendRedirect("products.jsp");
     }
 
-    private void createBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void createBook(HttpServletRequest request) {
        String isbn = request.getParameter("isbn");
        String title = request.getParameter("title");
        String author = request.getParameter("author");
        String genre = request.getParameter("genre");
        int price = Integer.parseInt(request.getParameter("price"));
        int nrOfCopies = Integer.parseInt(request.getParameter("nrOfCopies"));
-
        BookHandler.createBook(new BookInfo(isbn, title, genre, author, price, nrOfCopies));
-       updateSession(request, response);
-       response.sendRedirect("products.jsp");
     }
 
-    private void editBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void editBook(HttpServletRequest request) {
         String itemIdStr = request.getParameter("itemId");
         String priceStr = request.getParameter("price");
         String nrOfCopiesStr = request.getParameter("nrOfCopies");
@@ -77,20 +74,18 @@ public class BookServlet extends HttpServlet {
         }
 
         BookHandler.updateBook(book, newNrOfCopies, newPrice);
-        updateSession(request, response);
-        response.sendRedirect("products.jsp");
     }
 
-    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void deleteBook(HttpServletRequest request) {
         String itemIdStr = request.getParameter("itemId");
         BookHandler.deleteBookById(Integer.parseInt(itemIdStr));
-        updateSession(request, response);
-        response.sendRedirect("products.jsp");
     }
 
-    private void updateSession(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
+    private void updateAndRedirect(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
-        session.setAttribute("booksInfo", booksInfo);
+        request.setAttribute("booksInfo", booksInfo);
+        ArrayList<String> genres = BookHandler.getAllCategories();
+        request.setAttribute("genres", genres);
+        request.getRequestDispatcher("products.jsp").forward(request, response);
     }
 }

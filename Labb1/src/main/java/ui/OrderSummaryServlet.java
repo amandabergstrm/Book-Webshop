@@ -36,7 +36,7 @@ public class OrderSummaryServlet extends HttpServlet {
                 session.removeAttribute("cart");
                 response.sendRedirect("profile.jsp");
             } else {
-                response.sendRedirect("shop.jsp");
+                response.sendRedirect("shop-servlet");
             }
         }
     }

@@ -1,7 +1,5 @@
-<%@ page import="businessObjects.UserHandler" %>
 <%@ page import="ui.UserInfo" %>
 <%@ page import="ui.BookInfo" %>
-<%@ page import="businessObjects.BookHandler" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Collection" %>
@@ -23,21 +21,16 @@
 
 <body>
     <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
-<!--
-    < % if (currentUser == null) {
-        currentUser = new UserInfo(Authority.Admin, "Test User", "testuser@example.com", "password123");
-        session.setAttribute("currentUser", currentUser);
-    } % >-->
 
 <!-- Navigation bar -->
 <div class="topnav">
-    <a class="active" href="shop.jsp">Home</a>
+    <a class="active" href="shop-servlet">Home</a>
     <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
     <a href="orders.jsp">Orders</a>
-    <a href="products.jsp">Products</a>
+    <a href="product-servlet">Products</a>
     <% } %>
     <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-    <a href="users.jsp">Users</a>
+    <a href="user-servlet">Users</a>
     <% } %>
     <% if (currentUser != null) { %>
     <a href="profile.jsp">Profile</a>
@@ -88,7 +81,7 @@
     </div>
 
     <div class="shop-container">
-        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getSession().getAttribute("booksInfo");
+        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getAttribute("booksInfo");
             Iterator<BookInfo> it = books.iterator();
             for (; it.hasNext();) {
                 BookInfo b = it.next();
