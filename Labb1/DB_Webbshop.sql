@@ -30,9 +30,9 @@ CREATE TABLE T_Book (
 
 CREATE TABLE T_Order (
 	orderNr	INT	 				PRIMARY KEY AUTO_INCREMENT,
-    userEmail	VARCHAR(100)	NOT NULL,
+    userEmail	VARCHAR(100),
     status	VARCHAR(30)			NOT NULL,
-    CONSTRAINT T_Order_fk FOREIGN KEY (userEmail) REFERENCES T_User(email)
+    CONSTRAINT T_Order_fk FOREIGN KEY (userEmail) REFERENCES T_User(email) ON DELETE SET NULL
 );
 
 CREATE TABLE T_OrderItem (
@@ -110,28 +110,7 @@ INSERT INTO T_Book (isbn, title, genre, author, nrOfCopies, price)
 VALUES("9780575104044", "Steelheart", "Science Fiction", "Brandon Sanderson", 100, 99);
 
 INSERT INTO T_User (authority, name, email, password) 
-VALUES("Admin", "Betty", "poriazov@kth.se", "123");
-
-INSERT INTO T_User (authority, name, email, password)
-VALUES('Admin', 'Test User', 'testuser@example.com', 'password123');
-
-INSERT INTO T_Order (userEmail, status)
-VALUES ('testuser@example.com', 'Pending');
-
-INSERT INTO T_Order (userEmail, status)
-VALUES ('testuser@example.com', 'Pending');
-
-INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
-VALUES ('1', '6','1');
-
-INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
-VALUES ('2','2','1');
-
-INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
-VALUES ('3', '10','2');
-
-UPDATE T_Book
-SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
+VALUES("Admin", "Admin", "admin@admin.se", "123");
 
 SELECT *
 FROM T_Book;
@@ -148,15 +127,15 @@ FROM T_User;
 SELECT *
 FROM T_Category;
 
+/*
 UPDATE T_Book
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
-UPDATE T_User
-SET T_User.authority = "Admin" WHERE email = "test6@hello.com";
+UPDATE T_Book
+SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;
 
 SELECT * FROM T_Order WHERE userEmail = "poriazov@kth.se";
 
-/*
 SELECT itemId
 FROM T_Book
 WHERE isbn = "9780062380623" AND title = "Coraline";
