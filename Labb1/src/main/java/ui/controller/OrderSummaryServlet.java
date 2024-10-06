@@ -16,8 +16,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * The {@code OrderSummaryServlet} class handles order summary operations, such as confirming orders.
+ * It updates the book stock and redirects users to their profile page after confirmation.
+ */
 @WebServlet(name = "orderSummaryServlet", value = "/order-summary-servlet")
 public class OrderSummaryServlet extends HttpServlet {
+
+    /**
+     * Handles the confirmation of orders, updates the book stock, and redirects the user.
+     *
+     * @param request  the {@link HttpServletRequest} containing order confirmation data
+     * @param response the {@link HttpServletResponse} used to redirect the user after order confirmation
+     * @throws IOException if an input or output error is detected
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String action = request.getParameter("action");
@@ -45,6 +57,12 @@ public class OrderSummaryServlet extends HttpServlet {
         }
     }
 
+    /**
+     * Updates the stock of books after an order has been confirmed.
+     *
+     * @param orderItems the list of ordered items
+     * @param session    the current session
+     */
     private void updateBookStock(ArrayList<OrderItemInfo> orderItems, HttpSession session) {
         for (OrderItemInfo orderItem : orderItems) {
             BookInfo book = BookHandler.getBookByItemId(orderItem.getItemId());

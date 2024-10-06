@@ -12,11 +12,22 @@ import ui.view.OrderItemInfo;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The {@code CartServlet} class manages cart-related operations in an online shop.
+ * It handles adding items to the cart, removing items, and updating the session.
+ */
 @WebServlet(name = "cartServlet", value = "/cart-servlet")
 public class CartServlet extends HttpServlet {
+
+    /**
+     * Handles adding and removing items from the cart based on the action specified.
+     *
+     * @param request  the {@link HttpServletRequest} containing the action and item information
+     * @param response the {@link HttpServletResponse} used to redirect the user after the operation
+     * @throws IOException if an input or output error is detected
+     */
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
-
         String itemIdStr = request.getParameter("itemId");
         String action = request.getParameter("action");
         ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
