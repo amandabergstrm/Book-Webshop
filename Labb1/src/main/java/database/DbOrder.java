@@ -173,4 +173,40 @@ public class DbOrder extends Order {
         return orders;
     }
 
+    public static void executeOrderUpdate(Order orderObj) {
+        String command = "UPDATE T_Order SET status = ?, WHERE orderNr = ?";
+        Connection con = DbManager.getConnection();
+
+        try {
+            con.setAutoCommit(false);
+            PreparedStatement preparedStatement = con.prepareStatement(command);
+            String statusString = orderObj.getOrderStatus().name();
+            preparedStatement.setString(1, statusString);
+            preparedStatement.setInt(2, orderObj.getOrderNr());
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Order status successfully updated");
+            } else {
+                System.out.println("No order found with the given order number.");
+            }
+            con.commit();
+        } catch (SQLException e) {
+            if (con != null) {
+                try {
+                    con.rollback();
+                } catch (SQLException ex) {
+                    e.printStackTrace();
+                }
+            } e.printStackTrace();
+        } finally {
+            try {
+                if (con != null) {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

@@ -18,11 +18,8 @@ public class OrderServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         HttpSession session = request.getSession();
 
-        Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
-        session.setAttribute("booksInfo", booksInfo);
-
         ArrayList<OrderInfo> ordersInfo = OrderHandler.getAllOrders();
-       session.setAttribute("ordersInfo", ordersInfo);
+        session.setAttribute("ordersInfo", ordersInfo);
         System.out.println(ordersInfo.toString());
 
         request.getRequestDispatcher("orders.jsp").forward(request, response);

@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="businessObjects.OrderHandler" %>
 <%@ page import="businessObjects.Authority" %>
+<%@ page import="ui.OrderItemInfo" %>
+<%@ page import="java.util.Iterator" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -47,8 +49,63 @@
         </div>
     </div>
 
+    <!-- Display all current orders -->
+    <div>
+        <h2>Display all current orders</h2>
+        <%
+            ArrayList<OrderInfo> orders = OrderHandler.getAllOrders(); // Fetch all orders
+            Iterator<OrderInfo> orderIterator = orders.iterator(); // Create an iterator
+            if (!orders.isEmpty()) {
+        %>
+        <table>
+            <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>User Email</th>
+                <th>Order Status</th>
+                <th>Number of Items</th>
+                <th>Order Items</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                while (orderIterator.hasNext()) {
+                    OrderInfo order = orderIterator.next();
+                    int orderNr = order.getOrderNr();
+                    String userEmail = order.getUserEmail();
+                    String status = order.getOrderStatus().toString();
+                    ArrayList<OrderItemInfo> orderItems = order.getOrderItemInfo();
+            %>
+            <tr>
+                <td><%= orderNr %></td>
+                <td><%= userEmail %></td>
+                <td><%= status %></td>
+                <td><%= orderItems.size() %></td>
+                <td>
+                    <ul>
+                        <% for (OrderItemInfo item : orderItems) { %>
+                        <li>Item ID: <%= item.getItemId() %>, Quantity: <%= item.getNrOfItems() %></li>
+                        <% } %>
+                    </ul>
+                </td>
+            </tr>
+            <%
+                }
+            %>
+            </tbody>
+        </table>
+        <%
+        } else {
+        %>
+        <p>No orders found.</p>
+        <%
+            }
+        %>
+    </div>
+
     <!-- Hämta alla ordrar -->
-    <% ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getSession().getAttribute("ordersInfo");
+
+    <!-- < % ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getSession().getAttribute("ordersInfo");
         for(OrderInfo o: ordersInfo){
             OrderInfo orderInfo = o;
             int orderNr = orderInfo.getOrderNr();
@@ -56,11 +113,15 @@
 
             <div class="list-order">
                 <div class="order-info">
-                <p><%= orderNr %></p>
-                <p><%= orderInfo.getUserEmail() %></p>
-                    <p><%= orderInfo.getOrderStatus() %></p>
-                    <% } %>
+                <p>< %= orderNr %></p>
+                <p>< %= orderInfo.getUserEmail() %></p>
+                    <p>< %= orderInfo.getOrderStatus() %></p>
+                    < % } %>
 </div>
-            </div>
+            </div> -->
+
+    <!-- Ändra order status knapp -->
+
+</div>
 </body>
 </html>
