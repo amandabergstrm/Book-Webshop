@@ -15,10 +15,10 @@
     <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
 
     <div class="topnav">
-        <a class="active" href="shop.jsp">Home</a>
+        <a class="active" href="shop-servlet">Home</a>
         <a href="orders.jsp">Orders</a>
-        <a href="products.jsp">Products</a>
-        <a href="users.jsp">Users</a>
+        <a href="product-servlet">Products</a>
+        <a href="user-servlet">Users</a>
         <a href="profile.jsp">Profile</a>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
@@ -65,7 +65,7 @@
             </div>
         </div>
 
-        <%  Collection<UserInfo> usersInfo = (Collection<UserInfo>) request.getSession().getAttribute("usersInfo");
+        <%  Collection<UserInfo> usersInfo = (Collection<UserInfo>) request.getAttribute("usersInfo");
             Iterator<UserInfo> it = usersInfo.iterator();
             for (; it.hasNext();) {
                 UserInfo userInfo = it.next();

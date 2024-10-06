@@ -15,27 +15,12 @@ import java.util.Collection;
 @WebServlet(name = "shopServlet", value = "/shop-servlet")
 public class ShopServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        HttpSession session = request.getSession();
-
         Collection<BookInfo> booksInfo = BookHandler.getAllBooks();
-        session.setAttribute("booksInfo", booksInfo);
+        request.setAttribute("booksInfo", booksInfo);
 
         ArrayList<String> genres = BookHandler.getAllCategories();
-        session.setAttribute("genres", genres);
-
-        Collection<UserInfo> usersInfo = UserHandler.getAllUsers();
-        session.setAttribute("usersInfo", usersInfo);
+        request.setAttribute("genres", genres);
 
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }
-
-    /*<a href="hello-servlet">Hello Servlet</a>
-<% UserInfo user = UserHandler.getUserByEmail("test7@gmail.com");%>
-<%= user.getAuthority().toString() %>
-
-<% user.setAuthority(Authority.Admin);
-    UserHandler.updateUser(user);%>
-<% user = UserHandler.getUserByEmail("test7@gmail.com");%>
-<%=user.getAuthority().toString() %>
-*/
 }

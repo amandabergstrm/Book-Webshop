@@ -17,11 +17,11 @@
     <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
 
     <div class="topnav">
-        <a class="active" href="shop.jsp">Home</a>
+        <a class="active" href="shop-servlet">Home</a>
         <a href="orders.jsp">Orders</a>
-        <a href="products.jsp">Products</a>
+        <a href="product-servlet">Products</a>
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-            <a href="users.jsp">Users</a>
+            <a href="user-servlet">Users</a>
         <% } %>
         <a href="profile.jsp">Profile</a>
         <% if(currentUser == null) { %>
@@ -52,7 +52,7 @@
                 <div class="form-container" id="createBookForm">
                     <label for="createBookToggle" class="close-btn">&times;</label>
                     <h2>Add New Book</h2>
-                    <form action="book-servlet" method="POST">
+                    <form action="product-servlet" method="POST">
                         <input type="hidden" name="action" value="create">
                         <label for="isbn">ISBN:</label>
                         <input type="text" id="isbn" name="isbn" required>
@@ -62,7 +62,7 @@
                         <input type="text" id="author" name="author" required>
                         <label for="genre">Genre:</label>
                         <select id="genre" name="genre" required>
-                            <% ArrayList<String> genres = (ArrayList<String>) session.getAttribute("genres");
+                            <% ArrayList<String> genres = (ArrayList<String>) request.getAttribute("genres");
                                 for (String genre : genres) { %>
                             <option value="<%= genre %>"><%= genre %></option>
                             <% } %>
@@ -81,7 +81,7 @@
                 <div class="form-container" id="addCategoryForm">
                     <label for="addCategoryToggle" class="close-btn">&times;</label>
                     <h2>Add New Category</h2>
-                    <form action="book-servlet" method="POST">
+                    <form action="product-servlet" method="POST">
                         <input type="hidden" name="action" value="category">
                         <label for="newGenre">Category (genre):</label>
                         <input type="text" id="newGenre" name="newGenre" required>
@@ -97,7 +97,7 @@
             </div>
         </div>
 
-        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getSession().getAttribute("booksInfo");
+        <%  Collection<BookInfo> books = (Collection<BookInfo>) request.getAttribute("booksInfo");
             Iterator<BookInfo> it = books.iterator();
             for (; it.hasNext();) {
                 BookInfo book = it.next();
@@ -119,7 +119,7 @@
                     <div class="form-container" id="editBookForm<%=id%>">
                         <label for="editBookToggle<%=id%>" class="close-btn">&times;</label>
                         <h2>Edit item: <%=id%></h2>
-                        <form action="book-servlet" method="POST">
+                        <form action="product-servlet" method="POST">
                             <input type="hidden" name="action" value="edit">
                             <input type="hidden" name="itemId" value="<%=id%>">
 
@@ -140,7 +140,7 @@
 
                     <!-- Delete Button -->
                     <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-                        <form action="book-servlet" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?');">
+                        <form action="product-servlet" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?');">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="itemId" value="<%= id %>">
                             <button type="submit" class="delete-btn">Delete</button>
