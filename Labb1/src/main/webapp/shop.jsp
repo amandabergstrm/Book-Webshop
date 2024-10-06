@@ -68,7 +68,7 @@
         <% if (cart != null && !cart.isEmpty()) { %>
             <label class="proceedToPay">
                 <% if (currentUser == null) {%>
-                    <a href="login.jsp">Proceed to Pay</a>
+                    <a href="login.jsp?redirect=orderSummary.jsp">Proceed to Pay</a>
                 <% } else { %>
                     <a href="orderSummary.jsp">Proceed to Pay</a>
                 <% } %>
