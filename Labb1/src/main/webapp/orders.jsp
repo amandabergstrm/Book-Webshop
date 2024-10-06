@@ -1,8 +1,6 @@
 <%@ page import="ui.UserInfo" %>
 <%@ page import="ui.OrderInfo" %>
-<%@ page import="ui.OrderItemInfo" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
 <%@ page import="businessObjects.OrderHandler" %>
 <%@ page import="businessObjects.Authority" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,11 +10,12 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/navBarStyle.css">
-    <link rel="stylesheet" href="css/orderStyle.css"> <!-- The CSS file containing your toggle styles -->
-    <title>Orders</title>
+    <link rel="stylesheet" href="css/orderStyle.css">
+    <title>Manage Orders</title>
 </head>
 <body>
 <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
+
 
 <div class="topnav">
     <a class="active" href="shop.jsp">Home</a>
@@ -37,50 +36,21 @@
     <% } %>
 </div>
 
-<div class="order-list-container">
-    <h2>All Orders</h2>
+<div class="order-list">
+    <div class="list-order">
+        <div class="order-info">
+        <a> </a>
+        <a>Order number</a>
+        <a>User email</a>
+        <a>Order Status</a>
+            <a>Handle order</a>
+        </div>
+    </div>
 
-    <!-- Fetch all orders from the system -->
-    <%
-        ArrayList<OrderInfo> orders = OrderHandler.getAllOrders();
-        if (orders == null || orders.isEmpty()) {
-    %>
-    <p>No orders found.</p>
-    <% } else { %>
+    <!-- Hämta alla ordrar -->
+    <% ArrayList<OrderInfo> orderInfos = new ArrayList<OrderInfo>()
 
-    <!-- Orders list -->
-    <ul class="order-list">
-        <%
-            for (OrderInfo order : orders) {
-                int orderNr = order.getOrderNr();
-                String userEmail = order.getUserEmail();
-                String status = order.getOrderStatus().toString();
-                ArrayList<OrderItemInfo> orderItems = order.getOrderItemInfo();
-        %>
-        <li>
-            <!-- Display order information -->
-            <strong>Order Number:</strong> <%= orderNr %> <br>
-            <strong>User Email:</strong> <%= userEmail %> <br>
-            <strong>Order Status:</strong> <%= status %> <br>
-            <strong>Number of Items:</strong> <%= orderItems.size() %> <br>
-
-            <!-- Checkbox to toggle order items -->
-            <input type="checkbox" id="toggleOrder<%= orderNr %>" hidden>
-            <label for="toggleOrder<%= orderNr %>" class="view-order-items">View Order Items</label>
-
-            <!-- Nested list for order items (hidden by default, shown when checkbox is checked) -->
-            <ul class="order-items-list order-details-<%= orderNr %>">
-                <% for (OrderItemInfo item : orderItems) { %>
-                <li>
-                    <strong>Item ID:</strong> <%= item.getItemId() %> <br>
-                    <strong>Quantity:</strong> <%= item.getNrOfItems() %>
-                </li>
-                <% } %>
-            </ul>
-        </li>
-        <% } %>
-    </ul>
-    <% } %>
 </div>
+
 </body>
 </html>
