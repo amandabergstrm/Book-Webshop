@@ -56,13 +56,21 @@
             <%  session = request.getSession();
                 ArrayList<OrderItemInfo> cart = (ArrayList<OrderItemInfo>) session.getAttribute("cart");
                 if (cart == null || cart.isEmpty()) { %>
-                    <p>Your cart is empty!</p>
+                    <p class="empty-cart">Your cart is empty!</p>
                 <% } else { %>
-            <p>
+            <div class="cart-items-wrapper">
                 <% for (OrderItemInfo itemInfo : cart) { %>
-                    <p> <%= itemInfo.getItem().getTitle() %>   -   <%= itemInfo.getItem().getPrice() %> kr  -  <%= itemInfo.getNrOfItems()%> </p>
+                <div class="cart-item-info">
+                    <img src="resources/<%= itemInfo.getItem().getIsbn() %>.jpg" alt="<%= itemInfo.getItem().getIsbn() %>">
+                    <div class="item-details">
+                        <p class="item-title"><%= itemInfo.getItem().getTitle() %></p>
+                        <p class="item-author">by <%= itemInfo.getItem().getAuthor() %></p>
+                        <p class="item-price"><%= itemInfo.getItem().getPrice() %> kr</p>
+                        <p class="item-quantity">Quantity: <%= itemInfo.getNrOfItems() %></p>
+                    </div>
+                </div>
                 <% } %>
-            </p>
+            </div>
             <% } %>
         </div>
         <% if (cart != null && !cart.isEmpty()) { %>
