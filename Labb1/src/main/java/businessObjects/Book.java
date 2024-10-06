@@ -3,7 +3,6 @@ package businessObjects;
 import database.DbBook;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class Book {
@@ -28,7 +27,7 @@ public class Book {
         return DbBook.searchBookByItemID(itemId);
     }
 
-    public static Collection importAllBooks() {
+    public static ArrayList<DbBook> importAllBooks() {
       return DbBook.importAllBooks();
     }
 
