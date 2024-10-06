@@ -21,7 +21,6 @@
 <body>
 <% UserInfo currentUser = (UserInfo) session.getAttribute("currentUser"); %>
 
-
 <div class="topnav">
     <a class="active" href="shop-servlet">Home</a>
     <a href="orders-servlet">Orders</a>
@@ -29,7 +28,7 @@
     <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
     <a href="user-servlet">Users</a>
     <% } %>
-    <a href="profile.jsp">Profile</a>
+    <a href="profile-servlet">Profile</a>
     <% if(currentUser == null) { %>
     <a href="login.jsp">Login</a>
     <% } else { %>
@@ -53,11 +52,9 @@
     </div>
 
         <%ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getAttribute("ordersInfo");
-        for(OrderInfo o: ordersInfo){
-        OrderInfo orderInfo = o;
+        for(OrderInfo orderInfo : ordersInfo){
         int orderNr = orderInfo.getOrderNr();
         ArrayList<OrderItemInfo> orderItems = orderInfo.getOrderItemInfo(); %>
-        %>
 
     <div class="list-order">
         <div class="order-info">
@@ -66,7 +63,8 @@
             <p><%= orderInfo.getUserEmail() %></p>
             <p><%= orderInfo.getOrderStatus() %></p>
 
-
+            <label for="editOrderStatusToggle<%=orderNr%>" class="toggle-link">Edit</label>
+            <p></p>
             <!-- Checkbox to toggle the visibility of order items -->
             <input type="checkbox" id="toggleOrder<%= orderNr %>" hidden>
             <label for="toggleOrder<%= orderNr %>" class="view-order-items">View Order Items</label>
@@ -98,7 +96,6 @@
                     <button type="submit">Save Changes</button>
                 </form>
             </div>
-            <label for="editOrderStatusToggle<%=orderNr%>" class="toggle-link">Edit</label>
         </div>
     </div>
         <% } %>

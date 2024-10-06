@@ -23,7 +23,7 @@
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
             <a href="user-servlet">Users</a>
         <% } %>
-        <a href="profile.jsp">Profile</a>
+        <a href="profile-servlet">Profile</a>
         <% if(currentUser == null) { %>
         <a href="login.jsp">Login</a>
         <% } else { %>

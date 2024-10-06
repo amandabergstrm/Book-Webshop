@@ -12,17 +12,19 @@ body {
     gap: 20px;
     padding: 20px;
 }
+
 .list-order {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 16px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: max-content;
 }
 
 .order-info {
     display: grid;
-    grid-template-columns: 10px 250px 260px 100px; /* Adjust the grid layout */
+    grid-template-columns: 10px 250px 260px 150px 150px;
     align-items: center;
 }
 
@@ -45,12 +47,10 @@ body {
     display: none;
 }
 
-/* Show order items when checkbox is checked */
 input[type="checkbox"]:checked ~ .order-items-list {
     display: block;
 }
 
-/* Style the view order items link */
 .view-order-items {
     cursor: pointer;
     color: #0073e6;
@@ -62,7 +62,6 @@ input[type="checkbox"]:checked ~ .order-items-list {
     text-decoration: underline;
 }
 
-/* Style the order items list */
 .order-items-list li {
     padding: 8px;
     border-bottom: 1px solid #ddd;

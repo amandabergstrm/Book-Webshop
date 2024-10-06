@@ -33,7 +33,7 @@
         <a href="user-servlet">Users</a>
         <% } %>
         <% if (currentUser != null) { %>
-        <a href="profile.jsp">Profile</a>
+        <a href="profile-servlet">Profile</a>
         <% } %>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
         <% if (currentUser == null) { %>

@@ -2,6 +2,7 @@
 <%@ page import="businessObjects.Authority" %>
 <%@ page import="ui.OrderItemInfo" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="ui.OrderInfo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +10,7 @@
     <link rel="stylesheet" href="css/navBarStyle.css">
     <link rel="stylesheet" href="css/sidebarCartStyle.css">
     <link rel="stylesheet" href="css/profileStyle.css">
+    <link rel="stylesheet" href="css/orderStyle.css">
     <title>Profile</title>
 </head>
 <body>
@@ -23,7 +25,7 @@
         <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
         <a href="user-servlet">Users</a>
         <% } %>
-        <a href="profile.jsp">Profile</a>
+        <a href="profile-servlet">Profile</a>
         <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
         <% if (currentUser == null) { %>
         <a href="login.jsp">Login</a>
@@ -75,7 +77,37 @@
         <!-- User Orders -->
         <div class="orders-section">
             <h2>Your Orders</h2>
-            <!-- samma kod som från orders -->
+
+            <% ArrayList<OrderInfo> userOrders = (ArrayList<OrderInfo>) request.getAttribute("userOrders");
+                for(OrderInfo orderInfo : userOrders) {
+                    int orderNr = orderInfo.getOrderNr();
+                    ArrayList<OrderItemInfo> orderItems = orderInfo.getOrderItemInfo(); %>
+
+            <div class="list-order">
+                <div class="order-info">
+                    <p></p>
+                    <p><%= orderNr %></p>
+                    <p><%= orderInfo.getUserEmail() %></p>
+                    <p><%= orderInfo.getOrderStatus() %></p>
+                    <p></p>
+                    <p></p>
+
+                    <!-- Checkbox to toggle the visibility of order items -->
+                    <input type="checkbox" id="toggleOrder<%= orderNr %>" hidden>
+                    <label for="toggleOrder<%= orderNr %>" class="view-order-items">View Order Items</label>
+
+                    <!-- Nested list for order items, hidden by default -->
+                    <ul class="order-items-list" id="orderItems<%= orderNr %>">
+                        <% for (OrderItemInfo item : orderItems) { %>
+                        <li>
+                            <strong>Item ID:</strong> <%= item.getItemId() %> <br>
+                            <strong>Quantity:</strong> <%= item.getNrOfItems() %>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+            </div>
+            <% } %>
         </div>
     </div>
 </body>

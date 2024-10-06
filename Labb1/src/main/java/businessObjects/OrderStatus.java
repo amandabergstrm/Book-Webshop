@@ -2,5 +2,5 @@ package businessObjects;
 
 public enum OrderStatus {
 
-    Pending, Handled, Shipped, Cancelled, Returned
+    Pending, Handled, Shipped, Delivered, Cancelled, Returned
 }

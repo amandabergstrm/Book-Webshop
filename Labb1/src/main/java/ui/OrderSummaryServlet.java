@@ -34,7 +34,7 @@ public class OrderSummaryServlet extends HttpServlet {
                 updateBookStock(orderItems, session);
 
                 session.removeAttribute("cart");
-                response.sendRedirect("profile.jsp");
+                response.sendRedirect("profile-servlet");
             } else {
                 response.sendRedirect("shop-servlet");
             }
