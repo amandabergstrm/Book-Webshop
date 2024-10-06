@@ -22,32 +22,32 @@
 <body>
     <% UserInfo currentUser = (UserInfo) request.getSession().getAttribute("currentUser"); %>
 
-<!-- Navigation bar -->
-<div class="topnav">
-    <a class="active" href="shop-servlet">Home</a>
-    <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
-    <a href="orders-servlet">Orders</a>
-    <a href="product-servlet">Products</a>
-    <% } %>
-    <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-    <a href="user-servlet">Users</a>
-    <% } %>
-    <% if (currentUser != null) { %>
-    <a href="profile.jsp">Profile</a>
-    <% } %>
-    <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
-    <% if (currentUser == null) { %>
-    <a href="login.jsp">Login</a>
-    <% } else { %>
-    <form action="login-servlet" method="POST">
-        <input type="hidden" name="action" value="logout">
-        <button class="log-out" type="submit">Logout</button>
-    </form>
-    <a class="view-user">Logged in: <%= currentUser.getName() %></a>
-    <% } %>
-</div>
+    <!-- Navigation bar -->
+    <div class="topnav">
+        <a class="active" href="shop-servlet">Home</a>
+        <% if (currentUser != null && currentUser.getAuthority() != Authority.Customer) { %>
+        <a href="orders-servlet">Orders</a>
+        <a href="product-servlet">Products</a>
+        <% } %>
+        <% if (currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
+        <a href="user-servlet">Users</a>
+        <% } %>
+        <% if (currentUser != null) { %>
+        <a href="profile.jsp">Profile</a>
+        <% } %>
+        <a class="cart-link"><label for="cartToggle" class="open-link">View Cart</label></a>
+        <% if (currentUser == null) { %>
+        <a href="login.jsp">Login</a>
+        <% } else { %>
+        <form action="login-servlet" method="POST">
+            <input type="hidden" name="action" value="logout">
+            <button class="log-out" type="submit">Logout</button>
+        </form>
+        <a class="view-user">Logged in: <%= currentUser.getName() %></a>
+        <% } %>
+    </div>
 
-    <input type="checkbox" id="cartToggle" hidden>
+    <input type="checkbox" id="cartToggle" hidden <%= "open".equals(request.getAttribute("cartToggle")) ? "checked" : "" %> >
 
     <div id="cartSidebar" class="cart-sidebar">
         <label for="cartToggle" class="closebtn">&times;</label>
@@ -108,6 +108,7 @@
                     <p><%= b.getPrice()%> kr</p>
                     <form action="cart-servlet" method="POST">
                         <input type="hidden" name="itemId" value="<%= b.getItemId()%>">
+                        <input type="hidden" name="cartToggle" value="open">
                         <button type="submit" class="add-to-cart-button" <%= (nrOfCopies == 0) ? "disabled" : "" %> >Add to Cart</button>
                     </form>
                 </div>

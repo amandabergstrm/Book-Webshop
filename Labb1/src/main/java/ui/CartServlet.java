@@ -41,6 +41,8 @@ public class CartServlet extends HttpServlet {
             if (orderItemInfo.getItem().getNrOfCopies() != 1)
                 cart.add(orderItemInfo);
         }
-        response.sendRedirect("shop-servlet");
+
+        String cartToggle = request.getParameter("cartToggle");
+        response.sendRedirect("shop-servlet?cartToggle=" + cartToggle);
     }
 }
