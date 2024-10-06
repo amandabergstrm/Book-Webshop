@@ -27,11 +27,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("currentUser", existingUser);
 
                 if (existingUser.getAuthority() == Authority.Admin) {
-                    response.sendRedirect("shop.jsp"); // skicka till admin sida eller till home men dem ser allt
+                    response.sendRedirect("shop.jsp");
                 } else if (existingUser.getAuthority() == Authority.WarehouseWorker) {
-                    response.sendRedirect("shop.jsp"); // skicka till lager sida eller till home men dem ser det dem behöver
+                    response.sendRedirect("shop.jsp");
                 } else {
-                    response.sendRedirect("shop.jsp"); // gör så man hamnar i checkout endast om man tryck på proceed to pay annars hamna i home
+                    response.sendRedirect("shop.jsp");
                 }
             } else {
                 System.out.println("Fel lösenord (rätt email)");
@@ -51,10 +51,11 @@ public class LoginServlet extends HttpServlet {
                 UserHandler.createUser(newUserInfo);
                 System.out.println("Fortsätt till kassa");
                 session.setAttribute("currentUser", newUserInfo);
-                response.sendRedirect("shop.jsp"); // ska fortsätta till kassa om man var i varukorgen när man logagr in
+                response.sendRedirect("shop.jsp");
             }
         } else if ("logout".equals(action)) {
             session = request.getSession();
+            session.setAttribute("currentUser", null);
             session.invalidate();
             response.sendRedirect("index.jsp");
         } else {

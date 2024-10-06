@@ -105,7 +105,7 @@
         %>
             <div class="list-item">
                 <div class="item-info">
-                    <img src="resources/<%= book.getTitle() %>.jpg" alt="<%= book.getTitle() %>">
+                    <img src="resources/<%= book.getIsbn() %>.jpg" alt="<%= book.getIsbn() %>">
                     <p><%= id %></p>
                     <p><%= book.getIsbn() %></p>
                     <p><%= book.getTitle() %></p>
