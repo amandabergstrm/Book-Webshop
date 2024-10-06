@@ -2,7 +2,7 @@ CREATE DATABASE DB_Webbshop;
 
 USE DB_Webbshop;
 
--- DROP DATABASE DB_Webbshop; DROP USER 'client'@'localhost';
+-- DROP DATABASE DB_Webbshop;
 
 CREATE TABLE T_User (
 	authority		VARCHAR(100)	NOT NULL,
@@ -46,8 +46,12 @@ CREATE TABLE T_OrderItem (
 
 GRANT CREATE USER ON *.* TO 'root'@'localhost';
 
-CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
-GRANT ALL PRIVILEGES on DB_Webbshop.* TO 'admin'@'localhost';
+-- CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
+-- GRANT ALL PRIVILEGES on DB_Webbshop.* TO 'admin'@'localhost';
+
+CREATE USER IF NOT EXISTS 'admin'@'%' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'admin'@'%';
+FLUSH PRIVILEGES;
 
 INSERT INTO T_Category (genre)
 VALUES ('Fantasy'),
