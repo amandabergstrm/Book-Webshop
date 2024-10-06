@@ -111,20 +111,20 @@ VALUES("Admin", "Betty", "poriazov@kth.se", "123");
 INSERT INTO T_User (authority, name, email, password)
 VALUES('Admin', 'Test User', 'testuser@example.com', 'password123');
 
--- INSERT INTO T_Order (userEmail, status)
--- VALUES ('testuser@example.com', 'Pending');
+INSERT INTO T_Order (userEmail, status)
+VALUES ('testuser@example.com', 'Pending');
 
--- INSERT INTO T_Order (userEmail, status)
--- VALUES ('testuser@example.com', 'Pending');
+INSERT INTO T_Order (userEmail, status)
+VALUES ('testuser@example.com', 'Pending');
 
--- INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
--- VALUES ('1', '6','1');
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('1', '6','1');
 
--- INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
--- VALUES ('2','2','1');
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('2','2','1');
 
--- INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
--- VALUES ('3', '10','2');
+INSERT INTO T_OrderItem (itemId, nrOfItems, orderNr)
+VALUES ('3', '10','2');
 
 UPDATE T_Book
 SET T_Book.nrOfCopies = 10, T_Book.price = 100 WHERE itemId = 10;

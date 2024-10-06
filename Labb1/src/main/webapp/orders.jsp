@@ -48,9 +48,19 @@
     </div>
 
     <!-- Hämta alla ordrar -->
-    <% ArrayList<OrderInfo> orderInfos = new ArrayList<OrderInfo>()
+    <% ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getSession().getAttribute("ordersInfo");
+        for(OrderInfo o: ordersInfo){
+            OrderInfo orderInfo = o;
+            int orderNr = orderInfo.getOrderNr();
+            %>
 
+            <div class="list-order">
+                <div class="order-info">
+                <p><%= orderNr %></p>
+                <p><%= orderInfo.getUserEmail() %></p>
+                    <p><%= orderInfo.getOrderStatus() %></p>
+                    <% } %>
 </div>
-
+            </div>
 </body>
 </html>
