@@ -119,3 +119,19 @@ input[id^="editUserToggle"]:checked ~ div[id^="editUserForm"] {
     cursor: pointer;
     text-align: center;
 }
+
+ul.category-list {
+    list-style-type: circle;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+ul.category-list li {
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 4px;
+}

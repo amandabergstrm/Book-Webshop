@@ -64,7 +64,7 @@
                         <select id="genre" name="genre" required>
                             <% ArrayList<String> genres = (ArrayList<String>) request.getAttribute("genres");
                                 for (String genre : genres) { %>
-                            <option value="<%= genre %>"><%= genre %></option>
+                                <option value="<%= genre %>"><%= genre %></option>
                             <% } %>
                             <option value="other"> </option>
                         </select>
@@ -85,12 +85,18 @@
                         <input type="hidden" name="action" value="category">
                         <label for="newGenre">Category (genre):</label>
                         <input type="text" id="newGenre" name="newGenre" required>
+                        <label>Existing Categories:</label>
+                        <ul class="category-list">
+                            <% for (String genre : genres) { %>
+                            <li><%= genre %></li>
+                            <% } %>
+                        </ul>
                         <button type="submit">Add Category</button>
                     </form>
                 </div>
 
                 <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-                <label for="createBookToggle" class="toggle-link">Add</label>
+                <label for="createBookToggle" class="toggle-link">Add Book</label>
                 <a> </a>
                 <label for="addCategoryToggle" class="toggle-link">Add Category</label>
                 <% } %>
