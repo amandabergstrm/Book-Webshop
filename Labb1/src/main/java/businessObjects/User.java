@@ -1,9 +1,7 @@
 package businessObjects;
 
 import database.DbUser;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.regex.Pattern;
 
 public class User {
@@ -17,7 +15,6 @@ public class User {
         return EMAIL_PATTERN.matcher(isbn).matches();
     }
 
-    /*Har kontakt mellan ob och db*/
     public void createUser(User userObj) {
         DbUser.executeUserInsert(userObj);
     }

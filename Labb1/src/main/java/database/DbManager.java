@@ -24,7 +24,6 @@ public class DbManager {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(server, userName, password);
-            //con = DriverManager.getConnection("jdbc:mysql://localhost/admin?user=root&password=admin");
             System.out.println("Connection successfull");
             con.setAutoCommit(false);
         } catch (SQLException | ClassNotFoundException e) {

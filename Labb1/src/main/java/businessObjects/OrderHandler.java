@@ -2,13 +2,10 @@ package businessObjects;
 
 import ui.OrderInfo;
 import ui.OrderItemInfo;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class OrderHandler {
-
-
     public static void createOrder(OrderInfo orderInfo) {
         ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
         ArrayList<OrderItemInfo> orderItemInfos = orderInfo.getOrderItemInfo();
@@ -34,19 +31,9 @@ public class OrderHandler {
     }
 
     public static void updateOrderStatus(int orderNr, String newStatus) {
-        //Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), convertOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
         Order.updateOrderStatus(orderNr, newStatus);
     }
 
-    public static ArrayList<OrderItem> convertOrderItemInfoToOrderItem(ArrayList<OrderItemInfo> orderItemInfos){
-        ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
-        for(OrderItemInfo o: orderItemInfos){
-            orderItems.add(new OrderItem(o.getItemId(), o.getNrOfItems()));
-        }
-        return orderItems;
-    }
-
-    //Snygga till senare, anropa converOrderItemInfoToOrderItem istället
     private static ArrayList<OrderInfo> convertOrderToOrderInfo(Collection<Order> orders) {
         ArrayList<OrderInfo> orderInfoList = new ArrayList<>();
 

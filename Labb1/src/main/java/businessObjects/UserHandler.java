@@ -4,9 +4,6 @@ import ui.UserInfo;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*
-Kontakt mellan ui och bo.
- */
 public class UserHandler {
     public static void createUser(UserInfo userInfo) {
         User userObj = new User(userInfo.getAuthority(), userInfo.getName(), userInfo.getEmail(), userInfo.getPassword());

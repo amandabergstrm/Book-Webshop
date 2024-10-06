@@ -1,7 +1,6 @@
 package ui;
 
 import java.io.*;
-
 import businessObjects.Authority;
 import businessObjects.UserHandler;
 import jakarta.servlet.http.*;

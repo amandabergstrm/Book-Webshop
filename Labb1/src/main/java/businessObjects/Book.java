@@ -1,7 +1,6 @@
 package businessObjects;
 
 import database.DbBook;
-
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 

@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 
 @WebServlet(name = "cartServlet", value = "/cart-servlet")
 public class CartServlet extends HttpServlet {

@@ -1,11 +1,8 @@
 package ui;
 
 public class OrderItemInfo {
-
     private final int itemId;
-
     private int nrOfItems;
-
     private BookInfo item;
 
     public OrderItemInfo(int itemId, int nrOfItems){

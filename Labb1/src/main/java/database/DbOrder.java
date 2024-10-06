@@ -1,7 +1,6 @@
 package database;
 
 import businessObjects.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 

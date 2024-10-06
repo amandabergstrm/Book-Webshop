@@ -1,7 +1,6 @@
 package ui;
 
 public class BookInfo {
-
     private int itemId;
     private final String isbn;
     private final String title;

@@ -1,11 +1,8 @@
 <%@ page import="ui.UserInfo" %>
 <%@ page import="ui.OrderInfo" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="businessObjects.OrderHandler" %>
 <%@ page import="businessObjects.Authority" %>
 <%@ page import="ui.OrderItemInfo" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.Collection" %>
 <%@ page import="businessObjects.OrderStatus" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
