@@ -118,7 +118,7 @@ public class Book {
      * @param nrOfCopies  the number of copies available
      * @param price       the price of the book
      */
-    public Book(String isbn, String title, String genre, String author, int nrOfCopies, int price) {
+    protected Book(String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         if (!isIsbnValid(isbn))
             throw new IllegalArgumentException("Not a valid ISBN");
         this.isbn = isbn;
@@ -144,7 +144,7 @@ public class Book {
      * @param nrOfCopies  the number of copies available
      * @param price       the price of the book
      */
-    public Book(int itemId, String isbn, String title, String genre, String author, int nrOfCopies, int price) {
+    protected Book(int itemId, String isbn, String title, String genre, String author, int nrOfCopies, int price) {
         this(isbn, title, genre, author, nrOfCopies, price);
         this.itemId = itemId;
     }

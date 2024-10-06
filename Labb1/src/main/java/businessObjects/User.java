@@ -80,7 +80,7 @@ public class User {
      * @param email     the email of the user
      * @param password  the password of the user
      */
-    public User(Authority authority, String name, String email, String password) {
+    protected User(Authority authority, String name, String email, String password) {
         this.authority = authority;
         this.name = name;
         this.email = email;
