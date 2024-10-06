@@ -173,16 +173,16 @@ public class DbOrder extends Order {
         return orders;
     }
 
-    public static void executeOrderUpdate(Order orderObj) {
-        String command = "UPDATE T_Order SET status = ?, WHERE orderNr = ?";
+    public static void executeOrderUpdate(int orderNr, String status ) {
+        String command = "UPDATE T_Order SET status = ? WHERE orderNr = ?";
         Connection con = DbManager.getConnection();
 
         try {
             con.setAutoCommit(false);
             PreparedStatement preparedStatement = con.prepareStatement(command);
-            String statusString = orderObj.getOrderStatus().name();
-            preparedStatement.setString(1, statusString);
-            preparedStatement.setInt(2, orderObj.getOrderNr());
+            //String statusString = orderObj.getOrderStatus().name();
+            preparedStatement.setString(1,status);
+            preparedStatement.setInt(2, orderNr);
 
             int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {

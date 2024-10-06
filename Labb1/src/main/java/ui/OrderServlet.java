@@ -1,5 +1,6 @@
 package ui;
 
+import businessObjects.Authority;
 import businessObjects.BookHandler;
 import businessObjects.OrderHandler;
 import businessObjects.UserHandler;
@@ -16,12 +17,25 @@ import java.util.Collection;
 @WebServlet(name = "orderServlet", value = "/orders-servlet")
 public class OrderServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        updateAndRedirect(request, response);
+    }
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String action = request.getParameter("action");
+        if ("edit".equals(action)) {
+            updateOrderStatus(request);
+        }
+        updateAndRedirect(request, response);
+    }
 
+    private void updateOrderStatus(HttpServletRequest request) {
+        int orderNr = Integer.parseInt(request.getParameter("orderNr"));
+        String orderStatus = request.getParameter("status");
+        OrderHandler.updateOrderStatus(orderNr, orderStatus);
+    }
+    private void updateAndRedirect(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ArrayList<OrderInfo> ordersInfo = OrderHandler.getAllOrders();
         request.setAttribute("ordersInfo", ordersInfo);
-        System.out.println(ordersInfo.toString());
-
         request.getRequestDispatcher("orders.jsp").forward(request, response);
-
     }
 }

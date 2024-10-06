@@ -69,7 +69,7 @@
             Iterator<UserInfo> it = usersInfo.iterator();
             for (; it.hasNext();) {
                 UserInfo userInfo = it.next();
-                String id = userInfo.getEmail();
+                String email = userInfo.getEmail();
         %>
 
         <div class="list-user">
@@ -80,15 +80,15 @@
                 <p><%= userInfo.getAuthority() %></p>
 
                 <!-- Edit Button -->
-                <input type="checkbox" id="editUserToggle<%=id%>" hidden>
-                <div class="form-container" id="editUserForm<%=id%>">
-                    <label for="editUserToggle<%=id%>" class="close-btn">&times;</label>
-                    <h2>Edit user: <%=id%></h2>
+                <input type="checkbox" id="editUserToggle<%=email%>" hidden>
+                <div class="form-container" id="editUserForm<%=email%>">
+                    <label for="editUserToggle<%=email%>" class="close-btn">&times;</label>
+                    <h2>Edit user: <%=email%></h2>
                     <form action="user-servlet" method="POST">
                         <input type="hidden" name="action" value="edit">
-                        <input type="hidden" name="email" value="<%=id%>">
-                        <label for="newAuthority<%=id%>">New Authority (leave empty to keep unchanged):</label>
-                        <select id="newAuthority<%=id%>" name="authority" required>
+                        <input type="hidden" name="email" value="<%=email%>">
+                        <label for="newAuthority<%=email%>">New Authority (leave empty to keep unchanged):</label>
+                        <select id="newAuthority<%=email%>" name="authority" required>
                             <% for (Authority authority : Authority.values()) { %>
                             <option value="<%= authority %>"><%= authority %></option>
                             <% } %>
@@ -96,12 +96,12 @@
                         <button type="submit">Save Changes</button>
                     </form>
                 </div>
-                <label for="editUserToggle<%=id%>" class="toggle-link">Edit</label>
+                <label for="editUserToggle<%=email%>" class="toggle-link">Edit</label>
 
                 <!-- Delete Button -->
                 <form action="user-servlet" method="POST" onsubmit="return confirm('Are you sure you want to remove this user?');">
                     <input type="hidden" name="action" value="delete">
-                    <input type="hidden" name="email" value="<%= id %>">
+                    <input type="hidden" name="email" value="<%= email %>">
                     <button type="submit" class="delete-btn">Delete</button>
                 </form>
             </div>

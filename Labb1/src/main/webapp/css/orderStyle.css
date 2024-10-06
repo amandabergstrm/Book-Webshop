@@ -4,9 +4,9 @@ body {
     background-color: #f4f4f4;
 }
 
-
 .order-list {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
@@ -22,7 +22,7 @@ body {
 
 .order-info {
     display: grid;
-    grid-template-columns: 10px 250px 260px 250px; /* Adjust the grid layout */
+    grid-template-columns: 10px 250px 260px 100px; /* Adjust the grid layout */
     align-items: center;
 }
 
@@ -39,4 +39,43 @@ body {
     margin: 0;
     padding: 0;
     font-weight: bold;
+}
+
+.order-items-list {
+    display: none;
+}
+
+/* Show order items when checkbox is checked */
+input[type="checkbox"]:checked ~ .order-items-list {
+    display: block;
+}
+
+/* Style the view order items link */
+.view-order-items {
+    cursor: pointer;
+    color: #0073e6;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.view-order-items:hover {
+    text-decoration: underline;
+}
+
+/* Style the order items list */
+.order-items-list li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+.order-items-list li:hover {
+    background-color: #f1f1f1;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }

@@ -19,27 +19,6 @@ public class OrderHandler {
         Order orderObj = new Order(orderInfo.getUserEmail(), orderItems);
         Order.createOrder(orderObj);
     }
-    /*public static ArrayList<OrderInfo> getAllOrders(){
-        ArrayList<DbOrder> orders = Order.importAllOrders();
-        if(orders == null) {
-            System.out.println("INGA ORDRAR FINNS");
-        }
-
-        ArrayList<OrderInfo> orderInfo = new ArrayList<OrderInfo>();
-        ArrayList<OrderItemInfo> orderItemInfos = new ArrayList<OrderItemInfo>();
-        for(Order o: orders){
-            ArrayList<OrderItem> orderItems = o.getOrderItems();
-            for(OrderItem b: orderItems) {
-                OrderItemInfo orderItemInfo = new OrderItemInfo(b.getItemId(), b.getNrOfItems());
-                orderItemInfos.add(orderItemInfo);
-            }
-        }
-
-        for (Order o : orders){
-            orderInfo.add(new OrderInfo(o.getUserEmail(), o.getOrderNr(), orderItemInfos, o.getOrderStatus()));
-        }
-        return orderInfo;
-    }*/
 
     public static ArrayList<OrderInfo> getAllOrders() {
         ArrayList<DbOrder> orders = Order.importAllOrders();
@@ -54,9 +33,9 @@ public class OrderHandler {
         return convertOrderToOrderInfo(orders);
     }
 
-    public static void updateOrderStatus(OrderInfo orderInfo, OrderStatus newStatus) {
-        Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), convertOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
-        Order.updateOrderStatus(orderObj);
+    public static void updateOrderStatus(int orderNr, String newStatus) {
+        //Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), convertOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
+        Order.updateOrderStatus(orderNr, newStatus);
     }
 
     public static ArrayList<OrderItem> convertOrderItemInfoToOrderItem(ArrayList<OrderItemInfo> orderItemInfos){
