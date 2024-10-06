@@ -1,6 +1,6 @@
 package businessObjects;
 
-import ui.UserInfo;
+import ui.view.UserInfo;
 import java.util.ArrayList;
 import java.util.Collection;
 

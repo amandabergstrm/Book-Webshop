@@ -1,4 +1,4 @@
-<%@ page import="ui.OrderItemInfo" %>
+<%@ page import="ui.view.OrderItemInfo" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

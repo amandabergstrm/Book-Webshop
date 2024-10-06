@@ -1,12 +1,12 @@
-<%@ page import="ui.UserInfo" %>
-<%@ page import="ui.BookInfo" %>
+<%@ page import="ui.view.UserInfo" %>
+<%@ page import="ui.view.BookInfo" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="businessObjects.Authority" %>
-<%@ page import="ui.OrderItemInfo" %>
-<%@ page import="ui.OrderItemInfo" %>
-<%@ page import="ui.OrderInfo" %>
+<%@ page import="ui.view.OrderItemInfo" %>
+<%@ page import="ui.view.OrderItemInfo" %>
+<%@ page import="ui.view.OrderInfo" %>
 <%@ page import="businessObjects.OrderHandler" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <!DOCTYPE html>

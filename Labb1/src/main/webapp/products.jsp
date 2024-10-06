@@ -1,5 +1,5 @@
-<%@ page import="ui.UserInfo" %>
-<%@ page import="ui.BookInfo" %>
+<%@ page import="ui.view.UserInfo" %>
+<%@ page import="ui.view.BookInfo" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="businessObjects.Authority" %>

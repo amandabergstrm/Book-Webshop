@@ -1,4 +1,4 @@
-package ui;
+package ui.view;
 
 import businessObjects.OrderStatus;
 import java.util.ArrayList;

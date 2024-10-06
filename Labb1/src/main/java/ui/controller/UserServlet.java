@@ -1,4 +1,4 @@
-package ui;
+package ui.controller;
 
 import java.io.*;
 import java.util.Collection;
@@ -7,6 +7,7 @@ import businessObjects.UserHandler;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import ui.view.UserInfo;
 
 @WebServlet(name = "userServlet", value = "/user-servlet")
 public class UserServlet extends HttpServlet {

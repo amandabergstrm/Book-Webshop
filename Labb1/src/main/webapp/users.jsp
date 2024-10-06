@@ -1,4 +1,4 @@
-<%@ page import="ui.UserInfo" %>
+<%@ page import="ui.view.UserInfo" %>
 <%@ page import="businessObjects.Authority" %>
 <%@ page import="java.util.Collection" %>
 <%@ page import="java.util.Iterator" %>

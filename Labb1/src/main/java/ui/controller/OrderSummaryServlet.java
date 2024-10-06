@@ -1,4 +1,4 @@
-package ui;
+package ui.controller;
 
 import businessObjects.BookHandler;
 import businessObjects.OrderHandler;
@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import ui.view.BookInfo;
+import ui.view.OrderInfo;
+import ui.view.OrderItemInfo;
+import ui.view.UserInfo;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;

@@ -1,7 +1,7 @@
 package businessObjects;
 
-import ui.OrderInfo;
-import ui.OrderItemInfo;
+import ui.view.OrderInfo;
+import ui.view.OrderItemInfo;
 import java.util.ArrayList;
 import java.util.Collection;
 

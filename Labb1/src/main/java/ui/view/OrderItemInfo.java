@@ -1,4 +1,4 @@
-package ui;
+package ui.view;
 
 public class OrderItemInfo {
     private final int itemId;

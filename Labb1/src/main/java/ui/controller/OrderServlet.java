@@ -1,4 +1,4 @@
-package ui;
+package ui.controller;
 
 import businessObjects.OrderHandler;
 import jakarta.servlet.ServletException;

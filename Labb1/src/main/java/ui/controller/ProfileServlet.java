@@ -1,4 +1,4 @@
-package ui;
+package ui.controller;
 
 import businessObjects.OrderHandler;
 import jakarta.servlet.ServletException;
@@ -6,6 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import ui.view.OrderInfo;
+import ui.view.UserInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;

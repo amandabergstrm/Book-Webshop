@@ -1,8 +1,8 @@
-<%@ page import="ui.UserInfo" %>
+<%@ page import="ui.view.UserInfo" %>
 <%@ page import="businessObjects.Authority" %>
-<%@ page import="ui.OrderItemInfo" %>
+<%@ page import="ui.view.OrderItemInfo" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="ui.OrderInfo" %>
+<%@ page import="ui.view.OrderInfo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

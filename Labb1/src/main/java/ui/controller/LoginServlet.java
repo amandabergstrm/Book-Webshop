@@ -1,10 +1,11 @@
-package ui;
+package ui.controller;
 
 import java.io.*;
 import businessObjects.Authority;
 import businessObjects.UserHandler;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import ui.view.UserInfo;
 
 @WebServlet(name = "loginServlet", value = "/login-servlet")
 public class LoginServlet extends HttpServlet {
