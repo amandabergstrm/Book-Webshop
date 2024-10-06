@@ -21,11 +21,11 @@
 
 
 <div class="topnav">
-    <a class="active" href="shop.jsp">Home</a>
-    <a href="orders.jsp">Orders</a>
-    <a href="products.jsp">Products</a>
+    <a class="active" href="shop-servlet">Home</a>
+    <a href="orders-servlet">Orders</a>
+    <a href="product-servlet">Products</a>
     <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
-    <a href="users.jsp">Users</a>
+    <a href="user-servlet">Users</a>
     <% } %>
     <a href="profile.jsp">Profile</a>
     <% if(currentUser == null) { %>
@@ -50,60 +50,6 @@
         </div>
     </div>
 
-    <!-- Hårdkodat alla current orders, ta bort sen, bara kontroll att den kommer till orders.jsp överhuvudtaget-->
-    <div>
-        <h2>Display all current orders</h2>
-        <%
-            ArrayList<OrderInfo> orders = OrderHandler.getAllOrders(); // Fetch all orders
-            Iterator<OrderInfo> orderIterator = orders.iterator(); // Create an iterator
-            if (!orders.isEmpty()) {
-        %>
-        <table>
-            <thead>
-            <tr>
-                <th>Order Number</th>
-                <th>User Email</th>
-                <th>Order Status</th>
-                <th>Number of Items</th>
-                <th>Order Items</th>
-            </tr>
-            </thead>
-            <tbody>
-            <%
-                while (orderIterator.hasNext()) {
-                    OrderInfo order = orderIterator.next();
-                    int orderNr = order.getOrderNr();
-                    String userEmail = order.getUserEmail();
-                    String status = order.getOrderStatus().toString();
-                    ArrayList<OrderItemInfo> orderItems = order.getOrderItemInfo();
-            %>
-            <tr>
-                <td><%= orderNr %></td>
-                <td><%= userEmail %></td>
-                <td><%= status %></td>
-                <td><%= orderItems.size() %></td>
-                <td>
-                    <ul>
-                        <% for (OrderItemInfo item : orderItems) { %>
-                        <li>Item ID: <%= item.getItemId() %>, Quantity: <%= item.getNrOfItems() %></li>
-                        <% } %>
-                    </ul>
-                </td>
-            </tr>
-            <%
-                }
-            %>
-            </tbody>
-        </table>
-        <%
-        } else {
-        %>
-        <p>No orders found.</p>
-        <%
-            }
-        %>
-    </div>
-
     <!-- Hämta alla ordrar -->
 
     <!-- < % ArrayList<OrderInfo> ordersInfo = (ArrayList<OrderInfo>) request.getSession().getAttribute("ordersInfo");
@@ -123,7 +69,7 @@
 
     <!-- Ändra order status knapp -->
 
-        <%  Collection<OrderInfo> orderInfos = (Collection<OrderInfo>) request.getSession().getAttribute("ordersInfo");
+        <%  Collection<OrderInfo> orderInfos = (Collection<OrderInfo>) request.getAttribute("ordersInfo");
             Iterator<OrderInfo> it = orderInfos.iterator();
             for (; it.hasNext();) {
                 OrderInfo orderInfo = it.next();
@@ -131,12 +77,15 @@
         %>
     <div class="list-order">
         <div class="order-info">
+            <p></p>
             <p><%= orderNr %></p>
             <p><%= orderInfo.getUserEmail() %></p>
             <p><%= orderInfo.getOrderStatus() %></p>
 
-            <% } %>
+
 </div>
+
     </div>
+        <% } %>
 </body>
 </html>

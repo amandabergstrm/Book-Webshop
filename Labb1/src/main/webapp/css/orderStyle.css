@@ -22,7 +22,7 @@ body {
 
 .order-info {
     display: grid;
-    grid-template-columns: 1px 250px 260px 250px 120px; /* Adjust the grid layout */
+    grid-template-columns: 10px 250px 260px 250px; /* Adjust the grid layout */
     align-items: center;
 }
 

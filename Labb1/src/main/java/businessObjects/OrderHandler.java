@@ -1,12 +1,9 @@
 package businessObjects;
 
 import database.DbOrder;
-import ui.BookInfo;
 import ui.OrderInfo;
 import ui.OrderItemInfo;
 
-import java.sql.Array;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class OrderHandler {
@@ -58,11 +55,11 @@ public class OrderHandler {
     }
 
     public static void updateOrderStatus(OrderInfo orderInfo, OrderStatus newStatus) {
-        Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), converOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
+        Order orderObj = new Order(orderInfo.getUserEmail(), orderInfo.getOrderNr(), convertOrderItemInfoToOrderItem(orderInfo.getOrderItemInfo()), newStatus);
         Order.updateOrderStatus(orderObj);
     }
 
-    public static ArrayList<OrderItem> converOrderItemInfoToOrderItem(ArrayList<OrderItemInfo> orderItemInfos){
+    public static ArrayList<OrderItem> convertOrderItemInfoToOrderItem(ArrayList<OrderItemInfo> orderItemInfos){
         ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
         for(OrderItemInfo o: orderItemInfos){
             orderItems.add(new OrderItem(o.getItemId(), o.getNrOfItems()));

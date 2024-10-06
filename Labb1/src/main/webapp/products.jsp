@@ -18,7 +18,7 @@
 
     <div class="topnav">
         <a class="active" href="shop-servlet">Home</a>
-        <a href="orders.jsp">Orders</a>
+        <a href="orders-servlet">Orders</a>
         <a href="product-servlet">Products</a>
         <% if(currentUser != null && currentUser.getAuthority() == Authority.Admin) { %>
             <a href="user-servlet">Users</a>
