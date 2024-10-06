@@ -44,9 +44,10 @@ CREATE TABLE T_OrderItem (
     CONSTRAINT T_OrderItem_fk1 FOREIGN KEY (itemId) REFERENCES T_Book(itemId)
 );
 
-CREATE USER IF NOT EXISTS 'client'@'localhost' IDENTIFIED BY 'client';
+GRANT CREATE USER ON *.* TO 'root'@'localhost';
 
-GRANT ALL PRIVILEGES ON DB_Webbshop.* TO 'client'@'localhost';
+CREATE USER IF NOT EXISTS 'admin'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES on DB_Webbshop.* TO 'admin'@'localhost';
 
 INSERT INTO T_Category (genre)
 VALUES ('Fantasy'),

@@ -16,9 +16,10 @@ public class DbManager {
 
     private DbManager() {
         String database = "DB_Webbshop";
-        String userName = "client";
-        String password = "client";
-        String server = "jdbc:mysql://localhost:3306/" + database + "?UseClientEnc=UTF8";
+        String userName = "admin";
+        String password = "admin";
+        //String server = "jdbc:mysql://localhost:3306/" + database + "?UseClientEnc=UTF8"; // Amanda
+        String server = "jdbc:mysql://localhost:3006/" + database + "?UseClientEnc=UTF8";  // Betty
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
