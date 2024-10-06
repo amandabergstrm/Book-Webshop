@@ -79,3 +79,11 @@ button {
     border: none;
     cursor: pointer;
 }
+
+button img {
+    vertical-align: middle;
+}
+
+button:hover img {
+    opacity: 0.7;
+}
