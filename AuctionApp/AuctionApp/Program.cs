@@ -1,7 +1,12 @@
+using AuctionApp.Core.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//dependecy injection till controllern, berättar vilken implementation av IAuctionService som ska användas
+builder.Services.AddScoped<IAuctionService, MockAuctionService>();
 
 var app = builder.Build();
 

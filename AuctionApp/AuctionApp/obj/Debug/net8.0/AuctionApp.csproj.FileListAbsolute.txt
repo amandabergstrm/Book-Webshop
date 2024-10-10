@@ -29,3 +29,4 @@
 /Users/amandabergstrom/distrulabbar/AuctionApp/AuctionApp/obj/Debug/net8.0/AuctionApp.pdb
 /Users/amandabergstrom/distrulabbar/AuctionApp/AuctionApp/obj/Debug/net8.0/AuctionApp.genruntimeconfig.cache
 /Users/amandabergstrom/distrulabbar/AuctionApp/AuctionApp/obj/Debug/net8.0/ref/AuctionApp.dll
+/Users/amandabergstrom/distrulabbar/AuctionApp/AuctionApp/obj/Debug/net8.0/AuctionApp.csproj.AssemblyReference.cache
