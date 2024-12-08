@@ -1,7 +1,6 @@
 # Book Webshop
 
-Lab assignment in the course Distributed Information Systems, taken during my final year of my Bachelor's in Computer Engineering.
-The assignent consisted of developing a simple webshop, using frameworks and tools such as Tomcat, JSP pages, CSS, HTML, C# and MySQL. 
+Lab assignment in the course Distributed Information Systems, taken during my final year of my Bachelor's in Computer Engineering. The assignent consisted of developing a simple webshop, written in Java, HTML, CSS, and using technologies such as Tomcat server, JSP pages and MySQL.
 
 
 An overview of the architechtural structure of the application, and relations/connection between the layers. 
