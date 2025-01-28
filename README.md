@@ -1,7 +1,7 @@
 # Book Webshop
 
 # Project Description
-This final lab assignment was part of the course _Distributed Information Systems_, taken in my final year of my bachelor's studies in Computer Engineering, at KTH Royal Institute of Technology. The assignent consisted of developing a simple webshop, written in Java, HTML, CSS. Implementation also included the following technologies:
+This final lab assignment was part of the course _Distributed Information Systems_, taken my final year of my bachelor's studies in Computer Engineering, at KTH Royal Institute of Technology. The assignent consisted of developing a webshop, written in Java, HTML, CSS. Implementation also included the following technologies:
 
 * Tomcat server: For deploying and running the application
 * JSP pages: Dynamic web content
