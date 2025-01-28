@@ -21,7 +21,7 @@ An overview of the architechtural structure of the application, and relations be
 
  # Selected screenshots
 
-1. Start page:
+1. Home page:
 <img width="1436" alt="Screenshot 2024-10-06 at 21 05 44" src="https://github.com/user-attachments/assets/7adfa35b-d3c8-4fa9-9b0f-07d31bda94a8">
 
 2. Inventory/employee view:
